@@ -1,0 +1,369 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="Just a blog." />
+<link rel="stylesheet" href="/css/style.css" />
+
+  <title>
+使用jest+enzyme测试react组件 - zWing
+</title>
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+</head>
+
+<body>
+<canvas id='ribbon'></canvas>
+<div class="main">
+<div class="header">
+    <a class="logo" href="/">zWing</a><!--
+
+ --><div class="menu">
+        <a href="/archives/">Archives</a><a href="/about/">About</a>
+    </div>
+
+    <div class="social">
+        <a target="_blank" href="https://github.com/zWingz/my-blog-config/issues"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path>
+</svg></a>
+    </div>
+</div>
+
+
+<div id="post" class="center">
+  <p class="time">November 23, 2018</p>
+  <h1 class="title">使用jest+enzyme测试react组件</h1>
+  <div class="content"><h2 id="前言">前言</h2><p>最近第一次给一个项目写一个完整的测试流程, 也算是我第一次写完整的测试.
+于是记一下整个测试流程
+<a href="https://github.com/zWingz/react-image">项目地址</a>
+目前项目使用的测试框架是主流的<code>jest</code>+<code>enzyme</code></p>
+<h2 id="依赖">依赖</h2><h3 id="必要依赖">必要依赖</h3><ul>
+<li>Jest</li>
+<li>enzyme</li>
+<li>enzyme-adapter-react-16</li>
+</ul>
+<h3 id="按需">按需</h3><ul>
+<li>如果使用<code>babel</code>，则需要<code>babel-jest</code></li>
+<li>如果使用<code>typescript</code>， 则需要<code>ts-jest</code></li>
+</ul>
+<h2 id="jest配置">Jest 配置</h2><p>起初项目使用<code>babel</code>进行编译，后面统一转成了<code>ts</code></p>
+
+      <div class="hljs json">
+        <table>
+          <tbody>
+            <tr>
+              <td class="line">
+                <pre><span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+<span>6</span>
+<span>7</span>
+<span>8</span>
+<span>9</span>
+<span>10</span>
+<span>11</span>
+<span>12</span>
+<span>13</span>
+<span>14</span>
+<span>15</span>
+<span>16</span>
+<span>17</span>
+<span>18</span>
+<span>19</span>
+<span>20</span>
+<span>21</span>
+<span>22</span>
+</pre>
+              </td>
+              <td class="code"><pre><span class="hljs-string">"jest"</span>: {
+    <span class="hljs-string">"moduleNameMapper"</span>: {
+      <span class="hljs-string">"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|scss)$"</span>:<span class="hljs-string">"&lt;rootDir&gt;/test/utils.ts"</span>
+    },
+    <span class="hljs-string">"moduleFileExtensions"</span>: [
+      <span class="hljs-string">"ts"</span>,
+      <span class="hljs-string">"tsx"</span>,
+      <span class="hljs-string">"js"</span>
+    ],
+    <span class="hljs-string">"setupTestFrameworkScriptFile"</span>: <span class="hljs-string">"&lt;rootDir&gt;/test/setup.ts"</span>,
+    <span class="hljs-string">"collectCoverageFrom"</span>: [
+      <span class="hljs-string">"src/**/*.{ts,tsx}"</span>
+    ],
+    <span class="hljs-string">"coverageDirectory"</span>: <span class="hljs-string">"./coverage/"</span>,
+    <span class="hljs-string">"collectCoverage"</span>: true,
+    <span class="hljs-string">"transform"</span>: {
+      <span class="hljs-string">"^.+\\.(ts|tsx)$"</span>: <span class="hljs-string">"ts-jest"</span>
+    },
+    <span class="hljs-string">"testMatch"</span>: [
+      <span class="hljs-string">"**/__test__/*.(ts|tsx)"</span>
+    ]
+  }</pre></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <p>如果使用<code>babel</code>的话, 只要将<code>ts</code>转成<code>js</code>, <code>ts-jest</code>转成<code>babel-jest</code>即可。</p>
+<h4 id="modulenamemapper">moduleNameMapper</h4><p>用来<code>mock</code>一些额外<code>module</code>, 比如<code>sass</code>, <code>jpg</code>等等.</p>
+
+      <div class="hljs typescript">
+        <table>
+          <tbody>
+            <tr>
+              <td class="line">
+                <pre><span>1</span>
+<span>2</span>
+</pre>
+              </td>
+              <td class="code"><pre><span class="hljs-comment">// /test/utils.ts</span>
+<span class="hljs-keyword">module</span>.<span class="hljs-keyword">exports</span> = <span class="hljs-string">'test-file-stub'</span></pre></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <h4 id="setuptestframeworkscriptfile">setupTestFrameworkScriptFile</h4><blockquote>
+<p>The path to a module that runs some code to configure or set up the testing framework before each test. </p>
+</blockquote>
+<p>可以用来初始化<code>test</code>配置, 在这里需要使用<code>enzyme-adapter</code></p>
+
+      <div class="hljs typescript">
+        <table>
+          <tbody>
+            <tr>
+              <td class="line">
+                <pre><span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+<span>6</span>
+</pre>
+              </td>
+              <td class="code"><pre><span class="hljs-comment">// /test/setup.ts</span>
+<span class="hljs-keyword">import</span> { configure } <span class="hljs-keyword">from</span> <span class="hljs-string">'enzyme'</span>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> ReactSixteenAdapter <span class="hljs-keyword">from</span> <span class="hljs-string">'enzyme-adapter-react-16'</span>
+
+configure({ <span class="hljs-attr">adapter</span>: <span class="hljs-keyword">new</span> ReactSixteenAdapter() })
+</pre></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <h4 id="collectcoveragefrom">collectCoverageFrom</h4><p>需要测试覆盖率的文件</p>
+<h4 id="coveragedirectory">coverageDirectory</h4><p>覆盖率输出目录</p>
+<h4 id="transform">transform</h4><blockquote>
+<p>A map from regular expressions to paths to transformers. A transformer is a module that provides a synchronous function for transforming source files</p>
+</blockquote>
+<p>跟<code>webpack-loader</code>类似</p>
+<h3 id="testmatch">testMatch</h3><blockquote>
+<p>The glob patterns Jest uses to detect test files.</p>
+</blockquote>
+<p>测试文件匹配规则, 如果跟官方不同, 则修改此值.</p>
+<h2 id="enzyme使用">Enzyme 使用</h2><p><a href="https://airbnb.io/enzyme/">官方文档</a></p>
+<h3 id="简单介绍">简单介绍</h3><p>其实<code>enzyme</code>上手挺简单的, 它有三个<code>API</code></p>
+<p>包括<code>shallow</code>、<code>mount</code>和<code>render</code>, 其中<code>shallow</code>和<code>mount</code>是常用的</p>
+<p>他们区别是</p>
+<ul>
+<li><code>shallow</code>: 只会渲染顶级组件, 而子组件不会渲染, 渲染结果是一颗<code>react</code>树, 效率最高</li>
+<li><code>mount</code>: 会渲染整个组件, 包括子组件, 如果需要深入组件内部测试, 则需要使用<code>mount</code></li>
+<li><code>render</code>: 直接选择普通的<code>html</code>结构.</li>
+</ul>
+<p><code>shallow</code>和<code>mount</code>得到结果是一个<code>ReactWrapper</code>对象, 可以进行多种操作, 包括<code>find()</code>、<code>prop()</code>、<code>instance()</code>等。</p>
+<h3 id="基本使用">基本使用</h3>
+      <div class="hljs typescript">
+        <table>
+          <tbody>
+            <tr>
+              <td class="line">
+                <pre><span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+<span>6</span>
+<span>7</span>
+<span>8</span>
+<span>9</span>
+<span>10</span>
+<span>11</span>
+<span>12</span>
+<span>13</span>
+<span>14</span>
+<span>15</span>
+<span>16</span>
+<span>17</span>
+<span>18</span>
+<span>19</span>
+<span>20</span>
+<span>21</span>
+<span>22</span>
+<span>23</span>
+<span>24</span>
+<span>25</span>
+<span>26</span>
+<span>27</span>
+<span>28</span>
+<span>29</span>
+<span>30</span>
+<span>31</span>
+<span>32</span>
+<span>33</span>
+<span>34</span>
+<span>35</span>
+<span>36</span>
+<span>37</span>
+<span>38</span>
+<span>39</span>
+<span>40</span>
+<span>41</span>
+<span>42</span>
+<span>43</span>
+<span>44</span>
+<span>45</span>
+<span>46</span>
+<span>47</span>
+<span>48</span>
+<span>49</span>
+<span>50</span>
+<span>51</span>
+<span>52</span>
+<span>53</span>
+<span>54</span>
+<span>55</span>
+<span>56</span>
+<span>57</span>
+<span>58</span>
+<span>59</span>
+<span>60</span>
+<span>61</span>
+<span>62</span>
+<span>63</span>
+<span>64</span>
+<span>65</span>
+<span>66</span>
+<span>67</span>
+</pre>
+              </td>
+              <td class="code"><pre><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> { shallow, mount } <span class="hljs-keyword">from</span> <span class="hljs-string">'enzyme'</span>
+<span class="hljs-keyword">import</span> MyComponent <span class="hljs-keyword">from</span> <span class="hljs-string">'../MyComponent'</span>
+<span class="hljs-keyword">import</span> ChildComponent <span class="hljs-keyword">from</span> <span class="hljs-string">'../ChildComponent'</span>
+
+describt(<span class="hljs-string">'测试xxxxx'</span>, () =&gt; {
+    it(<span class="hljs-string">'组件state以及渲染情况'</span>, () =&gt; {
+        const <span class="hljs-keyword">wrapper</span> = shallow(&lt;MyComponent /&gt;)
+        expect(<span class="hljs-keyword">wrapper</span>.state().msg).toEqual(<span class="hljs-string">'test msg'</span>)
+        expect(<span class="hljs-keyword">wrapper</span>.find(<span class="hljs-string">'#childId'</span>)).toHaveLength(<span class="hljs-number">1</span>) // 测试是否包含某个`element`
+        expect(<span class="hljs-keyword">wrapper</span>.find(ChildComponent)).toHaveLength(<span class="hljs-number">1</span>) // 测试是否包含某个子组件
+    })
+    it(<span class="hljs-string">'触发事件'</span>, () =&gt; {
+        const click = jest.fn()
+        const <span class="hljs-keyword">wrapper</span> = shallow(&lt;MyComponent onClick={click}/&gt;)
+        // 触发#triggerClickElement的click事件
+        <span class="hljs-keyword">wrapper</span>.find(<span class="hljs-string">'#triggerClickElement'</span>).simulate(<span class="hljs-string">'click'</span>)
+        // 判断click事件是否被触发
+        expect(click).toBeCalledTimes(<span class="hljs-number">1</span>)
+    })
+    // 测试函数调用
+    // 默认该函数声明方式通过<span class="hljs-keyword">class</span>.<span class="hljs-keyword">method</span>声明
+    // <span class="hljs-keyword">class</span> MyComponent{
+    //   someMethod() {} 
+    // }
+    it(<span class="hljs-string">'测试函数调用'</span>, () =&gt; {
+        const spy = jest.spyOn(MyComponent.prototype, <span class="hljs-string">'someMethod'</span>)
+        const <span class="hljs-keyword">wrapper</span> = shallow(&lt;MyComponent /&gt;)
+        // 暂且认为组件挂载时会调用`someMethod`
+        // 在此测试是否正确调用
+        expect(spy).toBeCalledTimes(<span class="hljs-number">1</span>)
+    })
+    // 但是由于react需要绑定this
+    // 所以一般会这样声明
+    // <span class="hljs-keyword">class</span> MyComponent {
+    //   someMethod = () =&gt; {}    
+    // }
+    // 这时候通过babel或者typescript编译后
+    // 会变成类似
+    // <span class="hljs-keyword">class</span> MyComponent{
+    //   constructor() {
+    //     this.someMethod = () =&gt; {}     
+    //   }    
+    // }
+    // 这时候someMethod不属于MyComponent.prototype
+    // 所以要改变测试方式
+    it(<span class="hljs-string">'测试函数调用'</span>, () =&gt; {
+        const <span class="hljs-keyword">wrapper</span> = shallow(&lt;MyComponent /&gt;)
+        const ins = <span class="hljs-keyword">wrapper</span>.instance()
+        const spy = jest.spyOn(ins, <span class="hljs-string">'someMethod'</span>)
+        <span class="hljs-keyword">wrapper</span>.<span class="hljs-keyword">update</span>()
+          ins.forceUpdate()
+        expect(spy).toBeCalledTimes(<span class="hljs-number">1</span>)
+    })
+    it(<span class="hljs-string">'触发特定事件, 并传递参数'</span>, () =&gt; {
+        // 如果要触发特定事件, 比如mousemove, keyup等等
+        // 可以通过构造自定义事件, 并且使用dispatchEvent来触发
+        const <span class="hljs-keyword">wrapper</span> = shallow(&lt;MyComponent /&gt;)
+        const element = <span class="hljs-keyword">wrapper</span>.find(<span class="hljs-string">'.some-element'</span>)
+        const event = <span class="hljs-built_in">new</span> MouseEvent(<span class="hljs-string">'mousemove'</span>, {
+            clientX: <span class="hljs-number">100</span>,
+            clientY: <span class="hljs-number">100</span>
+        })
+        element.getDOMNode().dispatchEvent(event)
+        expect(<span class="hljs-keyword">wrapper</span>.state.x).toEqueal(<span class="hljs-number">100</span>)
+    })
+})</pre></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <p>其实<code>enzyme</code>常用的api大概就是几个, 按照本项目中用到的, </p>
+<ul>
+<li>state</li>
+<li>find</li>
+<li>prop</li>
+<li>simulate</li>
+</ul>
+<h2 id="进行测试">进行测试</h2><p>编写完<code>test case</code>后, 只要调用<code>jest</code>即可进行测试, 同时会输出覆盖率
+如果带上<code>--watch</code>则可以监听文件改动并进行测试</p>
+<h2 id="上传测试覆盖率">上传测试覆盖率</h2><p>目前使用<code>Codecov</code>来管理测试覆盖率
+如果在本地上传, 则需要带上<code>token</code>, 如果通过<code>travisCi</code>, 则不需要, 直接调用<code>codecov</code>即可。</p>
+<h2 id="完结">完结</h2><p>至此， 整套<code>jest</code>+<code>enzyme</code>测试流程已经跑完.
+目前看来没有用高更深的测试功能, 比如说<code>jsdom</code>, <code>enzyme.render</code>等</p>
+</div>
+  <div class="comments"><div id="gitalk-container"></div></div>
+  <!-- <div class="comments"><div id="disqus_thread"></div></div> -->
+</div>
+
+
+</div>
+
+<div class="footer">
+    <div class="center">
+      zWing / Powered by
+      <a target="_blank" href="https://github.com/acyortjs/acyort">AcyOrt</a> /
+      Theme
+      <a target="_blank" href="https://github.com/acyortjs/theme-donob">donob</a>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '0438ed96c0cb944693a7',
+    clientSecret: '23e7aa3152f5d03d8f20029540741d6f886c9f5b',
+    repo: 'my-blog-config',
+    owner: 'zWingz',
+    admin: ['zWingz'],
+    number: 20,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+</script>
+
+<script defer src="/script/ribbon.js"></script>
+</body>
+</html>

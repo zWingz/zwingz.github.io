@@ -1,0 +1,425 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="Just a blog." />
+<link rel="stylesheet" href="/css/style.css" />
+
+  <title>
+记一次webpack优化 --- 从babelrc和UglifyPlugin下手 - zWing
+</title>
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+</head>
+
+<body>
+<canvas id='ribbon'></canvas>
+<div class="main">
+<div class="header">
+    <a class="logo" href="/">zWing</a><!--
+
+ --><div class="menu">
+        <a href="/archives/">Archives</a><a href="/about/">About</a>
+    </div>
+
+    <div class="social">
+        <a target="_blank" href="https://github.com/zWingz/my-blog-config/issues"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path>
+</svg></a>
+    </div>
+</div>
+
+
+<div id="post" class="center">
+  <p class="time">February 01, 2018</p>
+  <h1 class="title">记一次webpack优化 --- 从babelrc和UglifyPlugin下手</h1>
+  <div class="content"><h2 id="优化前">优化前</h2><p>先来看优化前打包速度
+大的第三方库大概有vue+axios+vueRouter+vuex+elementUI(datepicker, message两个插件)+jquery
+打包总体积为2648k, 一共14个chunk(使用了异步路由)
+<img src="https://user-images.githubusercontent.com/13031838/35665400-19f380fc-0761-11e8-944b-85a5117364c2.png" alt="image"></p>
+<p>在我本地打包一次需要31s</p>
+<p><img src="https://user-images.githubusercontent.com/13031838/35664714-26a6075a-075e-11e8-8df9-1cde8b4f1878.png" alt="image"></p>
+<p>而在服务器打包时候则要70s以上, 这里就不贴图了. </p>
+<h2 id="优化后">优化后</h2><p>优化后时间
+打包总体积上升为2700k, 上升了50k</p>
+<p><img src="https://user-images.githubusercontent.com/13031838/35665453-3ce893ea-0761-11e8-8d79-2c8b3555acb5.png" alt="image"></p>
+<p>本地打包18s</p>
+<p><img src="https://user-images.githubusercontent.com/13031838/35664879-c88ec336-075e-11e8-88c0-a61590c97cad.png" alt="image"></p>
+<p>服务器打包时间40s</p>
+<p><img src="https://user-images.githubusercontent.com/13031838/35664898-d966d888-075e-11e8-8e6b-70b4043afe8b.png" alt="image"></p>
+<p><strong>提升很明显有没有</strong></p>
+<h2 id="修改了哪些地方">修改了哪些地方 ?</h2><h3 id="uglifeplugin">UglifePlugin</h3><p>主要修改地方还是在UglifyPlugin配置中
+由于我是用的并不是webpack自带的,而是独立的<a href="https://github.com/webpack-contrib/uglifyjs-webpack-plugin">uglifyjs-webpack-plugin</a></p>
+<p>其实官方使用的也是这个插件. 只不过官方使用的暂且不是最新版,而webpack4.0-beta已经使用此插件最新版本</p>
+<p>用法很简单</p>
+
+      <div class="hljs javascript">
+        <table>
+          <tbody>
+            <tr>
+              <td class="line">
+                <pre><span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+<span>6</span>
+<span>7</span>
+</pre>
+              </td>
+              <td class="code"><pre><span class="hljs-variable">const</span> <span class="hljs-variable">UglifyJsPlugin</span> = <span class="hljs-function"><span class="hljs-title">require</span>(<span class="hljs-string">'uglifyjs-webpack-plugin'</span>)</span>
+
+<span class="hljs-variable">module</span>.exports = {
+  <span class="hljs-variable">plugins</span>: [
+    <span class="hljs-variable">new</span> <span class="hljs-function"><span class="hljs-title">UglifyJsPlugin</span>()</span>
+  ]
+}</pre></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <p>如果使用默认配置,那么打包速度并不会有提升.</p>
+<p>而且uglifyplugin在打包过程中其实也会进行一些压缩优化,比如内敛静态变量等等.</p>
+<p>那么我们可以从这里面入手,去除一切不必要的压缩优化.可以提升压缩速度.</p>
+<p>同时.我们需要开启parallel和cache选项,对压缩进行缓存和多线程执行</p>
+<p>具体配置规则请参考官方文档<a href="https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options">UglifyOptions</a></p>
+<p>我的最终配置如下</p>
+
+      <div class="hljs javascript">
+        <table>
+          <tbody>
+            <tr>
+              <td class="line">
+                <pre><span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+<span>6</span>
+<span>7</span>
+<span>8</span>
+<span>9</span>
+<span>10</span>
+<span>11</span>
+<span>12</span>
+<span>13</span>
+<span>14</span>
+<span>15</span>
+<span>16</span>
+<span>17</span>
+<span>18</span>
+<span>19</span>
+<span>20</span>
+<span>21</span>
+<span>22</span>
+<span>23</span>
+<span>24</span>
+<span>25</span>
+<span>26</span>
+<span>27</span>
+<span>28</span>
+<span>29</span>
+<span>30</span>
+<span>31</span>
+<span>32</span>
+<span>33</span>
+<span>34</span>
+<span>35</span>
+<span>36</span>
+<span>37</span>
+<span>38</span>
+<span>39</span>
+<span>40</span>
+<span>41</span>
+<span>42</span>
+<span>43</span>
+<span>44</span>
+<span>45</span>
+<span>46</span>
+<span>47</span>
+<span>48</span>
+<span>49</span>
+<span>50</span>
+<span>51</span>
+<span>52</span>
+<span>53</span>
+<span>54</span>
+<span>55</span>
+<span>56</span>
+<span>57</span>
+<span>58</span>
+<span>59</span>
+<span>60</span>
+<span>61</span>
+<span>62</span>
+<span>63</span>
+<span>64</span>
+<span>65</span>
+<span>66</span>
+<span>67</span>
+<span>68</span>
+<span>69</span>
+<span>70</span>
+<span>71</span>
+<span>72</span>
+<span>73</span>
+<span>74</span>
+<span>75</span>
+<span>76</span>
+<span>77</span>
+<span>78</span>
+<span>79</span>
+<span>80</span>
+<span>81</span>
+<span>82</span>
+<span>83</span>
+<span>84</span>
+<span>85</span>
+<span>86</span>
+<span>87</span>
+<span>88</span>
+<span>89</span>
+<span>90</span>
+<span>91</span>
+<span>92</span>
+<span>93</span>
+<span>94</span>
+<span>95</span>
+<span>96</span>
+<span>97</span>
+<span>98</span>
+<span>99</span>
+<span>100</span>
+<span>101</span>
+</pre>
+              </td>
+              <td class="code"><pre>    <span class="hljs-string">new</span> <span class="hljs-string">UglifyEsPlugin({</span>
+<span class="hljs-attr">            parallel:</span> <span class="hljs-literal">true</span><span class="hljs-string">,</span>
+<span class="hljs-attr">            cache:</span> <span class="hljs-literal">true</span><span class="hljs-string">,</span>
+<span class="hljs-attr">            sourceMap:</span> <span class="hljs-literal">true</span><span class="hljs-string">,</span>
+<span class="hljs-attr">            uglifyOptions:</span> <span class="hljs-string">{</span>
+<span class="hljs-attr">                ecma:</span> <span class="hljs-number">8</span><span class="hljs-string">,</span>
+                <span class="hljs-string">//</span> <span class="hljs-string">详细规则</span>
+                <span class="hljs-string">//</span> <span class="hljs-attr">https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options</span>
+<span class="hljs-attr">                compress:</span> <span class="hljs-string">{</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">在UglifyJs删除没有用到的代码时不输出警告</span>
+<span class="hljs-attr">                    warnings:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">删除所有的</span> <span class="hljs-string">`console`</span> <span class="hljs-string">语句</span>
+<span class="hljs-attr">                    drop_console:</span> <span class="hljs-literal">true</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">将()=&gt;{return</span> <span class="hljs-string">x}</span> <span class="hljs-string">转成</span> <span class="hljs-string">()=&gt;x</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">关闭.eslint有做检查</span>
+<span class="hljs-attr">                    arrows:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">转换类似!!a</span> <span class="hljs-string">?</span> <span class="hljs-string">b</span> <span class="hljs-string">:</span> <span class="hljs-string">c</span> <span class="hljs-string">→</span> <span class="hljs-string">a</span> <span class="hljs-string">?</span> <span class="hljs-string">b</span> <span class="hljs-string">:</span> <span class="hljs-string">c</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">关闭.eslint做检查</span>
+<span class="hljs-attr">                    booleans:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">转换由计算得来的属性名</span> <span class="hljs-string">{["computed"]:</span> <span class="hljs-number">1</span><span class="hljs-string">}</span> <span class="hljs-string">is</span> <span class="hljs-string">converted</span> <span class="hljs-string">to</span> <span class="hljs-string">{computed:</span> <span class="hljs-number">1</span><span class="hljs-string">}.</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">关闭,eslint做检查</span>
+<span class="hljs-attr">                    computed_props:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">自动转换判断</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">e.g.</span> <span class="hljs-string">a</span> <span class="hljs-string">=</span> <span class="hljs-type">!b</span> <span class="hljs-string">&amp;&amp;</span> <span class="hljs-type">!c</span> <span class="hljs-string">&amp;&amp;</span> <span class="hljs-type">!d</span> <span class="hljs-string">&amp;&amp;</span> <span class="hljs-type">!e</span> <span class="hljs-string">→</span> <span class="hljs-string">a=!(b||c||d||e)</span> <span class="hljs-string">etc.</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">关闭,请自行做规范</span>
+<span class="hljs-attr">                    comparisons:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">去掉死代码</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">关闭.eslint做检查</span>
+<span class="hljs-attr">                    dead_code:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">关闭debugger</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">eslint做检查</span>
+<span class="hljs-attr">                    drop_debugger:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">自动进行静态算术计算</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">开启</span>
+<span class="hljs-attr">                    evaluate:</span> <span class="hljs-literal">true</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">函数声明提升</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">默认就是关闭,不需要开启</span>
+<span class="hljs-attr">                    hoist_funs:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">For</span> <span class="hljs-attr">example:</span> <span class="hljs-string">var</span> <span class="hljs-string">o={p:1,</span> <span class="hljs-attr">q:2};</span> <span class="hljs-string">f(o.p,</span> <span class="hljs-string">o.q);</span> <span class="hljs-string">is</span> <span class="hljs-string">converted</span> <span class="hljs-string">to</span> <span class="hljs-string">f(1,</span> <span class="hljs-number">2</span><span class="hljs-string">);</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">不需要咯</span>
+<span class="hljs-attr">                    hoist_props:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">变量提升</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">不需要咯</span>
+<span class="hljs-attr">                    hoist_vars:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span>  <span class="hljs-string">optimizations</span> <span class="hljs-string">for</span> <span class="hljs-string">if/return</span> <span class="hljs-string">and</span> <span class="hljs-string">if/continue</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">不需要,</span> <span class="hljs-string">eslint做检查</span>
+<span class="hljs-attr">                    if_return:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">/**</span>
+                     <span class="hljs-string">*</span> <span class="hljs-string">无法用言语表达,自行理解</span>
+                     <span class="hljs-string">*</span> <span class="hljs-string">inline</span> <span class="hljs-string">(default:</span> <span class="hljs-literal">true</span><span class="hljs-string">)</span> <span class="hljs-bullet">--</span> <span class="hljs-string">inline</span> <span class="hljs-string">calls</span> <span class="hljs-string">to</span> <span class="hljs-string">function</span> <span class="hljs-string">with</span> <span class="hljs-string">simple/return</span> <span class="hljs-attr">statement:</span>
+                        <span class="hljs-literal">false</span> <span class="hljs-bullet">--</span> <span class="hljs-string">same</span> <span class="hljs-string">as</span> <span class="hljs-number">0</span>
+                        <span class="hljs-number">0</span> <span class="hljs-bullet">--</span> <span class="hljs-string">disabled</span> <span class="hljs-string">inlining</span>
+                        <span class="hljs-number">1</span> <span class="hljs-bullet">--</span> <span class="hljs-string">inline</span> <span class="hljs-string">simple</span> <span class="hljs-string">functions</span>
+                        <span class="hljs-number">2</span> <span class="hljs-bullet">--</span> <span class="hljs-string">inline</span> <span class="hljs-string">functions</span> <span class="hljs-string">with</span> <span class="hljs-string">arguments</span>
+                        <span class="hljs-number">3</span> <span class="hljs-bullet">--</span> <span class="hljs-string">inline</span> <span class="hljs-string">functions</span> <span class="hljs-string">with</span> <span class="hljs-string">arguments</span> <span class="hljs-string">and</span> <span class="hljs-string">variables</span>
+                        <span class="hljs-literal">true</span> <span class="hljs-bullet">--</span> <span class="hljs-string">same</span> <span class="hljs-string">as</span> <span class="hljs-number">3</span>
+                     <span class="hljs-string">*/</span>
+<span class="hljs-attr">                    inline:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">join</span> <span class="hljs-string">consecutive</span> <span class="hljs-string">var</span> <span class="hljs-string">statements</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">就是将变量声明合并到一个var中</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">关闭,</span> <span class="hljs-string">eslin做检查</span>
+<span class="hljs-attr">                    join_vars:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">自动去除无用的function参数</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">关闭.</span> <span class="hljs-string">eslint做检查</span>
+<span class="hljs-attr">                    keep_fargs:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span>  <span class="hljs-string">Pass</span> <span class="hljs-literal">true</span> <span class="hljs-string">to</span> <span class="hljs-string">prevent</span> <span class="hljs-string">Infinity</span> <span class="hljs-string">from</span> <span class="hljs-string">being</span> <span class="hljs-string">compressed</span> <span class="hljs-string">into</span> <span class="hljs-number">1</span><span class="hljs-string">/0</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">禁止将infinity转成1/0</span>
+<span class="hljs-attr">                    keep_infinity:</span> <span class="hljs-literal">true</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">optimizations</span> <span class="hljs-string">for</span> <span class="hljs-string">do,</span> <span class="hljs-string">while</span> <span class="hljs-string">and</span> <span class="hljs-string">for</span> <span class="hljs-string">loops</span> <span class="hljs-string">when</span> <span class="hljs-string">we</span> <span class="hljs-string">can</span> <span class="hljs-string">statically</span> <span class="hljs-string">determine</span> <span class="hljs-string">the</span> <span class="hljs-string">condition.</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">优化循环</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">此处关闭,应该由开发者自行优化</span>
+<span class="hljs-attr">                    loops:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">negate</span> <span class="hljs-string">"Immediately-Called Function Expressions"</span> <span class="hljs-string">where</span> <span class="hljs-string">the</span> <span class="hljs-string">return</span> <span class="hljs-string">value</span> <span class="hljs-string">is</span> <span class="hljs-string">discarded,</span> <span class="hljs-string">to</span> <span class="hljs-string">avoid</span> <span class="hljs-string">the</span> <span class="hljs-string">parens</span> <span class="hljs-string">that</span> <span class="hljs-string">the</span> <span class="hljs-string">code</span> <span class="hljs-string">generator</span> <span class="hljs-string">would</span> <span class="hljs-string">insert.</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">自行体会</span>
+<span class="hljs-attr">                    negate_iife:</span> <span class="hljs-literal">true</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span>  <span class="hljs-string">rewrite</span> <span class="hljs-string">property</span> <span class="hljs-string">access</span> <span class="hljs-string">using</span> <span class="hljs-string">the</span> <span class="hljs-string">dot</span> <span class="hljs-string">notation,</span> <span class="hljs-string">for</span> <span class="hljs-string">example</span> <span class="hljs-string">foo["bar"]</span> <span class="hljs-string">→</span> <span class="hljs-string">foo.bar</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">关闭.eslint检查</span>
+<span class="hljs-attr">                    properties:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">将只用到一次的function,通过inline方式插入</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">关闭.开发者自行把控</span>
+<span class="hljs-attr">                    reduce_funcs:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">将静态变量直接lnline紧代码里</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">可以开启</span>
+<span class="hljs-attr">                    reduce_vars:</span> <span class="hljs-literal">true</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">使用逗号运算符连接连续的简单语句</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">自行把控</span>
+<span class="hljs-attr">                    sequences:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">/**</span>
+                     <span class="hljs-string">*</span>  <span class="hljs-string">Pass</span> <span class="hljs-literal">false</span> <span class="hljs-string">to</span> <span class="hljs-string">disable</span> <span class="hljs-string">potentially</span> <span class="hljs-string">dropping</span> <span class="hljs-string">functions</span> <span class="hljs-string">marked</span> <span class="hljs-string">as</span> <span class="hljs-string">"pure"</span><span class="hljs-string">.</span> 
+                     <span class="hljs-string">*</span> <span class="hljs-string">A</span> <span class="hljs-string">function</span> <span class="hljs-string">call</span> <span class="hljs-string">is</span> <span class="hljs-string">marked</span> <span class="hljs-string">as</span> <span class="hljs-string">"pure"</span> <span class="hljs-string">if</span> <span class="hljs-string">a</span> <span class="hljs-string">comment</span> <span class="hljs-string">annotation</span> <span class="hljs-string">\/*@__PURE__*\/</span> <span class="hljs-string">or</span> <span class="hljs-string">\/*#__PURE__*\/</span> <span class="hljs-string">immediately</span> <span class="hljs-string">precedes</span> <span class="hljs-string">the</span> <span class="hljs-string">call.</span> 
+                     <span class="hljs-string">*</span> <span class="hljs-string">For</span> <span class="hljs-attr">example:</span> <span class="hljs-string">\/*@__PURE__*\/foo();</span>
+                     <span class="hljs-string">*</span> <span class="hljs-string">就是关闭标注纯函数的注释了</span>
+                     <span class="hljs-string">*/</span>
+<span class="hljs-attr">                    side_effects:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">去掉重复和无法到达的switch分支</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">eslint做检查,</span> <span class="hljs-string">以及开发者把控</span>
+<span class="hljs-attr">                    switches:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                    <span class="hljs-string">//</span> <span class="hljs-string">Transforms</span> <span class="hljs-string">typeof</span> <span class="hljs-string">foo</span> <span class="hljs-string">==</span> <span class="hljs-string">"undefined"</span> <span class="hljs-string">into</span> <span class="hljs-string">foo</span> <span class="hljs-string">===</span> <span class="hljs-string">void</span> <span class="hljs-number">0</span>
+<span class="hljs-attr">                    typeofs:</span> <span class="hljs-literal">false</span><span class="hljs-string">,</span>
+                <span class="hljs-string">}</span>
+            <span class="hljs-string">}</span></pre></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <p>其实很多优化点都是可以通过eslint来检查,而不需要在压缩过程检查</p>
+<p>再配合自身的开发习惯以及规范,可以去掉很多压缩检查, 压缩效率就能提升</p>
+<p>但是带来的负面影响就是压缩体积会有上升/</p>
+<p>因为对于第三方库来说,并不会安装项目配置的eslint来跑.自然就达不到要求.</p>
+<p>再少了uglifyplugin的压缩优化,体积就会上升.</p>
+<p>以我的例子来看,总体积上升了50k. 尚可以接受.</p>
+<p>而打包时间足足提升了30s. </p>
+<p>但可能也有人说上线打包不必在乎打包时间.</p>
+<p>其实这些都看具体业务需求,以及自身的开发规范来配置.</p>
+<p>重要的还是在打包速度和打包体积两者中找出一个最合适的平衡点</p>
+<h3 id="babelrc">.babelrc</h3><p>其实babel并不会影响到打包速度.我也只是顺便提下</p>
+<p>我的配置如下</p>
+
+      <div class="hljs javascript">
+        <table>
+          <tbody>
+            <tr>
+              <td class="line">
+                <pre><span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+<span>6</span>
+<span>7</span>
+<span>8</span>
+<span>9</span>
+<span>10</span>
+<span>11</span>
+<span>12</span>
+<span>13</span>
+<span>14</span>
+<span>15</span>
+<span>16</span>
+<span>17</span>
+<span>18</span>
+<span>19</span>
+<span>20</span>
+<span>21</span>
+<span>22</span>
+<span>23</span>
+<span>24</span>
+<span>25</span>
+</pre>
+              </td>
+              <td class="code"><pre>{
+    <span class="hljs-attr">"plugins"</span>: [
+        [
+            <span class="hljs-string">"component"</span>,
+            [{
+                <span class="hljs-attr">"libraryName"</span>: <span class="hljs-string">"element-ui"</span>,
+                <span class="hljs-attr">"styleLibraryName"</span>: <span class="hljs-string">"theme-default"</span>
+            }]]
+    ],
+    <span class="hljs-attr">"comments"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"env"</span>: {
+        <span class="hljs-attr">"development"</span>: {
+            <span class="hljs-attr">"plugins"</span>: [<span class="hljs-string">"transform-object-rest-spread"</span>, <span class="hljs-string">"syntax-dynamic-import"</span>]
+        },
+        <span class="hljs-attr">"production"</span>: {
+            <span class="hljs-attr">"presets"</span>: [[<span class="hljs-string">"es2015"</span>, {<span class="hljs-attr">"modules"</span>: <span class="hljs-literal">false</span>}], <span class="hljs-string">"stage-2"</span>],
+            <span class="hljs-attr">"plugins"</span>: [<span class="hljs-string">"transform-runtime"</span>]
+        },
+        <span class="hljs-attr">"test"</span>: {
+            <span class="hljs-attr">"presets"</span>: [<span class="hljs-string">"env"</span>, <span class="hljs-string">"stage-2"</span>],
+            <span class="hljs-attr">"plugins"</span>: [<span class="hljs-string">"transform-runtime"</span>, <span class="hljs-string">"istanbul"</span>]
+        }
+    }
+}
+</pre></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <p>我把babel配置区分成了三个阶段,开发,生产和测试.</p>
+<p>在开发过程不使用preset,直接跑原生代码. </p>
+<p>在生产环境则使用es2015的preset</p>
+<p>也许这样能提高开发环境的编译速度? 暂时不清楚,因为没感觉.一向很快.</p>
+<p>这也看个人喜好了.</p>
+<h2 id="ps">ps</h2><p>eslint的作用真的很大很大.</p>
+<p>但是在开发阶段使用eslint真的很烦很烦.</p>
+<p>所以,我目前的做法就是在开发阶段关闭eslint检查.因为我的vscode有带插件提示</p>
+<p>即便检查到有错误,也可以正常编译.</p>
+<p>但是在commit的时候添加了一层pre-commit来对修改的文件执行eslint.</p>
+<p>这样就确保上传到git的代码是经过eslint检查的</p>
+<p>这样既能确保开发不被干扰,也能确保代码能按照规范.</p>
+</div>
+  <div class="comments"><div id="gitalk-container"></div></div>
+  <!-- <div class="comments"><div id="disqus_thread"></div></div> -->
+</div>
+
+
+</div>
+
+<div class="footer">
+    <div class="center">
+      zWing / Powered by
+      <a target="_blank" href="https://github.com/acyortjs/acyort">AcyOrt</a> /
+      Theme
+      <a target="_blank" href="https://github.com/acyortjs/theme-donob">donob</a>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '0438ed96c0cb944693a7',
+    clientSecret: '23e7aa3152f5d03d8f20029540741d6f886c9f5b',
+    repo: 'my-blog-config',
+    owner: 'zWingz',
+    admin: ['zWingz'],
+    number: 6,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+</script>
+
+<script defer src="/script/ribbon.js"></script>
+</body>
+</html>
