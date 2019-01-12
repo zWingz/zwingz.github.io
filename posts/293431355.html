@@ -1,48 +1,10 @@
-<!doctype html>
-<html>
-
-<head>
-  <meta charset="UTF-8" />
+<!doctype html><html><head><!-- <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="description" content="Just a blog." />
 <link rel="stylesheet" href="/css/style.css" />
+ --><meta charset="UTF-8"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><meta name="description" content="Just a blog."><link rel="stylesheet" href="/css/style.css"><title>多个git 配置ssh key - zWing</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"></head><body><canvas id="ribbon"></canvas><div class="main"><div class="header"><a class="logo" href="/">zWing</a><!--
 
-  <title>
-多个git 配置ssh key - zWing
-</title>
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-
-</head>
-
-<body>
-<canvas id='ribbon'></canvas>
-<div class="main">
-<div class="header">
-    <a class="logo" href="/">zWing</a><!--
-
- --><div class="menu">
-        <a href="/archives/">Archives</a><a href="/about/">About</a>
-    </div>
-
-    <div class="social">
-        <a target="_blank" href="https://github.com/zWingz/my-blog-config/issues"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-<path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path>
-</svg></a>
-    </div>
-</div>
-
-
-<div id="post" class="center">
-  <p class="time">February 01, 2018</p>
-  <h1 class="title">多个git 配置ssh key</h1>
-  <div class="content"><h2 id="安装">安装</h2>
-      <div class="hljs bash">
-        <table>
-          <tbody>
-            <tr>
-              <td class="line">
-                <pre><span>1</span>
+ --><div class="menu"><a href="/archives/">Archives</a><a href="/about/">About</a></div><div class="social"><a target="_blank" href="https://github.com/zWingz/my-blog-config/issues"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path></svg></a></div></div><div id="post" class="center"><p class="time">February 01, 2018</p><h1 class="title">多个git 配置ssh key</h1><div class="content"><h2><a href="#安装" id="安装" class="heading"></a>安装</h2><div class="hljs bash"><table><tbody><tr><td class="line"><pre><span>1</span>
 <span>2</span>
 <span>3</span>
 <span>4</span>
@@ -55,9 +17,7 @@
 <span>11</span>
 <span>12</span>
 <span>13</span>
-</pre>
-              </td>
-              <td class="code"><pre>brew install git
+</pre></td><td class="code"><pre>brew install git
 <span class="hljs-meta"># or</span>
 <span class="hljs-meta"># apt-get install git</span>
 
@@ -69,22 +29,7 @@ git config --global user.email <span class="hljs-string">''</span>
 ssh-keygen -t res -C <span class="hljs-string">'email'</span>
 <span class="hljs-meta"># 然后就是自定义</span>
 <span class="hljs-meta"># 要不要密码随便你</span>
-<span class="hljs-meta"># 反正下面都会进行ssh-add</span></pre></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    <p>上github或者gitlab, 进入setting,找到ssh-key, 点击new SSH Key 把id_rsa.pub内容粘贴进去就ok了</p>
-<p><img src="https://user-images.githubusercontent.com/13031838/35666461-2aaa5d40-0765-11e8-9e62-1ae17cb933a2.png" alt="image"></p>
-<h2 id="检查">检查</h2><p><code>ssh git@github.com</code></p>
-<p><img src="https://user-images.githubusercontent.com/13031838/35666525-620a3544-0765-11e8-8590-1018bdabae20.png" alt="image"></p>
-<h2 id="配置hosts">配置hosts</h2>
-      <div class="hljs bash">
-        <table>
-          <tbody>
-            <tr>
-              <td class="line">
-                <pre><span>1</span>
+<span class="hljs-meta"># 反正下面都会进行ssh-add</span></pre></td></tr></tbody></table></div><p>上github或者gitlab, 进入setting,找到ssh-key, 点击new SSH Key 把id_rsa.pub内容粘贴进去就ok了</p><p><img src="https://user-images.githubusercontent.com/13031838/35666461-2aaa5d40-0765-11e8-9e62-1ae17cb933a2.png" alt="image"></p><h2><a href="#检查" id="检查" class="heading"></a>检查</h2><p><code>ssh git@github.com</code></p><p><img src="https://user-images.githubusercontent.com/13031838/35666525-620a3544-0765-11e8-8590-1018bdabae20.png" alt="image"></p><h2><a href="#配置hosts" id="配置hosts" class="heading"></a>配置hosts</h2><div class="hljs bash"><table><tbody><tr><td class="line"><pre><span>1</span>
 <span>2</span>
 <span>3</span>
 <span>4</span>
@@ -100,9 +45,7 @@ ssh-keygen -t res -C <span class="hljs-string">'email'</span>
 <span>14</span>
 <span>15</span>
 <span>16</span>
-</pre>
-              </td>
-              <td class="code"><pre>cd ~/.ssh
+</pre></td><td class="code"><pre>cd ~/.ssh
 vim<span class="hljs-built_in"> config
 </span>
 Host github.com
@@ -117,44 +60,4 @@ IdentityFile ~/.ssh/id_rsa_gitlab
 
 
 <span class="hljs-comment"># 注入密码,下次不需要再输密码(除非重启)</span>
-ssh-<span class="hljs-builtin-name">add</span> -k ~/.ssh/id_rsa_gitlab</pre></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    <h3 id="简单快捷完成git配置了">简单快捷完成git配置了</h3></div>
-  <div class="comments"><div id="gitalk-container"></div></div>
-  <!-- <div class="comments"><div id="disqus_thread"></div></div> -->
-</div>
-
-
-</div>
-
-<div class="footer">
-    <div class="center">
-      zWing / Powered by
-      <a target="_blank" href="https://github.com/acyortjs/acyort">AcyOrt</a> /
-      Theme
-      <a target="_blank" href="https://github.com/acyortjs/theme-donob">donob</a>
-    </div>
-</div>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script>
-  var gitalk = new Gitalk({
-    clientID: '0438ed96c0cb944693a7',
-    clientSecret: '23e7aa3152f5d03d8f20029540741d6f886c9f5b',
-    repo: 'my-blog-config',
-    owner: 'zWingz',
-    admin: ['zWingz'],
-    number: 7,      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-  gitalk.render('gitalk-container')
-</script>
-
-<script defer src="/script/ribbon.js"></script>
-</body>
-</html>
+ssh-<span class="hljs-builtin-name">add</span> -k ~/.ssh/id_rsa_gitlab</pre></td></tr></tbody></table></div><h3><a href="#简单快捷完成git配置了" id="简单快捷完成git配置了" class="heading"></a>简单快捷完成git配置了</h3></div><div class="comments"><div id="gitalk-container"></div></div><!-- <div class="comments"><div id="disqus_thread"></div></div> --></div></div><div class="footer"><div class="center">zWing / Powered by <a target="_blank" href="https://github.com/acyortjs/acyort">AcyOrt</a> / Theme <a target="_blank" href="https://github.com/acyortjs/theme-donob">donob</a></div></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script></script><script defer="defer" src="/script/ribbon.js"></script></body></html>
