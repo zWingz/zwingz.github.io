@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 24 Jan 2019 02:31:42 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 24 Jan 2019 02:31:42 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 24 Jan 2019 02:32:38 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 24 Jan 2019 02:32:38 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
             <h2>
               <a href="#前言" id="前言" class="heading"></a>前言
             </h2>
@@ -1820,22 +1820,22 @@ export <span class="hljs-keyword">default</span> withRouter(<span class="hljs-ty
             <h3>
               <a href="#倒入蛋挞液后" id="倒入蛋挞液后" class="heading"></a>倒入蛋挞液后
             </h3>
-          <p><img src="http://ol1hthxqp.bkt.clouddn.com/18-3-24/45790429.jpg" alt=""></p>
+          <p><img src="https://zwing.site/imgur/45790429.jpg" alt=""></p>
 
             <h3>
               <a href="#放入烤箱" id="放入烤箱" class="heading"></a>放入烤箱
             </h3>
-          <p><img src="http://ol1hthxqp.bkt.clouddn.com/18-3-24/75661678.jpg" alt=""></p>
+          <p><img src="https://zwing.site/imgur/75661678.jpg" alt=""></p>
 
             <h3>
               <a href="#正在烤的蛋挞" id="正在烤的蛋挞" class="heading"></a>正在烤的蛋挞
             </h3>
-          <p><img src="http://ol1hthxqp.bkt.clouddn.com/18-3-24/33388698.jpg" alt=""></p>
+          <p><img src="https://zwing.site/imgur/33388698.jpg" alt=""></p>
 
             <h3>
               <a href="#成品" id="成品" class="heading"></a>成品
             </h3>
-          <p><img src="http://ol1hthxqp.bkt.clouddn.com/18-3-24/38696134.jpg" alt=""></p>
+          <p><img src="https://zwing.site/imgur/38696134.jpg" alt=""></p>
 
             <h2>
               <a href="#结语" id="结语" class="heading"></a>结语
