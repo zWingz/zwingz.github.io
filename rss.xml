@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 24 Jan 2019 02:32:38 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 24 Jan 2019 02:32:38 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 24 Jan 2019 02:33:20 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 24 Jan 2019 02:33:20 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
             <h2>
               <a href="#前言" id="前言" class="heading"></a>前言
             </h2>
@@ -1767,10 +1767,10 @@ export <span class="hljs-keyword">default</span> withRouter(<span class="hljs-ty
             <h2>
               <a href="#图片" id="图片" class="heading"></a>图片
             </h2>
-          <p><img src="http://ol1hthxqp.bkt.clouddn.com/18-4-1/92583692.jpg" alt=""></p>
-<p><img src="http://ol1hthxqp.bkt.clouddn.com/18-4-1/31921272.jpg" alt=""></p>
-<p><img src="http://ol1hthxqp.bkt.clouddn.com/18-4-1/61126157.jpg" alt=""></p>
-<p><img src="http://ol1hthxqp.bkt.clouddn.com/18-4-1/44394098.jpg" alt=""></p>
+          <p><img src="https://zwing.site/imgur/92583692.jpg" alt=""></p>
+<p><img src="https://zwing.site/imgur/31921272.jpg" alt=""></p>
+<p><img src="https://zwing.site/imgur/61126157.jpg" alt=""></p>
+<p><img src="https://zwing.site/imgur/44394098.jpg" alt=""></p>
 
             <h2>
               <a href="#最后" id="最后" class="heading"></a>最后
