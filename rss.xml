@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Tue, 22 Jan 2019 08:17:41 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 22 Jan 2019 08:17:41 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 24 Jan 2019 02:29:06 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 24 Jan 2019 02:29:06 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
             <h2>
               <a href="#前言" id="前言" class="heading"></a>前言
             </h2>
@@ -3236,10 +3236,10 @@ ssh-<span class="hljs-builtin-name">add</span> -k ~/.ssh/id_rsa_gitlab</pre></td
 <p>就是由于上周失败了, 并且找到原因, 所以这周就铁了心要把它完成. 当然这里肯定有图了</p>
 <ul>
 <li><p>这是入烤箱前
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-1-29/645802.jpg" alt=""></p>
+<img src="https://zwing.site/imgur/645802.jpg" alt=""></p>
 </li>
 <li><p>烤完后
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-1-29/84359394.jpg" alt="">
+<img src="https://zwing.site/imgur/84359394.jpg" alt="">
 味道还是不错的, 也挺简单.</p>
 </li>
 </ul>
@@ -3249,7 +3249,7 @@ ssh-<span class="hljs-builtin-name">add</span> -k ~/.ssh/id_rsa_gitlab</pre></td
             </h2>
           <p>做这个芒果千层, 耗时3小时, 也是不容易啊
 这里先上图, 之后再补充制作过程
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-1-29/38760413.jpg" alt=""></p>
+<img src="https://zwing.site/imgur/38760413.jpg" alt=""></p>
 
             <h2>
               <a href="#其他" id="其他" class="heading"></a>其他
@@ -3259,22 +3259,22 @@ ssh-<span class="hljs-builtin-name">add</span> -k ~/.ssh/id_rsa_gitlab</pre></td
 这里就顺便贴下图吧.过程就先忽略了</p>
 <ul>
 <li>鸡蛋布丁
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-1-29/42554020.jpg" alt=""></li>
+<img src="https://zwing.site/imgur/42554020.jpg" alt=""></li>
 </ul>
 <ul>
 <li>西多士
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-1-29/69072942.jpg" alt="">
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-1-29/52839589.jpg" alt=""></li>
+<img src="https://zwing.site/imgur/69072942.jpg" alt="">
+<img src="https://raw.githubusercontent.com/zWingz/imgur/master/52877777.jpg" alt=""></li>
 </ul>
 <ul>
 <li>蛋挞
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-1-29/59916873.jpg" alt="">
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-1-29/70796582.jpg" alt="">
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-1-29/48233877.jpg" alt=""></li>
+<img src="https://zwing.site/imgur/59916873.jpg" alt="">
+<img src="https://zwing.site/imgur/70796582.jpg" alt="">
+<img src="https://zwing.site/imgur/48233877.jpg" alt=""></li>
 </ul>
 <ul>
 <li>风琴土豆
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-1-29/33495732.jpg" alt=""></li>
+<img src="https://zwing.site/imgur/33495732.jpg" alt=""></li>
 </ul>
 ]]></description><link>http://zwingz.github.io/posts/292217983.html</link><guid isPermaLink="false">292217983</guid><category><![CDATA[烘焙]]></category><category><![CDATA[生活]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sun, 28 Jan 2018 16:34:04 GMT</pubDate></item><item><title><![CDATA[vue后台系统开发实践]]></title><description><![CDATA[
             <h2>
