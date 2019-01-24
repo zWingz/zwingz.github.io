@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 24 Jan 2019 02:29:06 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 24 Jan 2019 02:29:06 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 24 Jan 2019 02:31:42 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 24 Jan 2019 02:31:42 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
             <h2>
               <a href="#前言" id="前言" class="heading"></a>前言
             </h2>
@@ -2176,7 +2176,7 @@ IdentityFile ~/.ssh/id_rsa_gitlab</p>
 </li>
 <li><p>例子
 elementUI 的表格就是这样实现的.
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-2-10/39962386.jpg" alt="">
+<img src="https://zwing.site/imgur/39962386.jpg" alt="">
 同一个表格的表头,表体分别复制了3次.用来形成表头和两侧的固定.</p>
 <p>使用绝对定位固定两侧.</p>
 <p>通过管理 scroll 的值管理表头以及两侧滚动.</p>
@@ -2189,7 +2189,7 @@ elementUI 的表格就是这样实现的.
             </h2>
           <p>此方法原生支持固定表头.</p>
 <p>但是目前<a href="https://caniuse.com/#feat=css-sticky">兼容性</a>不客观
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-2-10/67634294.jpg" alt=""></p>
+<img src="https://zwing.site/imgur/67634294.jpg" alt=""></p>
 
             <h2>
               <a href="#本文实现" id="本文实现" class="heading"></a>本文实现
@@ -2230,7 +2230,7 @@ elementUI 的表格就是这样实现的.
             </h3>
           <p>在第一版完成后, 基本实现了固定表格头功能. 而且在 chrome 下表现顺畅.</p>
 <p>于是着手实现固定两侧.这里实现原理一样.所以很容易实现
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-2-10/60520413.jpg" alt=""></p>
+<img src="https://zwing.site/imgur/60520413.jpg" alt=""></p>
 <p>这种虽然右侧是固定在浏览器右侧.</p>
 <p>但是整体页面还是被撑开的.</p>
 <p>那么对于表格上下的其他组件,他们依旧是被浏览器隐藏.需要横向滚动才能看到.</p>
@@ -2242,13 +2242,13 @@ elementUI 的表格就是这样实现的.
           <p>这一版主要就是为了页面的其他组件不被表格的宽高影响.也就是说不管表格多高多宽.</p>
 <p>都可以在不滚动的前提下看到.</p>
 <p>那么就是将表格变成局部滚动了.</p>
-<p><img src="http://ol1hthxqp.bkt.clouddn.com/18-2-10/99932867.jpg" alt=""></p>
+<p><img src="https://zwing.site/imgur/99932867.jpg" alt=""></p>
 <p>其实就是一个自适应的内滚动容器.</p>
 <p>前提是页面高度宽度都是100%</p>
 <p>也就是说要有环境让容器产生滚动</p>
 <p>监听此容器的滚动来控制表格头和两侧的固定.</p>
 <p>但是收到反馈说这种表格看起来很狭小.不够大气</p>
-<p><img src="http://ol1hthxqp.bkt.clouddn.com/18-2-10/42701513.jpg" alt=""></p>
+<p><img src="https://zwing.site/imgur/42701513.jpg" alt=""></p>
 <p>没办法,只能继续进行思考改进</p>
 
             <h3>
@@ -2262,11 +2262,11 @@ elementUI 的表格就是这样实现的.
 <p>也就是说全局只有 y 轴滚动.没有 x 轴滚动.</p>
 <p>其实第三版是可以实现的.</p>
 <p>页面只需限制宽度为100%.高度不做限制,就可以轻松的达到要求.</p>
-<p><img src="http://ol1hthxqp.bkt.clouddn.com/18-2-10/27128653.jpg" alt=""></p>
+<p><img src="https://zwing.site/imgur/27128653.jpg" alt=""></p>
 <p>注意这里的高度其实没有做限制的.也就是说容器滚动条被隐藏了.</p>
 <p>那如果要横向滚动怎么办.</p>
 <p>很简单啊.按着 shift 再滚动就是横向滚动了.</p>
-<p><img src="http://ol1hthxqp.bkt.clouddn.com/18-2-10/42701513.jpg" alt=""></p>
+<p><img src="https://zwing.site/imgur/42701513.jpg" alt=""></p>
 <p>这是不科学的.不是每个人都知道.</p>
 <p>那样是不是可以有一条虚拟的横向滚动条, 来管理表格的横向滚动呢.</p>
 <p>于是就有第四版</p>
@@ -2278,9 +2278,9 @@ elementUI 的表格就是这样实现的.
 <p>当容器底部被浏览器隐藏时候.则平移这个滚动条至屏幕底部</p>
 <ul>
 <li>原生滚动条被隐藏时候,显示虚拟滚动条
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-2-10/24267221.jpg" alt=""></li>
+<img src="https://zwing.site/imgur/24267221.jpg" alt=""></li>
 <li>原生滚动条显示时候,隐藏虚拟滚动条
-<img src="http://ol1hthxqp.bkt.clouddn.com/18-2-10/61056576.jpg" alt=""></li>
+<img src="https://zwing.site/imgur/61056576.jpg" alt=""></li>
 </ul>
 <p>这样, 既能使得页面不被撑开. 同时高度也不需要限定在100%.</p>
 <p>刚好能满足需求.</p>
@@ -2290,7 +2290,7 @@ elementUI 的表格就是这样实现的.
             </h3>
           <p>实现方法其实就是使用 transform 以及监听滚动来实现固定咯.</p>
 <p>但是在使用上,则需要有一定的规则.</p>
-<p><img src="http://ol1hthxqp.bkt.clouddn.com/18-2-10/81508433.jpg" alt=""></p>
+<p><img src="https://zwing.site/imgur/81508433.jpg" alt=""></p>
 <p>也就是说</p>
 <p>在使用的时候.要通过 slot 分别配置 head,left,right 的内容.</p>
 <p>简单说就是把表格拆分成左/中/右</p>
@@ -2317,7 +2317,7 @@ elementUI 的表格就是这样实现的.
 <li><p>需要有 css 支持. 让容易有一个可滚动的环境.</p>
 </li>
 <li><p>使用时候会把正常的 table 拆分成几部分. </p>
-<p><img src="http://ol1hthxqp.bkt.clouddn.com/18-2-10/67633591.jpg" alt=""></p>
+<p><img src="https://zwing.site/imgur/67633591.jpg" alt=""></p>
 </li>
 </ul>
 
