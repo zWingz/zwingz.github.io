@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 24 Jan 2019 02:33:20 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 24 Jan 2019 02:33:20 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Fri, 25 Jan 2019 02:30:01 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 25 Jan 2019 02:30:01 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
             <h2>
               <a href="#前言" id="前言" class="heading"></a>前言
             </h2>
@@ -90,9 +90,9 @@
       </div>
     <p>如果使用<code>babel</code>的话, 只要将<code>ts</code>转成<code>js</code>, <code>ts-jest</code>转成<code>babel-jest</code>即可。</p>
 
-            <h4>
+            <h3>
               <a href="#moduleNameMapper" id="moduleNameMapper" class="heading"></a>moduleNameMapper
-            </h4>
+            </h3>
           <p>用来<code>mock</code>一些额外<code>module</code>, 比如<code>sass</code>, <code>jpg</code>等等.</p>
 
       <div class="hljs typescript">
@@ -111,9 +111,9 @@
         </table>
       </div>
     
-            <h4>
+            <h3>
               <a href="#setupTestFrameworkScriptFile" id="setupTestFrameworkScriptFile" class="heading"></a>setupTestFrameworkScriptFile
-            </h4>
+            </h3>
           <blockquote>
 <p>The path to a module that runs some code to configure or set up the testing framework before each test. </p>
 </blockquote>
@@ -143,19 +143,19 @@ configure({ <span class="hljs-attr">adapter</span>: <span class="hljs-keyword">n
         </table>
       </div>
     
-            <h4>
+            <h3>
               <a href="#collectCoverageFrom" id="collectCoverageFrom" class="heading"></a>collectCoverageFrom
-            </h4>
+            </h3>
           <p>需要测试覆盖率的文件</p>
 
-            <h4>
+            <h3>
               <a href="#coverageDirectory" id="coverageDirectory" class="heading"></a>coverageDirectory
-            </h4>
+            </h3>
           <p>覆盖率输出目录</p>
 
-            <h4>
+            <h3>
               <a href="#transform" id="transform" class="heading"></a>transform
-            </h4>
+            </h3>
           <blockquote>
 <p>A map from regular expressions to paths to transformers. A transformer is a module that provides a synchronous function for transforming source files</p>
 </blockquote>
