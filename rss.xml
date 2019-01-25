@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Fri, 25 Jan 2019 04:57:18 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 25 Jan 2019 04:57:18 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Fri, 25 Jan 2019 04:59:04 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 25 Jan 2019 04:59:04 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
             <h2>
               <a href="#前言" id="前言" class="heading"></a>前言
             </h2>
@@ -3108,7 +3108,7 @@ ssh-<span class="hljs-builtin-name">add</span> -k ~/.ssh/id_rsa_gitlab</pre></td
 <p>重要的还是在打包速度和打包体积两者中找出一个最合适的平衡点</p>
 
             <h3>
-              <a href="#.babelrc" id=".babelrc" class="heading"></a>.babelrc
+              <a href="#babelrc" id="babelrc" class="heading"></a>babelrc
             </h3>
           <p>其实babel并不会影响到打包速度.我也只是顺便提下</p>
 <p>我的配置如下</p>
