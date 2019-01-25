@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Fri, 25 Jan 2019 02:30:01 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 25 Jan 2019 02:30:01 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Fri, 25 Jan 2019 04:57:18 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 25 Jan 2019 04:57:18 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
             <h2>
               <a href="#前言" id="前言" class="heading"></a>前言
             </h2>
@@ -3277,13 +3277,13 @@ ssh-<span class="hljs-builtin-name">add</span> -k ~/.ssh/id_rsa_gitlab</pre></td
 <img src="https://zwing.site/imgur/33495732.jpg" alt=""></li>
 </ul>
 ]]></description><link>http://zwingz.github.io/posts/292217983.html</link><guid isPermaLink="false">292217983</guid><category><![CDATA[烘焙]]></category><category><![CDATA[生活]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sun, 28 Jan 2018 16:34:04 GMT</pubDate></item><item><title><![CDATA[vue后台系统开发实践]]></title><description><![CDATA[
-            <h2>
+            <h1>
               <a href="#Vue后台系统开发实践" id="Vue后台系统开发实践" class="heading"></a>Vue后台系统开发实践
-            </h2>
+            </h1>
           
-            <h3>
+            <h2>
               <a href="#依赖库" id="依赖库" class="heading"></a>依赖库
-            </h3>
+            </h2>
           <ul>
 <li><a href="mailto:vue@2.4.4">vue@2.4.4</a></li>
 <li><a href="mailto:vue-router@3.0.0">vue-router@3.0.0</a></li>
@@ -3292,9 +3292,9 @@ ssh-<span class="hljs-builtin-name">add</span> -k ~/.ssh/id_rsa_gitlab</pre></td
 <li>element-ui</li>
 </ul>
 
-            <h3>
+            <h2>
               <a href="#搭建流程" id="搭建流程" class="heading"></a>搭建流程
-            </h3>
+            </h2>
           <ol>
 <li><p><a href="https://github.com/zWingz/vue-webpack-template">webpack-template</a></p>
 </li>
@@ -3327,9 +3327,9 @@ ssh-<span class="hljs-builtin-name">add</span> -k ~/.ssh/id_rsa_gitlab</pre></td
 </li>
 </ol>
 
-            <h3>
+            <h2>
               <a href="#后台大致内容" id="后台大致内容" class="heading"></a>后台大致内容
-            </h3>
+            </h2>
           <ul>
 <li>登录/权限</li>
 <li>列表页</li>
@@ -3337,9 +3337,9 @@ ssh-<span class="hljs-builtin-name">add</span> -k ~/.ssh/id_rsa_gitlab</pre></td
 <li>创建/修改页</li>
 </ul>
 
-            <h3>
+            <h2>
               <a href="#问题分析" id="问题分析" class="heading"></a>问题分析
-            </h3>
+            </h2>
           <ul>
 <li><p>登录/权限</p>
 <ul>
@@ -3416,9 +3416,9 @@ ssh-<span class="hljs-builtin-name">add</span> -k ~/.ssh/id_rsa_gitlab</pre></td
 </li>
 </ul>
 
-            <h3>
+            <h2>
               <a href="#组件" id="组件" class="heading"></a>组件
-            </h3>
+            </h2>
           <ul>
 <li><p>Table(如上所说) <a href="https://zwingz.github.io/vue-fixed-table/release/demo.html">Demo</a></p>
 </li>
@@ -3474,9 +3474,9 @@ ssh-<span class="hljs-builtin-name">add</span> -k ~/.ssh/id_rsa_gitlab</pre></td
 </li>
 </ul>
 
-            <h3>
+            <h2>
               <a href="#建议" id="建议" class="heading"></a>建议
-            </h3>
+            </h2>
           <ol>
 <li><p>如果对组件进行for命令,必须加上:key,这是官方指定.
  但对于原生dom进行for循环时候.其实可以不加:key,或者使用index作为key. 
@@ -3514,14 +3514,10 @@ ssh-<span class="hljs-builtin-name">add</span> -k ~/.ssh/id_rsa_gitlab</pre></td
         </table>
       </div>
     
-            <h3>
+            <h2>
               <a href="#安利" id="安利" class="heading"></a>安利
-            </h3>
+            </h2>
           <p><a href="https://fundebug.com/">Fundebug</a></p>
 <p><a href="https://www.easy-mock.com/">EasyMock</a></p>
 <p><a href="http://apizza.cc/account">Apizza</a></p>
-
-            <h1>
-              <a href="#<strong>全剧终</strong>" id="<strong>全剧终</strong>" class="heading"></a><strong>全剧终</strong>
-            </h1>
-          ]]></description><link>http://zwingz.github.io/posts/275254986.html</link><guid isPermaLink="false">275254986</guid><category><![CDATA[front-end]]></category><category><![CDATA[js]]></category><category><![CDATA[vue]]></category><category><![CDATA[webpack]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Mon, 20 Nov 2017 07:02:07 GMT</pubDate></item></channel></rss>
+]]></description><link>http://zwingz.github.io/posts/275254986.html</link><guid isPermaLink="false">275254986</guid><category><![CDATA[front-end]]></category><category><![CDATA[js]]></category><category><![CDATA[vue]]></category><category><![CDATA[webpack]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Mon, 20 Nov 2017 07:02:07 GMT</pubDate></item></channel></rss>
