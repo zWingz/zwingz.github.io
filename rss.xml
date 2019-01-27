@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 27 Jan 2019 13:41:17 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 27 Jan 2019 13:41:17 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[2018，不普通的一年]]></title><description><![CDATA[
-    <h1 id="2018%E4%B8%8D%E6%99%AE%E9%80%9A%E7%9A%84%E4%B8%80%E5%B9%B4" class="heading">
-      <a href="#2018%E4%B8%8D%E6%99%AE%E9%80%9A%E7%9A%84%E4%B8%80%E5%B9%B4" class="heading-anchor"></a>2018，不普通的一年
-    </h1>
-  <p>2018对我个人来说是很重要的一年</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 27 Jan 2019 13:43:20 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 27 Jan 2019 13:43:20 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[2018，不普通的一年]]></title><description><![CDATA[<p>2018对我个人来说是很重要的一年</p>
 <p>在4月份, 我辞去了一份965的工作</p>
 <p>跟着前同事去了一家9:30 - 8:00 大小周的创业公司</p>
 
@@ -260,7 +256,7 @@
 </li>
 </ul>
 <p>希望2019也是不普通的一年</p>
-]]></description><link>http://zwingz.github.io/posts/403552116.html</link><guid isPermaLink="false">403552116</guid><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sun, 27 Jan 2019 13:40:58 GMT</pubDate></item><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
+]]></description><link>http://zwingz.github.io/posts/403552116.html</link><guid isPermaLink="false">403552116</guid><category><![CDATA[生活]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sun, 27 Jan 2019 13:40:58 GMT</pubDate></item><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[
     <h2 id="%E5%89%8D%E8%A8%80" class="heading">
       <a href="#%E5%89%8D%E8%A8%80" class="heading-anchor"></a>前言
     </h2>
