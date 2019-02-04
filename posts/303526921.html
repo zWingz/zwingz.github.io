@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><meta name="description" content="Just a blog."><link rel="stylesheet" href="/css/style.css"><title>开发环境搭建 - zWing</title><link rel="stylesheet" href="/css/highlight.ocean.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"></head><body><canvas id="ribbon"></canvas><div class="main"><div class="header"><a class="logo" href="/">zWing</a><div class="menu"><a href="/archives/">Archives</a><a href="/about/">About</a></div><div class="social"><a target="_blank" href="https://github.com/zWingz/my-blog-config/issues"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path></svg></a><a target="_blank" href="/rss.xml"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.18,15.64A2.18,2.18 0 0,1 8.36,17.82C8.36,19 7.38,20 6.18,20C5,20 4,19 4,17.82A2.18,2.18 0 0,1 6.18,15.64M4,4.44A15.56,15.56 0 0,1 19.56,20H16.73A12.73,12.73 0 0,0 4,7.27V4.44M4,10.1A9.9,9.9 0 0,1 13.9,20H11.07A7.07,7.07 0 0,0 4,12.93V10.1Z"></path></svg></a></div></div><div id="post" class="center"><div class="toc"><div class="stay"><ul><li><a href="#mac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83">mac开发环境</a><ul><li><a href="#%E5%AE%89%E8%A3%85-brew">安装 brew</a></li><li><a href="#%E7%BB%88%E7%AB%AF%E7%8E%AF%E5%A2%83">终端环境</a></li><li><a href="#node-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">node 环境搭建</a></li><li><a href="#git-%E9%85%8D%E7%BD%AE">git 配置</a></li><li><a href="#vscode">vscode</a></li><li><a href="#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%AE%8C%E6%AF%95">开发环境搭建完毕</a></li></ul></li></ul><span class="toc-icon"></span></div></div><div class="post-content"><p class="time">March 08, 2018</p><h1 class="title">开发环境搭建</h1><div class="content"><h1 id="mac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83" class="heading"><a href="#mac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83" class="heading-anchor"></a>mac开发环境</h1><h2 id="%E5%AE%89%E8%A3%85-brew" class="heading"><a href="#%E5%AE%89%E8%A3%85-brew" class="heading-anchor"></a>安装 brew</h2><div class="hljs bash"><table><tbody><tr><td class="line"><pre><span>1</span>
+<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><meta name="description" content="Just a blog."><link rel="stylesheet" href="/css/style.css"><title>开发环境搭建 - zWing</title><link rel="stylesheet" href="/css/highlight.ocean.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"></head><body><canvas id="ribbon"></canvas><div class="main"><div class="header"><a class="logo" href="/">zWing</a><div class="menu"><a href="/archives/">Archives</a><a href="/about/">About</a></div><div class="social"><a target="_blank" href="https://github.com/zWingz/my-blog-config/issues"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path></svg></a><a target="_blank" href="/rss.xml"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.18,15.64A2.18,2.18 0 0,1 8.36,17.82C8.36,19 7.38,20 6.18,20C5,20 4,19 4,17.82A2.18,2.18 0 0,1 6.18,15.64M4,4.44A15.56,15.56 0 0,1 19.56,20H16.73A12.73,12.73 0 0,0 4,7.27V4.44M4,10.1A9.9,9.9 0 0,1 13.9,20H11.07A7.07,7.07 0 0,0 4,12.93V10.1Z"></path></svg></a></div></div><div id="post" class="center"><div class="toc"><div class="stay"><ul><li><a href="#mac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83">mac开发环境</a><ul><li><a href="#%E5%AE%89%E8%A3%85-brew">安装 brew</a></li><li><a href="#%E7%BB%88%E7%AB%AF%E7%8E%AF%E5%A2%83">终端环境</a></li><li><a href="#node-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">node 环境搭建</a></li><li><a href="#git-%E9%85%8D%E7%BD%AE">git 配置</a></li><li><a href="#vscode">vscode</a></li></ul></li></ul><span class="toc-icon"></span></div></div><div class="post-content"><p class="time">March 08, 2018</p><h1 class="title">开发环境搭建</h1><div class="content"><h1 id="mac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83" class="heading"><a href="#mac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83" class="heading-anchor"></a>mac开发环境</h1><h2 id="%E5%AE%89%E8%A3%85-brew" class="heading"><a href="#%E5%AE%89%E8%A3%85-brew" class="heading-anchor"></a>安装 brew</h2><div class="hljs bash"><table><tbody><tr><td class="line"><pre><span>1</span>
 </pre></td><td class="code"><pre><span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/ruby -e "$(curl -fsSL https:/</span><span class="hljs-regexp">/raw.githubusercontent.com/</span>Homebrew<span class="hljs-regexp">/install/m</span>aster<span class="hljs-regexp">/install)"</span></pre></td></tr></tbody></table></div><h2 id="%E7%BB%88%E7%AB%AF%E7%8E%AF%E5%A2%83" class="heading"><a href="#%E7%BB%88%E7%AB%AF%E7%8E%AF%E5%A2%83" class="heading-anchor"></a>终端环境</h2><ul><li><p><a href="https://www.iterm2.com/">iterm2</a></p></li><li><p><a href="http://ohmyz.sh/">oh-my-zsh</a></p><p>安装</p><div class="hljs bash"><table><tbody><tr><td class="line"><pre><span>1</span>
 </pre></td><td class="code"><pre>sh -c <span class="hljs-string">"<span class="hljs-variable">$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></pre></td></tr></tbody></table></div><p>添加插件</p><div class="hljs bash"><table><tbody><tr><td class="line"><pre><span>1</span>
 </pre></td><td class="code"><pre>vim ~<span class="hljs-string">/.zshrc</span></pre></td></tr></tbody></table></div><div class="hljs bash"><table><tbody><tr><td class="line"><pre><span>1</span>
@@ -8,7 +8,7 @@
 </pre></td><td class="code"><pre>plugins=(
   <span class="hljs-name">git</span>
   z
-)</pre></td></tr></tbody></table></div><p>​</p></li></ul><h2 id="node-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA" class="heading"><a href="#node-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA" class="heading-anchor"></a>node 环境搭建</h2><ul><li><p>安装 nvm</p><div class="hljs shell"><table><tbody><tr><td class="line"><pre><span>1</span>
+)</pre></td></tr></tbody></table></div></li></ul><h2 id="node-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA" class="heading"><a href="#node-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA" class="heading-anchor"></a>node 环境搭建</h2><ul><li><p>安装 nvm</p><div class="hljs shell"><table><tbody><tr><td class="line"><pre><span>1</span>
 <span>2</span>
 <span>3</span>
 <span>4</span>
@@ -33,44 +33,20 @@ wget -qO- https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<spa
 <span>14</span>
 <span>15</span>
 <span>16</span>
-<span>17</span>
-<span>18</span>
-<span>19</span>
-<span>20</span>
-<span>21</span>
-<span>22</span>
-<span>23</span>
-<span>24</span>
-<span>25</span>
-<span>26</span>
-<span>27</span>
-<span>28</span>
 </pre></td><td class="code"><pre>
-  ​
-
   使用方法
 
   &#x60;&#x60;&#x60;shell
   # 本地node版本
   nvm ls
-
-
   # node所有版本
   nvm ls-remote
-
-
   # 安装最新node(稳定版,即偶数版)
   nvm install --lts
-
-
   # 安装指定版本node
   nvm install v8.9.4
-
-
   # 切换到指定版本&#x2F;别名node
   nvm use v8.9.4
-
-
   # 给node版本起别名
   nvm alias default v8.9.4</pre></td></tr></tbody></table></div><ul><li><p>安装 node</p><p><code>nvm install v8.9.4</code></p></li><li><p>npm 换源</p><div class="hljs bash"><table><tbody><tr><td class="line"><pre><span>1</span>
 <span>2</span>
@@ -79,7 +55,7 @@ wget -qO- https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<spa
 </pre></td><td class="code"><pre><span class="hljs-meta"># npm 源</span>
 npm config <span class="hljs-keyword">set</span> registry https:<span class="hljs-comment">//registry.npm.taobao.org</span>
 <span class="hljs-meta"># sass 源</span>
-npm config <span class="hljs-keyword">set</span> sass_binary_site https:<span class="hljs-comment">//npm.taobao.org/mirrors/node-sass/</span></pre></td></tr></tbody></table></div><p>​</p></li></ul><h2 id="git-%E9%85%8D%E7%BD%AE" class="heading"><a href="#git-%E9%85%8D%E7%BD%AE" class="heading-anchor"></a>git 配置</h2><ul><li><p>安装</p><div class="hljs bash"><table><tbody><tr><td class="line"><pre><span>1</span>
+npm config <span class="hljs-keyword">set</span> sass_binary_site https:<span class="hljs-comment">//npm.taobao.org/mirrors/node-sass/</span></pre></td></tr></tbody></table></div></li></ul><h2 id="git-%E9%85%8D%E7%BD%AE" class="heading"><a href="#git-%E9%85%8D%E7%BD%AE" class="heading-anchor"></a>git 配置</h2><ul><li><p>安装</p><div class="hljs bash"><table><tbody><tr><td class="line"><pre><span>1</span>
 </pre></td><td class="code"><pre><span class="hljs-keyword">brew </span><span class="hljs-keyword">install </span>git</pre></td></tr></tbody></table></div></li><li><p>配置 ssh-key</p><div class="hljs bash"><table><tbody><tr><td class="line"><pre><span>1</span>
 <span>2</span>
 <span>3</span>
@@ -87,7 +63,7 @@ npm config <span class="hljs-keyword">set</span> sass_binary_site https:<span cl
 </pre></td><td class="code"><pre>git config --global user<span class="hljs-selector-class">.name</span> <span class="hljs-string">''</span>
 git config --global user<span class="hljs-selector-class">.email</span> <span class="hljs-string">''</span>
 
-ssh-keygen -t res -C <span class="hljs-string">'email'</span></pre></td></tr></tbody></table></div><p>​</p></li><li><p>配置 hosts</p><div class="hljs bash"><table><tbody><tr><td class="line"><pre><span>1</span>
+ssh-keygen -t res -C <span class="hljs-string">'email'</span></pre></td></tr></tbody></table></div></li><li><p>配置 hosts</p><div class="hljs bash"><table><tbody><tr><td class="line"><pre><span>1</span>
 <span>2</span>
 <span>3</span>
 <span>4</span>
@@ -100,8 +76,6 @@ ssh-keygen -t res -C <span class="hljs-string">'email'</span></pre></td></tr></t
 <span>11</span>
 <span>12</span>
 <span>13</span>
-<span>14</span>
-<span>15</span>
 </pre></td><td class="code"><pre>cd ~/.ssh
 vim<span class="hljs-built_in"> config
 </span>
@@ -114,44 +88,7 @@ IdentityFile ~/.ssh/id_rsa_github
 Host gitlab.com
 HostName gitlab.com<span class="hljs-built_in">
 User </span>git
-IdentityFile ~/.ssh/id_rsa_gitlab
-
-</pre></td></tr></tbody></table></div></li></ul><h1 id="%E6%B3%A8%E5%85%A5%E5%AF%86%E7%A0%81%E4%B8%8B%E6%AC%A1%E4%B8%8D%E9%9C%80%E8%A6%81%E5%86%8D%E8%BE%93%E5%AF%86%E7%A0%81%E9%99%A4%E9%9D%9E%E9%87%8D%E5%90%AF" class="heading"><a href="#%E6%B3%A8%E5%85%A5%E5%AF%86%E7%A0%81%E4%B8%8B%E6%AC%A1%E4%B8%8D%E9%9C%80%E8%A6%81%E5%86%8D%E8%BE%93%E5%AF%86%E7%A0%81%E9%99%A4%E9%9D%9E%E9%87%8D%E5%90%AF" class="heading-anchor"></a>注入密码,下次不需要再输密码(除非重启)</h1><p>ssh-add -k ~/.ssh/id_rsa_gitlab</p><div class="hljs"><table><tbody><tr><td class="line"><pre><span>1</span>
-<span>2</span>
-<span>3</span>
-<span>4</span>
-<span>5</span>
-<span>6</span>
-<span>7</span>
-<span>8</span>
-<span>9</span>
-<span>10</span>
-<span>11</span>
-<span>12</span>
-<span>13</span>
-<span>14</span>
-<span>15</span>
-<span>16</span>
-<span>17</span>
-<span>18</span>
-</pre></td><td class="code"><pre>
-  ​
-
-## [vscode](https:&#x2F;&#x2F;code.visualstudio.com&#x2F;) 编辑器
-
-+ 安装插件 &#x60;Setting Sync&#x60;
-+ 设置 gist &#x60;&quot;sync.gist&quot;: &quot;8162a18bd9632ab95c50704e92e1a57c&quot;&#x60;
-+ 同步 Setting
-+ 主要插件&#x60; eslint&#x60; &#x60;vetur&#x60; &#x60;document this&#x60; &#x60;javascript code snippets&#x60; &#x60;project manager&#x60;
-
-
-
-
-
-
-开发环境搭建完毕
-------------------
-</pre></td></tr></tbody></table></div></div><div class="comments"><div id="gitalk-container"></div></div></div></div></div><div class="footer"><div class="center">zWing / Powered by <a target="_blank" href="https://github.com/acyortjs/acyort">AcyOrt</a> / Theme <a target="_blank" href="https://github.com/acyortjs/theme-donob">donob</a></div></div><script src="/script/post.js"></script><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalkConfig = JSON.parse('{"owner":"zWingz","repo":"my-blog-config","admin":["zWingz"],"clientID":"0438ed96c0cb944693a7","clientSecret":"23e7aa3152f5d03d8f20029540741d6f886c9f5b","number":13}')
+IdentityFile ~/.ssh/id_rsa_gitlab</pre></td></tr></tbody></table></div></li><li><p>注入密码（重启后失效） <code>ssh-add -k ~/.ssh/id_rsa_gitlab</code></p></li></ul><h2 id="vscode-%E7%BC%96%E8%BE%91%E5%99%A8" class="heading"><a href="#vscode-%E7%BC%96%E8%BE%91%E5%99%A8" class="heading-anchor"></a><a href="https://code.visualstudio.com/">vscode</a> 编辑器</h2><ul><li>安装插件 <code>Setting Sync</code></li><li>设置 gist <code>&quot;sync.gist&quot;: &quot;8162a18bd9632ab95c50704e92e1a57c&quot;</code></li><li>同步 Setting</li><li>主要插件<code>eslint</code> <code>vetur</code> <code>document this</code> <code>javascript code snippets</code> <code>project manager</code></li></ul></div><div class="comments"><div id="gitalk-container"></div></div></div></div></div><div class="footer"><div class="center">zWing / Powered by <a target="_blank" href="https://github.com/acyortjs/acyort">AcyOrt</a> / Theme <a target="_blank" href="https://github.com/acyortjs/theme-donob">donob</a></div></div><script src="/script/post.js"></script><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalkConfig = JSON.parse('{"owner":"zWingz","repo":"my-blog-config","admin":["zWingz"],"clientID":"0438ed96c0cb944693a7","clientSecret":"23e7aa3152f5d03d8f20029540741d6f886c9f5b","number":13}')
   var gitalk = new Gitalk({
     ...gitalkConfig
   })

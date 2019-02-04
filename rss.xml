@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 04 Feb 2019 05:07:35 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 04 Feb 2019 05:07:35 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[2018，不普通的一年]]></title><description><![CDATA[<p>2018对我个人来说是很重要的一年</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 04 Feb 2019 05:12:40 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 04 Feb 2019 05:12:40 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[2018，不普通的一年]]></title><description><![CDATA[<p>2018对我个人来说是很重要的一年</p>
 <p>在4月份, 我辞去了一份965的工作</p>
 <p>跟着前同事去了一家9:30 - 8:00 大小周的创业公司</p>
 
@@ -1430,8 +1430,7 @@ export <span class="hljs-keyword">default</span> withRouter(<span class="hljs-ty
   z
 )</pre>
       </div>
-    <p>​</p>
-</li>
+    </li>
 </ul>
 
     <h2 id="node-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA" class="heading">
@@ -1471,31 +1470,19 @@ wget -qO- https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<spa
 
       <div class="hljs code">
         <pre>
-  ​
-
   使用方法
 
   &#x60;&#x60;&#x60;shell
   # 本地node版本
   nvm ls
-
-
   # node所有版本
   nvm ls-remote
-
-
   # 安装最新node(稳定版,即偶数版)
   nvm install --lts
-
-
   # 安装指定版本node
   nvm install v8.9.4
-
-
   # 切换到指定版本&#x2F;别名node
   nvm use v8.9.4
-
-
   # 给node版本起别名
   nvm alias default v8.9.4</pre>
       </div>
@@ -1511,8 +1498,7 @@ npm config <span class="hljs-keyword">set</span> registry https:<span class="hlj
 <span class="hljs-meta"># sass 源</span>
 npm config <span class="hljs-keyword">set</span> sass_binary_site https:<span class="hljs-comment">//npm.taobao.org/mirrors/node-sass/</span></pre>
       </div>
-    <p>​</p>
-</li>
+    </li>
 </ul>
 
     <h2 id="git-%E9%85%8D%E7%BD%AE" class="heading">
@@ -1533,8 +1519,7 @@ git config --global user<span class="hljs-selector-class">.email</span> <span cl
 
 ssh-keygen -t res -C <span class="hljs-string">'email'</span></pre>
       </div>
-    <p>​</p>
-</li>
+    </li>
 <li><p>配置 hosts</p>
 
       <div class="hljs bash code">
@@ -1550,39 +1535,24 @@ IdentityFile ~/.ssh/id_rsa_github
 Host gitlab.com
 HostName gitlab.com<span class="hljs-built_in">
 User </span>git
-IdentityFile ~/.ssh/id_rsa_gitlab
-
-</pre>
+IdentityFile ~/.ssh/id_rsa_gitlab</pre>
       </div>
     </li>
+<li><p>注入密码（重启后失效）
+<code>ssh-add -k ~/.ssh/id_rsa_gitlab</code></p>
+</li>
 </ul>
 
-    <h1 id="%E6%B3%A8%E5%85%A5%E5%AF%86%E7%A0%81%E4%B8%8B%E6%AC%A1%E4%B8%8D%E9%9C%80%E8%A6%81%E5%86%8D%E8%BE%93%E5%AF%86%E7%A0%81%E9%99%A4%E9%9D%9E%E9%87%8D%E5%90%AF" class="heading">
-      <a href="#%E6%B3%A8%E5%85%A5%E5%AF%86%E7%A0%81%E4%B8%8B%E6%AC%A1%E4%B8%8D%E9%9C%80%E8%A6%81%E5%86%8D%E8%BE%93%E5%AF%86%E7%A0%81%E9%99%A4%E9%9D%9E%E9%87%8D%E5%90%AF" class="heading-anchor"></a>注入密码,下次不需要再输密码(除非重启)
-    </h1>
-  <p>  ssh-add -k ~/.ssh/id_rsa_gitlab</p>
-
-      <div class="hljs code">
-        <pre>
-  ​
-
-## [vscode](https:&#x2F;&#x2F;code.visualstudio.com&#x2F;) 编辑器
-
-+ 安装插件 &#x60;Setting Sync&#x60;
-+ 设置 gist &#x60;&quot;sync.gist&quot;: &quot;8162a18bd9632ab95c50704e92e1a57c&quot;&#x60;
-+ 同步 Setting
-+ 主要插件&#x60; eslint&#x60; &#x60;vetur&#x60; &#x60;document this&#x60; &#x60;javascript code snippets&#x60; &#x60;project manager&#x60;
-
-
-
-
-
-
-开发环境搭建完毕
-------------------
-</pre>
-      </div>
-    ]]></description><link>http://zwingz.github.io/posts/303526921.html</link><guid isPermaLink="false">303526921</guid><category><![CDATA[front-end]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 08 Mar 2018 15:45:19 GMT</pubDate></item><item><title><![CDATA[vue组件-固定表格]]></title><description><![CDATA[
+    <h2 id="vscode-%E7%BC%96%E8%BE%91%E5%99%A8" class="heading">
+      <a href="#vscode-%E7%BC%96%E8%BE%91%E5%99%A8" class="heading-anchor"></a><a href="https://code.visualstudio.com/">vscode</a> 编辑器
+    </h2>
+  <ul>
+<li>安装插件 <code>Setting Sync</code></li>
+<li>设置 gist <code>&quot;sync.gist&quot;: &quot;8162a18bd9632ab95c50704e92e1a57c&quot;</code></li>
+<li>同步 Setting</li>
+<li>主要插件<code>eslint</code> <code>vetur</code> <code>document this</code> <code>javascript code snippets</code> <code>project manager</code></li>
+</ul>
+]]></description><link>http://zwingz.github.io/posts/303526921.html</link><guid isPermaLink="false">303526921</guid><category><![CDATA[front-end]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 08 Mar 2018 15:45:19 GMT</pubDate></item><item><title><![CDATA[vue组件-固定表格]]></title><description><![CDATA[
     <h1 id="%E5%9B%BA%E5%AE%9A%E8%A1%A8%E6%A0%BC" class="heading">
       <a href="#%E5%9B%BA%E5%AE%9A%E8%A1%A8%E6%A0%BC" class="heading-anchor"></a>固定表格
     </h1>
