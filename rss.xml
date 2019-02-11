@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 04 Feb 2019 05:12:40 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 04 Feb 2019 05:12:40 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[2018，不普通的一年]]></title><description><![CDATA[<p>2018对我个人来说是很重要的一年</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 11 Feb 2019 12:20:31 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 11 Feb 2019 12:20:31 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[2018，不普通的一年]]></title><description><![CDATA[<p>2018对我个人来说是很重要的一年</p>
 <p>在4月份, 我辞去了一份965的工作</p>
 <p>跟着前同事去了一家9:30 - 8:00 大小周的创业公司</p>
 
@@ -292,28 +292,22 @@
   <p>起初项目使用<code>babel</code>进行编译，后面统一转成了<code>ts</code></p>
 
       <div class="hljs json code">
-        <pre><span class="hljs-string">"jest"</span>: {
-    <span class="hljs-string">"moduleNameMapper"</span>: {
-      <span class="hljs-string">"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|scss)$"</span>:<span class="hljs-string">"&lt;rootDir&gt;/test/utils.ts"</span>
+        <pre>{
+  <span class="hljs-attr">"jest"</span>: {
+    <span class="hljs-attr">"moduleNameMapper"</span>: {
+      <span class="hljs-attr">"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|scss)$"</span>: <span class="hljs-string">"&lt;rootDir&gt;/test/utils.ts"</span>
     },
-    <span class="hljs-string">"moduleFileExtensions"</span>: [
-      <span class="hljs-string">"ts"</span>,
-      <span class="hljs-string">"tsx"</span>,
-      <span class="hljs-string">"js"</span>
-    ],
-    <span class="hljs-string">"setupTestFrameworkScriptFile"</span>: <span class="hljs-string">"&lt;rootDir&gt;/test/setup.ts"</span>,
-    <span class="hljs-string">"collectCoverageFrom"</span>: [
-      <span class="hljs-string">"src/**/*.{ts,tsx}"</span>
-    ],
-    <span class="hljs-string">"coverageDirectory"</span>: <span class="hljs-string">"./coverage/"</span>,
-    <span class="hljs-string">"collectCoverage"</span>: true,
-    <span class="hljs-string">"transform"</span>: {
-      <span class="hljs-string">"^.+\\.(ts|tsx)$"</span>: <span class="hljs-string">"ts-jest"</span>
+    <span class="hljs-attr">"moduleFileExtensions"</span>: [<span class="hljs-string">"ts"</span>, <span class="hljs-string">"tsx"</span>, <span class="hljs-string">"js"</span>],
+    <span class="hljs-attr">"setupTestFrameworkScriptFile"</span>: <span class="hljs-string">"&lt;rootDir&gt;/test/setup.ts"</span>,
+    <span class="hljs-attr">"collectCoverageFrom"</span>: [<span class="hljs-string">"src/**/*.{ts,tsx}"</span>],
+    <span class="hljs-attr">"coverageDirectory"</span>: <span class="hljs-string">"./coverage/"</span>,
+    <span class="hljs-attr">"collectCoverage"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"transform"</span>: {
+      <span class="hljs-attr">"^.+\\.(ts|tsx)$"</span>: <span class="hljs-string">"ts-jest"</span>
     },
-    <span class="hljs-string">"testMatch"</span>: [
-      <span class="hljs-string">"**/__test__/*.(ts|tsx)"</span>
-    ]
-  }</pre>
+    <span class="hljs-attr">"testMatch"</span>: [<span class="hljs-string">"**/__test__/*.(ts|tsx)"</span>]
+  }
+}</pre>
       </div>
     <p>如果使用<code>babel</code>的话, 只要将<code>ts</code>转成<code>js</code>, <code>ts-jest</code>转成<code>babel-jest</code>即可。</p>
 

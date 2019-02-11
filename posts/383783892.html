@@ -14,34 +14,22 @@
 <span>14</span>
 <span>15</span>
 <span>16</span>
-<span>17</span>
-<span>18</span>
-<span>19</span>
-<span>20</span>
-<span>21</span>
-<span>22</span>
-</pre></td><td class="code"><pre><span class="hljs-string">"jest"</span>: {
-    <span class="hljs-string">"moduleNameMapper"</span>: {
-      <span class="hljs-string">"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|scss)$"</span>:<span class="hljs-string">"&lt;rootDir&gt;/test/utils.ts"</span>
+</pre></td><td class="code"><pre>{
+  <span class="hljs-attr">"jest"</span>: {
+    <span class="hljs-attr">"moduleNameMapper"</span>: {
+      <span class="hljs-attr">"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|scss)$"</span>: <span class="hljs-string">"&lt;rootDir&gt;/test/utils.ts"</span>
     },
-    <span class="hljs-string">"moduleFileExtensions"</span>: [
-      <span class="hljs-string">"ts"</span>,
-      <span class="hljs-string">"tsx"</span>,
-      <span class="hljs-string">"js"</span>
-    ],
-    <span class="hljs-string">"setupTestFrameworkScriptFile"</span>: <span class="hljs-string">"&lt;rootDir&gt;/test/setup.ts"</span>,
-    <span class="hljs-string">"collectCoverageFrom"</span>: [
-      <span class="hljs-string">"src/**/*.{ts,tsx}"</span>
-    ],
-    <span class="hljs-string">"coverageDirectory"</span>: <span class="hljs-string">"./coverage/"</span>,
-    <span class="hljs-string">"collectCoverage"</span>: true,
-    <span class="hljs-string">"transform"</span>: {
-      <span class="hljs-string">"^.+\\.(ts|tsx)$"</span>: <span class="hljs-string">"ts-jest"</span>
+    <span class="hljs-attr">"moduleFileExtensions"</span>: [<span class="hljs-string">"ts"</span>, <span class="hljs-string">"tsx"</span>, <span class="hljs-string">"js"</span>],
+    <span class="hljs-attr">"setupTestFrameworkScriptFile"</span>: <span class="hljs-string">"&lt;rootDir&gt;/test/setup.ts"</span>,
+    <span class="hljs-attr">"collectCoverageFrom"</span>: [<span class="hljs-string">"src/**/*.{ts,tsx}"</span>],
+    <span class="hljs-attr">"coverageDirectory"</span>: <span class="hljs-string">"./coverage/"</span>,
+    <span class="hljs-attr">"collectCoverage"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"transform"</span>: {
+      <span class="hljs-attr">"^.+\\.(ts|tsx)$"</span>: <span class="hljs-string">"ts-jest"</span>
     },
-    <span class="hljs-string">"testMatch"</span>: [
-      <span class="hljs-string">"**/__test__/*.(ts|tsx)"</span>
-    ]
-  }</pre></td></tr></tbody></table></div><p>如果使用<code>babel</code>的话, 只要将<code>ts</code>转成<code>js</code>, <code>ts-jest</code>转成<code>babel-jest</code>即可。</p><h3 id="modulenamemapper" class="heading"><a href="#modulenamemapper" class="heading-anchor"></a>moduleNameMapper</h3><p>用来<code>mock</code>一些额外<code>module</code>, 比如<code>sass</code>, <code>jpg</code>等等.</p><div class="hljs typescript"><table><tbody><tr><td class="line"><pre><span>1</span>
+    <span class="hljs-attr">"testMatch"</span>: [<span class="hljs-string">"**/__test__/*.(ts|tsx)"</span>]
+  }
+}</pre></td></tr></tbody></table></div><p>如果使用<code>babel</code>的话, 只要将<code>ts</code>转成<code>js</code>, <code>ts-jest</code>转成<code>babel-jest</code>即可。</p><h3 id="modulenamemapper" class="heading"><a href="#modulenamemapper" class="heading-anchor"></a>moduleNameMapper</h3><p>用来<code>mock</code>一些额外<code>module</code>, 比如<code>sass</code>, <code>jpg</code>等等.</p><div class="hljs typescript"><table><tbody><tr><td class="line"><pre><span>1</span>
 <span>2</span>
 </pre></td><td class="code"><pre><span class="hljs-comment">// /test/utils.ts</span>
 <span class="hljs-keyword">module</span>.<span class="hljs-keyword">exports</span> = <span class="hljs-string">'test-file-stub'</span></pre></td></tr></tbody></table></div><h3 id="setuptestframeworkscriptfile" class="heading"><a href="#setuptestframeworkscriptfile" class="heading-anchor"></a>setupTestFrameworkScriptFile</h3><blockquote><p>The path to a module that runs some code to configure or set up the testing framework before each test.</p></blockquote><p>可以用来初始化<code>test</code>配置, 在这里需要使用<code>enzyme-adapter</code></p><div class="hljs typescript"><table><tbody><tr><td class="line"><pre><span>1</span>
