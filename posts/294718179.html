@@ -1,99 +1,55 @@
-<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><meta name="description" content="Just a blog."><link rel="stylesheet" href="/css/style.css"><title>使用vuexStore.registerModule构建命令式组件 - zWing</title><link rel="stylesheet" href="/css/highlight.ocean.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"></head><body><canvas id="ribbon"></canvas><div class="main"><div class="header"><a class="logo" href="/">zWing</a><div class="menu"><a href="/archives/">Archives</a><a href="/about/">About</a></div><div class="social"><a target="_blank" href="https://github.com/zWingz/my-blog-config/issues"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path></svg></a><a target="_blank" href="/rss.xml"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.18,15.64A2.18,2.18 0 0,1 8.36,17.82C8.36,19 7.38,20 6.18,20C5,20 4,19 4,17.82A2.18,2.18 0 0,1 6.18,15.64M4,4.44A15.56,15.56 0 0,1 19.56,20H16.73A12.73,12.73 0 0,0 4,7.27V4.44M4,10.1A9.9,9.9 0 0,1 13.9,20H11.07A7.07,7.07 0 0,0 4,12.93V10.1Z"></path></svg></a></div></div><div id="post" class="center"><div class="toc"><div class="stay"><ul><li><a href="#%E5%91%BD%E4%BB%A4%E5%BC%8F%E7%BB%84%E4%BB%B6">命令式组件</a></li><li><a href="#%E7%BB%84%E4%BB%B6%E7%BC%96%E5%86%99">组件编写</a></li><li><a href="#%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F">接入方式</a><ul><li><a href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F">第一种接入方式</a></li><li><a href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F">第二种接入方式</a></li></ul></li></ul><span class="toc-icon"></span></div></div><div class="post-content"><p class="time">February 06, 2018</p><h1 class="title">使用vuexStore.registerModule构建命令式组件</h1><div class="content"><h2 id="%E5%91%BD%E4%BB%A4%E5%BC%8F%E7%BB%84%E4%BB%B6" class="heading"><a href="#%E5%91%BD%E4%BB%A4%E5%BC%8F%E7%BB%84%E4%BB%B6" class="heading-anchor"></a>命令式组件</h2><p>例如Notification, MessageBox, Alert, ConfirmBox 等等</p><p>这类组件都是通过命令式来调用.</p><p>例如<code>elementUi</code>中<code>this.$message</code>或者<code>Message</code>来调用.</p><p>对于我们来说,<code>this.$message</code>这种调用方法莫过于是最方便.因为不需要处处引入<code>Message</code>或者在<code>webpack</code>中配置插件使得<code>Message</code>暴露于全局</p><p>那么我就从<code>this.$message</code>这类讲起</p><h2 id="%E7%BB%84%E4%BB%B6%E7%BC%96%E5%86%99" class="heading"><a href="#%E7%BB%84%E4%BB%B6%E7%BC%96%E5%86%99" class="heading-anchor"></a>组件编写</h2><p>其实也只是编写一个Comp组件, 这里不多说.</p><h2 id="%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F" class="heading"><a href="#%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F" class="heading-anchor"></a>接入方式</h2><h3 id="%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F" class="heading"><a href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F" class="heading-anchor"></a>第一种接入方式</h3><p>将<code>Vue</code>组件挂载到一个<code>dom</code>上,也就是将组件实例化.</p><p>然后将组件实例挂载命名空间中或者<code>Vue.prototype</code>中,</p><p>这样相当于直接操作组件实例的<code>methods</code>来改变组件的状态.</p><p><code>ElementUI</code>使用的是这种方式.</p><p>无入侵式</p><h3 id="%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F" class="heading"><a href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F" class="heading-anchor"></a>第二种接入方式</h3><p>这方式前提必须要使用Vuex, 因为他是依赖vuex.registerStore实现</p><p>关于registerStore请移步到<a href="https://vuex.vuejs.org/en/modules.html">文档</a>中</p><p>其实就是动态注册一个storeModule, 用来管理组件的状态.</p><p>所有操作都通过细改store的状态来引起组件的改变</p><div class="hljs javascript"><table><tbody><tr><td class="line"><pre><span>1</span>
-<span>2</span>
-<span>3</span>
-<span>4</span>
-<span>5</span>
-<span>6</span>
-<span>7</span>
-<span>8</span>
-<span>9</span>
-<span>10</span>
-<span>11</span>
-</pre></td><td class="code"><pre>// 引入组件
-<span class="hljs-keyword">import</span> Comp from <span class="hljs-string">'Comp.vue'</span>
-<span class="hljs-keyword">function</span> registerModule(store) {
-    store.registerModule(<span class="hljs-string">'compNameSpaceState'</span>, {
-        namespaced: true,
-        state: {},
-        getters: {},
-        mutations: {},
-        actions: {}
-    })
-}</pre></td></tr></tbody></table></div><p>之后可以将通过对象将调用接口暴露出去</p><div class="hljs javascript"><table><tbody><tr><td class="line"><pre><span>1</span>
-<span>2</span>
-<span>3</span>
-<span>4</span>
-<span>5</span>
-<span>6</span>
-<span>7</span>
-<span>8</span>
-</pre></td><td class="code"><pre><span class="hljs-keyword">let</span> $compApi = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">return</span> {
-        <span class="hljs-comment">// 此处需要使用建投函数,确保this指向</span>
-        action: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-          <span class="hljs-keyword">this</span>.$store.dispatch(<span class="hljs-string">'compNameSpaceState/compAction'</span>)
-        }
-    }
-}</pre></td></tr></tbody></table></div><p>接下来很简单,就是将$compApi.prototype中.</p><p>那么如何保证<code>$compApi</code>中<code>this</code>指向<code>Vue</code>实例呢</p><div class="hljs javascript"><table><tbody><tr><td class="line"><pre><span>1</span>
-<span>2</span>
-<span>3</span>
-<span>4</span>
-<span>5</span>
-<span>6</span>
-<span>7</span>
-<span>8</span>
-<span>9</span>
-<span>10</span>
-<span>11</span>
-<span>12</span>
-<span>13</span>
-<span>14</span>
-<span>15</span>
-<span>16</span>
-<span>17</span>
-<span>18</span>
-<span>19</span>
-<span>20</span>
-<span>21</span>
-<span>22</span>
-<span>23</span>
-<span>24</span>
-</pre></td><td class="code"><pre><span class="hljs-keyword">let</span> bind = <span class="hljs-literal">false</span>
-<span class="hljs-comment">// Vue.use() 会自动调用install方法,此时可以注册组件</span>
-Comp.install = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">Vue</span>) </span>{
-    <span class="hljs-comment">// 代理带vue原形上.可以通过this.$spin调用</span>
-    <span class="hljs-built_in">Object</span>.defineProperties(Vue.prototype, {
-        <span class="hljs-attr">$compApi</span>: { <span class="hljs-comment">// 挂载到Vue.prototype中的$compApi</span>
-            get() {
-                <span class="hljs-keyword">if</span>(!bind) {
-                    <span class="hljs-comment">// 注册store</span>
-                    registerModule(<span class="hljs-keyword">this</span>.$store)
-                    <span class="hljs-comment">// 只需要绑定一次即可</span>
-                    <span class="hljs-comment">// 绑定后可以将原来的$compApi覆盖掉</span>
-                    <span class="hljs-comment">// 调用bind函数确保this指向</span>
-                    $compApi = $compApi.bind(<span class="hljs-keyword">this</span>)()
-                    bind = <span class="hljs-literal">true</span>
-                }
-                <span class="hljs-keyword">return</span> $compApi
-            }
-        }
-    })
-    <span class="hljs-comment">// 将组件注册为Vue全局组件</span>
-    Vue.component(<span class="hljs-string">'Comp'</span>, Comp)
-}
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Comp</pre></td></tr></tbody></table></div><p>最后一步则需要在App.vue将Comp挂载上去</p><div class="hljs javascript"><table><tbody><tr><td class="line"><pre><span>1</span>
-<span>2</span>
-<span>3</span>
-</pre></td><td class="code"><pre><span class="hljs-comment">// 这一步自动调用install, 会全局注册Comp</span>
-<span class="hljs-comment">// 但是在第一次调用$compApi时候才会进行registerStore.</span>
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Vue</span>.</span></span>use(Comp)</pre></td></tr></tbody></table></div><div class="hljs html"><table><tbody><tr><td class="line"><pre><span>1</span>
-<span>2</span>
-<span>3</span>
-<span>4</span>
-</pre></td><td class="code"><pre><span class="hljs-comment">&lt;!-- App.vue--&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">Comp</span>/&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></pre></td></tr></tbody></table></div><p>这种方法是入侵式的</p><p>但是可以很方便的追踪组件状态, 而且实现起来也很方便.</p><p>在自己开发组件的时候可以考虑</p></div><div class="comments"><div id="gitalk-container"></div></div></div></div></div><div class="footer"><div class="center">zWing / Powered by <a target="_blank" href="https://github.com/acyortjs/acyort">AcyOrt</a> / Theme <a target="_blank" href="https://github.com/acyortjs/theme-donob">donob</a></div></div><script src="/script/post.js"></script><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalkConfig = JSON.parse('{"owner":"zWingz","repo":"my-blog-config","admin":["zWingz"],"clientID":"0438ed96c0cb944693a7","clientSecret":"23e7aa3152f5d03d8f20029540741d6f886c9f5b","number":10}')
+<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><meta name="description" content="Just a blog."><link rel="stylesheet" href="/css/style.css"><title>使用vuexStore.registerModule构建命令式组件 - zWing</title><link rel="stylesheet" href="/css/highlight.ocean.css"><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"></head><body><canvas id="ribbon"></canvas><div class="main"><div class="header"><a class="logo" href="/">zWing</a><div class="menu"><a href="/archives/">Archives</a><a href="/about/">About</a></div><div class="social"><a target="_blank" href="https://github.com/zWingz/my-blog-config/issues"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path></svg></a><a target="_blank" href="/rss.xml"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.18,15.64A2.18,2.18 0 0,1 8.36,17.82C8.36,19 7.38,20 6.18,20C5,20 4,19 4,17.82A2.18,2.18 0 0,1 6.18,15.64M4,4.44A15.56,15.56 0 0,1 19.56,20H16.73A12.73,12.73 0 0,0 4,7.27V4.44M4,10.1A9.9,9.9 0 0,1 13.9,20H11.07A7.07,7.07 0 0,0 4,12.93V10.1Z"></path></svg></a></div></div><div id="post" class="center"><div class="toc"><div class="stay"><ul><li><a href="#%E5%91%BD%E4%BB%A4%E5%BC%8F%E7%BB%84%E4%BB%B6">命令式组件</a></li><li><a href="#%E7%BB%84%E4%BB%B6%E7%BC%96%E5%86%99">组件编写</a></li><li><a href="#%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F">接入方式</a><ul><li><a href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F">第一种接入方式</a></li><li><a href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F">第二种接入方式</a></li></ul></li></ul><span class="toc-icon"></span></div></div><div class="post-content"><p class="time">February 06, 2018</p><h1 class="title">使用vuexStore.registerModule构建命令式组件</h1><div class="content"><h2 id="命令式组件" class="heading"><a href="#%E5%91%BD%E4%BB%A4%E5%BC%8F%E7%BB%84%E4%BB%B6" aria-hidden="true"><span class="icon icon-link"></span></a>命令式组件</h2><p>例如Notification, MessageBox, Alert, ConfirmBox 等等</p><p>这类组件都是通过命令式来调用.</p><p>例如<code class="language-text">elementUi</code>中<code class="language-text">this.$message</code>或者<code class="language-text">Message</code>来调用.</p><p>对于我们来说,<code class="language-text">this.$message</code>这种调用方法莫过于是最方便.因为不需要处处引入<code class="language-text">Message</code>或者在<code class="language-text">webpack</code>中配置插件使得<code class="language-text">Message</code>暴露于全局</p><p>那么我就从<code class="language-text">this.$message</code>这类讲起</p><h2 id="组件编写" class="heading"><a href="#%E7%BB%84%E4%BB%B6%E7%BC%96%E5%86%99" aria-hidden="true"><span class="icon icon-link"></span></a>组件编写</h2><p>其实也只是编写一个Comp组件, 这里不多说.</p><h2 id="接入方式" class="heading"><a href="#%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F" aria-hidden="true"><span class="icon icon-link"></span></a>接入方式</h2><h3 id="第一种接入方式" class="heading"><a href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F" aria-hidden="true"><span class="icon icon-link"></span></a>第一种接入方式</h3><p>将<code class="language-text">Vue</code>组件挂载到一个<code class="language-text">dom</code>上,也就是将组件实例化.</p><p>然后将组件实例挂载命名空间中或者<code class="language-text">Vue.prototype</code>中,</p><p>这样相当于直接操作组件实例的<code class="language-text">methods</code>来改变组件的状态.</p><p><code class="language-text">ElementUI</code>使用的是这种方式.</p><p>无入侵式</p><h3 id="第二种接入方式" class="heading"><a href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F" aria-hidden="true"><span class="icon icon-link"></span></a>第二种接入方式</h3><p>这方式前提必须要使用Vuex, 因为他是依赖vuex.registerStore实现</p><p>关于registerStore请移步到<a href="https://vuex.vuejs.org/en/modules.html">文档</a>中</p><p>其实就是动态注册一个storeModule, 用来管理组件的状态.</p><p>所有操作都通过细改store的状态来引起组件的改变</p><div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// 引入组件</span>
+<span class="token keyword">import</span> Comp <span class="token keyword">from</span> <span class="token string">'Comp.vue'</span>
+<span class="token keyword">function</span> <span class="token function">registerModule</span><span class="token punctuation">(</span>store<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  store<span class="token punctuation">.</span><span class="token function">registerModule</span><span class="token punctuation">(</span><span class="token string">'compNameSpaceState'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    namespaced<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    state<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    getters<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    mutations<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    actions<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>之后可以将通过对象将调用接口暴露出去</p><div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> <span class="token function-variable function">$compApi</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 此处需要使用建投函数,确保this指向</span>
+    action<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'compNameSpaceState/compAction'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>接下来很简单,就是将$compApi.prototype中.</p><p>那么如何保证<code class="language-text">$compApi</code>中<code class="language-text">this</code>指向<code class="language-text">Vue</code>实例呢</p><div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> bind <span class="token operator">=</span> <span class="token boolean">false</span>
+<span class="token comment">// Vue.use() 会自动调用install方法,此时可以注册组件</span>
+Comp<span class="token punctuation">.</span><span class="token function-variable function">install</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>Vue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 代理带vue原形上.可以通过this.$spin调用</span>
+  Object<span class="token punctuation">.</span><span class="token function">defineProperties</span><span class="token punctuation">(</span>Vue<span class="token punctuation">.</span>prototype<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    $compApi<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 挂载到Vue.prototype中的$compApi</span>
+      <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>bind<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment">// 注册store</span>
+          <span class="token function">registerModule</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">)</span>
+          <span class="token comment">// 只需要绑定一次即可</span>
+          <span class="token comment">// 绑定后可以将原来的$compApi覆盖掉</span>
+          <span class="token comment">// 调用bind函数确保this指向</span>
+          $compApi <span class="token operator">=</span> $compApi<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+          bind <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> $compApi
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token comment">// 将组件注册为Vue全局组件</span>
+  Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'Comp'</span><span class="token punctuation">,</span> Comp<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> Comp
+</code></pre></div><p>最后一步则需要在App.vue将Comp挂载上去</p><div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// 这一步自动调用install, 会全局注册Comp</span>
+<span class="token comment">// 但是在第一次调用$compApi时候才会进行registerStore.</span>
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Comp<span class="token punctuation">)</span>
+</code></pre></div><div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token comment">&lt;!-- App.vue--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Comp</span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+</code></pre></div><p>这种方法是入侵式的</p><p>但是可以很方便的追踪组件状态, 而且实现起来也很方便.</p><p>在自己开发组件的时候可以考虑</p></div><div class="comments"><div id="gitalk-container"></div></div></div></div></div><div class="footer"><div class="center">zWing / Powered by <a target="_blank" href="https://github.com/acyortjs/acyort">AcyOrt</a> / Theme <a target="_blank" href="https://github.com/acyortjs/theme-donob">donob</a></div></div><script src="/script/post.js"></script><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalkConfig = JSON.parse('{"owner":"zWingz","repo":"my-blog-config","admin":["zWingz"],"clientID":"0438ed96c0cb944693a7","clientSecret":"23e7aa3152f5d03d8f20029540741d6f886c9f5b","number":10}')
   var gitalk = new Gitalk({
     ...gitalkConfig
   })
