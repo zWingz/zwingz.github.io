@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Fri, 15 Feb 2019 09:16:21 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 15 Feb 2019 09:16:21 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[2018，不普通的一年]]></title><description><![CDATA[<p>2018对我个人来说是很重要的一年</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Wed, 20 Feb 2019 06:56:34 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 20 Feb 2019 06:56:34 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[2018，不普通的一年]]></title><description><![CDATA[<p>2018对我个人来说是很重要的一年</p>
 <p>在4月份, 我辞去了一份965的工作</p>
 <p>跟着前同事去了一家9:30 - 8:00 大小周的创业公司</p>
 <h2 id="过去，我学到了什么" class="heading"><a href="#%E8%BF%87%E5%8E%BB%EF%BC%8C%E6%88%91%E5%AD%A6%E5%88%B0%E4%BA%86%E4%BB%80%E4%B9%88" aria-hidden="true"><span class="icon icon-link"></span></a>过去，我学到了什么</h2>
@@ -354,7 +354,7 @@
 <h2 id="完结" class="heading"><a href="#%E5%AE%8C%E7%BB%93" aria-hidden="true"><span class="icon icon-link"></span></a>完结</h2>
 <p>至此， 整套<code class="language-text">jest</code>+<code class="language-text">enzyme</code>测试流程已经跑完.
 目前看来没有用高更深的测试功能, 比如说<code class="language-text">jsdom</code>, <code class="language-text">enzyme.render</code>等</p>
-]]></description><link>http://zwingz.github.io/posts/383783892.html</link><guid isPermaLink="false">383783892</guid><category><![CDATA[front-end]]></category><category><![CDATA[react]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 23 Nov 2018 11:07:18 GMT</pubDate></item><item><title><![CDATA[多package下babel编译问题]]></title><description><![CDATA[<h2 id="项目背景" class="heading"><a href="#%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>项目背景</h2>
+]]></description><link>http://zwingz.github.io/posts/383783892.html</link><guid isPermaLink="false">383783892</guid><category><![CDATA[Front End]]></category><category><![CDATA[React]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 23 Nov 2018 11:07:18 GMT</pubDate></item><item><title><![CDATA[多package下babel编译问题]]></title><description><![CDATA[<h2 id="项目背景" class="heading"><a href="#%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>项目背景</h2>
 <p>之前一直使用<code class="language-text">typescript</code> + <code class="language-text">babel</code> 编译项目</p>
 <p><code class="language-text">typescript</code>作用只是单纯用来做强类型检查, <code class="language-text">babel</code>则真正用来编译代码.</p>
 <div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
@@ -381,7 +381,7 @@
 <p><img src="https://user-images.githubusercontent.com/13031838/48481024-15270180-e847-11e8-909b-3af7c5a7b209.png" alt="image"></p>
 <p>当然, 使用<code class="language-text">babel.config.js</code>还可以灵活的配置各个<code class="language-text">package</code>中<code class="language-text">babel</code>编译规则.
 具体的还是请看官方文档</p>
-]]></description><link>http://zwingz.github.io/posts/380665113.html</link><guid isPermaLink="false">380665113</guid><category><![CDATA[babel]]></category><category><![CDATA[front-end]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Wed, 14 Nov 2018 11:56:24 GMT</pubDate></item><item><title><![CDATA[使用Fabric+docker部署前端项目]]></title><description><![CDATA[<h2 id="部署过程" class="heading"><a href="#%E9%83%A8%E7%BD%B2%E8%BF%87%E7%A8%8B" aria-hidden="true"><span class="icon icon-link"></span></a>部署过程</h2>
+]]></description><link>http://zwingz.github.io/posts/380665113.html</link><guid isPermaLink="false">380665113</guid><category><![CDATA[Babel]]></category><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Wed, 14 Nov 2018 11:56:24 GMT</pubDate></item><item><title><![CDATA[使用Fabric+docker部署前端项目]]></title><description><![CDATA[<h2 id="部署过程" class="heading"><a href="#%E9%83%A8%E7%BD%B2%E8%BF%87%E7%A8%8B" aria-hidden="true"><span class="icon icon-link"></span></a>部署过程</h2>
 <ul>
 <li>合并<code class="language-text">develop</code>到<code class="language-text">master</code></li>
 <li><code class="language-text">push</code>代码</li>
@@ -466,7 +466,7 @@ c <span class="token operator">=</span> Connection<span class="token punctuation
 <p>上述过程其实完全可以由各种<code class="language-text">CI</code>完成</p>
 <p>但是对于私有<code class="language-text">gitlab</code>, 同时又没有部署<code class="language-text">gitlab-runner</code>或者不想接入第三方的话</p>
 <p><code class="language-text">fabric</code>是个不错的选择</p>
-]]></description><link>http://zwingz.github.io/posts/346031510.html</link><guid isPermaLink="false">346031510</guid><category><![CDATA[depoly]]></category><category><![CDATA[front-end]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 31 Jul 2018 04:32:38 GMT</pubDate></item><item><title><![CDATA[记一下从Vue转向React的感想]]></title><description><![CDATA[<h1 id="关于react-想说几点" class="heading"><a href="#%E5%85%B3%E4%BA%8Ereact-%E6%83%B3%E8%AF%B4%E5%87%A0%E7%82%B9" aria-hidden="true"><span class="icon icon-link"></span></a>关于React, 想说几点</h1>
+]]></description><link>http://zwingz.github.io/posts/346031510.html</link><guid isPermaLink="false">346031510</guid><category><![CDATA[Depoly]]></category><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 31 Jul 2018 04:32:38 GMT</pubDate></item><item><title><![CDATA[记一下从Vue转向React的感想]]></title><description><![CDATA[<h1 id="关于react-想说几点" class="heading"><a href="#%E5%85%B3%E4%BA%8Ereact-%E6%83%B3%E8%AF%B4%E5%87%A0%E7%82%B9" aria-hidden="true"><span class="icon icon-link"></span></a>关于React, 想说几点</h1>
 <p>没有干货, 只有感想.
 没有源码分析, 只有需求实现.</p>
 <h2 id="react跟vue对比" class="heading"><a href="#react%E8%B7%9Fvue%E5%AF%B9%E6%AF%94" aria-hidden="true"><span class="icon icon-link"></span></a>React跟Vue对比</h2>
@@ -540,7 +540,7 @@ browserHistory<span class="token punctuation">.</span><span class="token functio
 <li>部分组件的实现</li>
 </ul>
 <p>...后续再补</p>
-]]></description><link>http://zwingz.github.io/posts/339905815.html</link><guid isPermaLink="false">339905815</guid><category><![CDATA[front-end]]></category><category><![CDATA[js]]></category><category><![CDATA[react]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 10 Jul 2018 15:56:23 GMT</pubDate></item><item><title><![CDATA[Promise/A+规范以及实现]]></title><description><![CDATA[<h1 id="promise-实现原理" class="heading"><a href="#promise-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86" aria-hidden="true"><span class="icon icon-link"></span></a>Promise 实现原理</h1>
+]]></description><link>http://zwingz.github.io/posts/339905815.html</link><guid isPermaLink="false">339905815</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><category><![CDATA[React]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 10 Jul 2018 15:56:23 GMT</pubDate></item><item><title><![CDATA[Promise/A+规范以及实现]]></title><description><![CDATA[<h1 id="promise-实现原理" class="heading"><a href="#promise-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86" aria-hidden="true"><span class="icon icon-link"></span></a>Promise 实现原理</h1>
 <p><a href="https://github.com/zWingz/Promise">源码</a></p>
 <h2 id="promise基本用法" class="heading"><a href="#promise%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95" aria-hidden="true"><span class="icon icon-link"></span></a>Promise基本用法</h2>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -573,7 +573,7 @@ browserHistory<span class="token punctuation">.</span><span class="token functio
   <span class="token function">then</span><span class="token punctuation">(</span>onReslove<span class="token punctuation">,</span> onReject<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre></div>
-<h3 id="根据code-classlanguage-textpromisea规范code以下简称规范中所说的" class="heading"><a href="#%E6%A0%B9%E6%8D%AEcode-classlanguage-textpromisea%E8%A7%84%E8%8C%83code%E4%BB%A5%E4%B8%8B%E7%AE%80%E7%A7%B0%E8%A7%84%E8%8C%83%E4%B8%AD%E6%89%80%E8%AF%B4%E7%9A%84" aria-hidden="true"><span class="icon icon-link"></span></a>根据<code class="language-text">Promise/A+规范</code>(以下简称规范)中所说的</h3>
+<h3 id="根据promisea规范以下简称规范中所说的" class="heading"><a href="#%E6%A0%B9%E6%8D%AEpromisea%E8%A7%84%E8%8C%83%E4%BB%A5%E4%B8%8B%E7%AE%80%E7%A7%B0%E8%A7%84%E8%8C%83%E4%B8%AD%E6%89%80%E8%AF%B4%E7%9A%84" aria-hidden="true"><span class="icon icon-link"></span></a>根据<code class="language-text">Promise/A+规范</code>(以下简称规范)中所说的</h3>
 <ul>
 <li>Promise有三个状态 <code class="language-text">PENDING</code>, <code class="language-text">RESOLVED</code>, <code class="language-text">REJECTED</code></li>
 <li>状态只会从<code class="language-text">PENDING</code>转换到<code class="language-text">RESOLVED</code>或者<code class="language-text">REJECTED</code>其中一个, 并且之后不会再改变</li>
@@ -643,7 +643,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token comment">// Promise {&lt;pending>}</span>
 <span class="token comment">// after ins</span>
 </code></pre></div>
-<h3 id="还有一个code-classlanguage-textthencode方法没有完成-先看下规范怎么说" class="heading"><a href="#%E8%BF%98%E6%9C%89%E4%B8%80%E4%B8%AAcode-classlanguage-textthencode%E6%96%B9%E6%B3%95%E6%B2%A1%E6%9C%89%E5%AE%8C%E6%88%90-%E5%85%88%E7%9C%8B%E4%B8%8B%E8%A7%84%E8%8C%83%E6%80%8E%E4%B9%88%E8%AF%B4" aria-hidden="true"><span class="icon icon-link"></span></a>还有一个<code class="language-text">then</code>方法没有完成. 先看下规范怎么说</h3>
+<h3 id="还有一个then方法没有完成-先看下规范怎么说" class="heading"><a href="#%E8%BF%98%E6%9C%89%E4%B8%80%E4%B8%AAthen%E6%96%B9%E6%B3%95%E6%B2%A1%E6%9C%89%E5%AE%8C%E6%88%90-%E5%85%88%E7%9C%8B%E4%B8%8B%E8%A7%84%E8%8C%83%E6%80%8E%E4%B9%88%E8%AF%B4" aria-hidden="true"><span class="icon icon-link"></span></a>还有一个<code class="language-text">then</code>方法没有完成. 先看下规范怎么说</h3>
 <ul>
 <li>一个promise必须提供一个<code class="language-text">then</code>方法以访问当前值, 终止和据因</li>
 <li>then接受两个参数<code class="language-text">then(onResolve, onReject)</code></li>
@@ -939,7 +939,7 @@ Promise<span class="token punctuation">.</span><span class="token function">reje
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h3 id="开发过程中遇到其他问题" class="heading"><a href="#%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98" aria-hidden="true"><span class="icon icon-link"></span></a>开发过程中遇到其他问题</h3>
-<h4 id="node中的code-classlanguage-textunhandledrejectioncode和浏览器中的code-classlanguage-textuncaught-in-promisecode-提示" class="heading"><a href="#node%E4%B8%AD%E7%9A%84code-classlanguage-textunhandledrejectioncode%E5%92%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E7%9A%84code-classlanguage-textuncaught-in-promisecode-%E6%8F%90%E7%A4%BA" aria-hidden="true"><span class="icon icon-link"></span></a>node中的<code class="language-text">unhandledRejection</code>和浏览器中的<code class="language-text">Uncaught (in promise)</code> 提示</h4>
+<h4 id="node中的unhandledrejection和浏览器中的uncaught-in-promise-提示" class="heading"><a href="#node%E4%B8%AD%E7%9A%84unhandledrejection%E5%92%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E7%9A%84uncaught-in-promise-%E6%8F%90%E7%A4%BA" aria-hidden="true"><span class="icon icon-link"></span></a>node中的<code class="language-text">unhandledRejection</code>和浏览器中的<code class="language-text">Uncaught (in promise)</code> 提示</h4>
 <p>在Promise中产生的所有错误都会被Promise吞掉. 当没有相应的错误处理函数时候, node和浏览器分别有不同的表现.</p>
 <p>但是这并不是一个新的错误, 因为不能用<code class="language-text">try{} catch(){}</code> 捕获.</p>
 <p>所以在浏览器端, 是一个<code class="language-text">console.error</code>的错误提示, 在<code class="language-text">node</code>中, 这个算是一个事件. 具体可以通过<code class="language-text">process.on</code>来监听</p>
@@ -987,7 +987,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h2 id="参考" class="heading"><a href="#%E5%8F%82%E8%80%83" aria-hidden="true"><span class="icon icon-link"></span></a>参考</h2>
 <p><a href="http://www.ituring.com.cn/article/66566">【翻译】Promises/A+规范</a></p>
 <p><a href="http://es6.ruanyifeng.com/#docs/promise#Promise-prototype-finally">ECMAScript 6入门</a></p>
-]]></description><link>http://zwingz.github.io/posts/316337025.html</link><guid isPermaLink="false">316337025</guid><category><![CDATA[front-end]]></category><category><![CDATA[js]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 20 Apr 2018 16:40:56 GMT</pubDate></item><item><title><![CDATA[初次制作戚风蛋糕（6寸）]]></title><description><![CDATA[<h2 id="材料" class="heading"><a href="#%E6%9D%90%E6%96%99" aria-hidden="true"><span class="icon icon-link"></span></a>材料</h2>
+]]></description><link>http://zwingz.github.io/posts/316337025.html</link><guid isPermaLink="false">316337025</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 20 Apr 2018 16:40:56 GMT</pubDate></item><item><title><![CDATA[初次制作戚风蛋糕（6寸）]]></title><description><![CDATA[<h2 id="材料" class="heading"><a href="#%E6%9D%90%E6%96%99" aria-hidden="true"><span class="icon icon-link"></span></a>材料</h2>
 <ul>
 <li>低筋面粉 45g</li>
 <li>鸡蛋 3个</li>
@@ -1177,7 +1177,7 @@ IdentityFile ~/.ssh/id_rsa_gitlab</code></pre></div>
 <li>同步 Setting</li>
 <li>主要插件<code class="language-text">eslint</code> <code class="language-text">vetur</code> <code class="language-text">document this</code> <code class="language-text">javascript code snippets</code> <code class="language-text">project manager</code></li>
 </ul>
-]]></description><link>http://zwingz.github.io/posts/303526921.html</link><guid isPermaLink="false">303526921</guid><category><![CDATA[front-end]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 08 Mar 2018 15:45:19 GMT</pubDate></item><item><title><![CDATA[vue组件-固定表格]]></title><description><![CDATA[<h1 id="固定表格" class="heading"><a href="#%E5%9B%BA%E5%AE%9A%E8%A1%A8%E6%A0%BC" aria-hidden="true"><span class="icon icon-link"></span></a>固定表格</h1>
+]]></description><link>http://zwingz.github.io/posts/303526921.html</link><guid isPermaLink="false">303526921</guid><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 08 Mar 2018 15:45:19 GMT</pubDate></item><item><title><![CDATA[vue组件-固定表格]]></title><description><![CDATA[<h1 id="固定表格" class="heading"><a href="#%E5%9B%BA%E5%AE%9A%E8%A1%A8%E6%A0%BC" aria-hidden="true"><span class="icon icon-link"></span></a>固定表格</h1>
 <p>后台管理系统,多多少少会有列表页.</p>
 <p>而列表页又正是由表格形成.</p>
 <p>但是原生的表头并不能固定头部以及两侧.</p>
@@ -1335,7 +1335,7 @@ elementUI 的表格就是这样实现的.
 <p>后续会继续优化</p>
 <h2 id="放假了-过年了" class="heading"><a href="#%E6%94%BE%E5%81%87%E4%BA%86-%E8%BF%87%E5%B9%B4%E4%BA%86" aria-hidden="true"><span class="icon icon-link"></span></a>放假了, 过年了</h2>
 <p>祝大家新年快乐 !</p>
-]]></description><link>http://zwingz.github.io/posts/295960409.html</link><guid isPermaLink="false">295960409</guid><category><![CDATA[front-end]]></category><category><![CDATA[vue]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 09 Feb 2018 18:10:56 GMT</pubDate></item><item><title><![CDATA[使用vuexStore.registerModule构建命令式组件]]></title><description><![CDATA[<h2 id="命令式组件" class="heading"><a href="#%E5%91%BD%E4%BB%A4%E5%BC%8F%E7%BB%84%E4%BB%B6" aria-hidden="true"><span class="icon icon-link"></span></a>命令式组件</h2>
+]]></description><link>http://zwingz.github.io/posts/295960409.html</link><guid isPermaLink="false">295960409</guid><category><![CDATA[Front End]]></category><category><![CDATA[Vue]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 09 Feb 2018 18:10:56 GMT</pubDate></item><item><title><![CDATA[使用vuexStore.registerModule构建命令式组件]]></title><description><![CDATA[<h2 id="命令式组件" class="heading"><a href="#%E5%91%BD%E4%BB%A4%E5%BC%8F%E7%BB%84%E4%BB%B6" aria-hidden="true"><span class="icon icon-link"></span></a>命令式组件</h2>
 <p>例如Notification, MessageBox, Alert, ConfirmBox 等等</p>
 <p>这类组件都是通过命令式来调用.</p>
 <p>例如<code class="language-text">elementUi</code>中<code class="language-text">this.$message</code>或者<code class="language-text">Message</code>来调用.</p>
@@ -1418,7 +1418,7 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
 <p>这种方法是入侵式的</p>
 <p>但是可以很方便的追踪组件状态, 而且实现起来也很方便.</p>
 <p>在自己开发组件的时候可以考虑</p>
-]]></description><link>http://zwingz.github.io/posts/294718179.html</link><guid isPermaLink="false">294718179</guid><category><![CDATA[front-end]]></category><category><![CDATA[js]]></category><category><![CDATA[vue]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 06 Feb 2018 11:04:40 GMT</pubDate></item><item><title><![CDATA[Eventloop中的microtask和macrotask]]></title><description><![CDATA[<h1 id="eventloop" class="heading"><a href="#eventloop" aria-hidden="true"><span class="icon icon-link"></span></a>EventLoop</h1>
+]]></description><link>http://zwingz.github.io/posts/294718179.html</link><guid isPermaLink="false">294718179</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><category><![CDATA[Vue]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 06 Feb 2018 11:04:40 GMT</pubDate></item><item><title><![CDATA[Eventloop中的microtask和macrotask]]></title><description><![CDATA[<h1 id="eventloop" class="heading"><a href="#eventloop" aria-hidden="true"><span class="icon icon-link"></span></a>EventLoop</h1>
 <p>js是单线程的, 所有异步都需要经过Eventloop(事件循环).这里不介绍eventloop</p>
 <p> 主要记录下eventloop中的microtask 和macrotask</p>
 <h2 id="microtask" class="heading"><a href="#microtask" aria-hidden="true"><span class="icon icon-link"></span></a>microtask</h2>
@@ -1507,7 +1507,7 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
   microTimerFunc <span class="token operator">=</span> macroTimerFunc
 <span class="token punctuation">}</span>
 </code></pre></div>
-]]></description><link>http://zwingz.github.io/posts/294602245.html</link><guid isPermaLink="false">294602245</guid><category><![CDATA[front-end]]></category><category><![CDATA[js]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 06 Feb 2018 01:35:11 GMT</pubDate></item><item><title><![CDATA[多个git 配置ssh key]]></title><description><![CDATA[<h2 id="安装" class="heading"><a href="#%E5%AE%89%E8%A3%85" aria-hidden="true"><span class="icon icon-link"></span></a>安装</h2>
+]]></description><link>http://zwingz.github.io/posts/294602245.html</link><guid isPermaLink="false">294602245</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 06 Feb 2018 01:35:11 GMT</pubDate></item><item><title><![CDATA[多个git 配置ssh key]]></title><description><![CDATA[<h2 id="安装" class="heading"><a href="#%E5%AE%89%E8%A3%85" aria-hidden="true"><span class="icon icon-link"></span></a>安装</h2>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">brew <span class="token function">install</span> <span class="token function">git</span>
 <span class="token comment"># or</span>
 <span class="token comment"># apt-get install git</span>
@@ -1544,7 +1544,7 @@ IdentityFile ~/.ssh/id_rsa_gitlab
 <span class="token comment"># 注入密码,下次不需要再输密码(除非重启)</span>
 ssh-add -k ~/.ssh/id_rsa_gitlab</code></pre></div>
 <h3 id="简单快捷完成git配置了" class="heading"><a href="#%E7%AE%80%E5%8D%95%E5%BF%AB%E6%8D%B7%E5%AE%8C%E6%88%90git%E9%85%8D%E7%BD%AE%E4%BA%86" aria-hidden="true"><span class="icon icon-link"></span></a>简单快捷完成git配置了</h3>
-]]></description><link>http://zwingz.github.io/posts/293431355.html</link><guid isPermaLink="false">293431355</guid><category><![CDATA[front-end]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 01 Feb 2018 07:37:09 GMT</pubDate></item><item><title><![CDATA[记一次webpack优化 --- 从babelrc和UglifyPlugin下手]]></title><description><![CDATA[<h2 id="优化前" class="heading"><a href="#%E4%BC%98%E5%8C%96%E5%89%8D" aria-hidden="true"><span class="icon icon-link"></span></a>优化前</h2>
+]]></description><link>http://zwingz.github.io/posts/293431355.html</link><guid isPermaLink="false">293431355</guid><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 01 Feb 2018 07:37:09 GMT</pubDate></item><item><title><![CDATA[记一次webpack优化 --- 从babelrc和UglifyPlugin下手]]></title><description><![CDATA[<h2 id="优化前" class="heading"><a href="#%E4%BC%98%E5%8C%96%E5%89%8D" aria-hidden="true"><span class="icon icon-link"></span></a>优化前</h2>
 <p>先来看优化前打包速度
 大的第三方库大概有vue+axios+vueRouter+vuex+elementUI(datepicker, message两个插件)+jquery
 打包总体积为2648k, 一共14个chunk(使用了异步路由)
@@ -1730,7 +1730,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>但是在commit的时候添加了一层pre-commit来对修改的文件执行eslint.</p>
 <p>这样就确保上传到git的代码是经过eslint检查的</p>
 <p>这样既能确保开发不被干扰,也能确保代码能按照规范.</p>
-]]></description><link>http://zwingz.github.io/posts/293426099.html</link><guid isPermaLink="false">293426099</guid><category><![CDATA[front-end]]></category><category><![CDATA[webpack]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 01 Feb 2018 07:13:03 GMT</pubDate></item><item><title><![CDATA[烹饪和烘焙的点滴]]></title><description><![CDATA[<p>突然想写些什么..
+]]></description><link>http://zwingz.github.io/posts/293426099.html</link><guid isPermaLink="false">293426099</guid><category><![CDATA[Front End]]></category><category><![CDATA[Webpack]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 01 Feb 2018 07:13:03 GMT</pubDate></item><item><title><![CDATA[烹饪和烘焙的点滴]]></title><description><![CDATA[<p>突然想写些什么..
 那就写下这周做了什么吃的..
 除了晚餐之外.
 这周做了特别的可能就是<strong>炸薯条</strong>, <strong>火烧云</strong>以及<strong>芒果千层</strong>了.
@@ -2027,4 +2027,4 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><a href="https://fundebug.com/">Fundebug</a></p>
 <p><a href="https://www.easy-mock.com/">EasyMock</a></p>
 <p><a href="http://apizza.cc/account">Apizza</a></p>
-]]></description><link>http://zwingz.github.io/posts/275254986.html</link><guid isPermaLink="false">275254986</guid><category><![CDATA[front-end]]></category><category><![CDATA[js]]></category><category><![CDATA[vue]]></category><category><![CDATA[webpack]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Mon, 20 Nov 2017 07:02:07 GMT</pubDate></item></channel></rss>
+]]></description><link>http://zwingz.github.io/posts/275254986.html</link><guid isPermaLink="false">275254986</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><category><![CDATA[Vue]]></category><category><![CDATA[Webpack]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Mon, 20 Nov 2017 07:02:07 GMT</pubDate></item></channel></rss>
