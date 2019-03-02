@@ -1,4 +1,77 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Tue, 26 Feb 2019 08:31:52 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 26 Feb 2019 08:31:52 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[2018，不普通的一年]]></title><description><![CDATA[<p>2018对我个人来说是很重要的一年</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sat, 02 Mar 2019 02:48:37 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 02 Mar 2019 02:48:37 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[Lerna使用]]></title><description><![CDATA[<h2 id="lerna使用" class="heading"><a href="#lerna%E4%BD%BF%E7%94%A8" aria-hidden="true"><span class="icon icon-link"></span></a>Lerna使用</h2>
+<p><a href="https://github.com/lerna/lerna">lerna</a>用于管理多<code class="language-text">package</code>项目，且各<code class="language-text">package</code>可能会互相引用。</p>
+<p><code class="language-text">lerna</code>通过两种方式管理子项目的版本号</p>
+<ul>
+<li>Fixed/Locked mode (default)：每次执行<code class="language-text">lerna publish</code>都会将所涉及到的包升级到最新一个版本，开发者只需要确定发布下一个<code class="language-text">version</code>。</li>
+<li>Independent mode：由开发者自行管理子项目的<code class="language-text">version</code>，每次执行<code class="language-text">lerna publish</code>都需要确定每个包的下个版本号。</li>
+</ul>
+<h3 id="基本使用" class="heading"><a href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8" aria-hidden="true"><span class="icon icon-link"></span></a>基本使用</h3>
+<p>以下命令以<code class="language-text">yarn</code>为主。</p>
+<h4 id="安装" class="heading"><a href="#%E5%AE%89%E8%A3%85" aria-hidden="true"><span class="icon icon-link"></span></a>安装</h4>
+<p><code class="language-text">yarn global add lerna</code></p>
+<h4 id="init" class="heading"><a href="#init" aria-hidden="true"><span class="icon icon-link"></span></a>init</h4>
+<p><code class="language-text">lerna init</code>
+命令执行完毕后，会在生成对应的目录结构。</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">lerna-repo/
+  package.json
+  lerna.json
+  packages/
+    package-1/
+      package.json
+    package-2/
+      package.json</code></pre></div>
+<h4 id="配置" class="heading"><a href="#%E9%85%8D%E7%BD%AE" aria-hidden="true"><span class="icon icon-link"></span></a>配置</h4>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
+  <span class="token string">"version"</span><span class="token punctuation">:</span> <span class="token string">"1.1.3"</span><span class="token punctuation">,</span> <span class="token comment">// 项目版本</span>
+  <span class="token string">"npmClient"</span><span class="token punctuation">:</span> <span class="token string">"npm"</span><span class="token punctuation">,</span> <span class="token comment">// 默认使用的npm，可改为yarn</span>
+  <span class="token string">"command"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token comment">// lerna 内置命令的配置</span>
+    <span class="token string">"publish"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"ignoreChanges"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"*.md"</span><span class="token punctuation">,</span> <span class="token string">"**/test/**"</span><span class="token punctuation">,</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 发布时忽略部分文件的改动，配置此项可以减少不必要的publish。</span>
+      <span class="token string">"message"</span><span class="token punctuation">:</span> <span class="token string">"chore(release): publish"</span> <span class="token operator">/</span><span class="token operator">/</span> git commit message
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">"packages"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"packages/*"</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span></code></pre></div>
+<h4 id="create" class="heading"><a href="#create" aria-hidden="true"><span class="icon icon-link"></span></a>create</h4>
+<p><code class="language-text">lerna create &lt;name&gt;</code>
+创建一个子项目，并会根据交互提示生成对应的<code class="language-text">package.json</code></p>
+<h4 id="添加依赖" class="heading"><a href="#%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96" aria-hidden="true"><span class="icon icon-link"></span></a>添加依赖</h4>
+<p><code class="language-text">lerna add &lt;package&gt;[@version] [--dev] [--exact]</code></p>
+<ul>
+<li><code class="language-text">lerna add eslint</code>： 所有包都会装上<code class="language-text">eslint</code>。</li>
+<li><code class="language-text">lerna add eslint --scope=package1</code>：只有<code class="language-text">package1</code>会装上。</li>
+<li><code class="language-text">lerna add eslint packages/prefix-*</code>：符合<code class="language-text">prefix</code>的包会装上。</li>
+</ul>
+<p>options:</p>
+<ul>
+<li><code class="language-text">-dev</code>：添加到<code class="language-text">devDependencies</code></li>
+<li><code class="language-text">--exact</code>: 只安装特定版本</li>
+</ul>
+<p>如果添加的是子项目，则会通过<code class="language-text">link</code>软连接到对应的项目中。
+<code class="language-text">lerna add package1 --scope=package2</code></p>
+<h4 id="执行npm-script命令" class="heading"><a href="#%E6%89%A7%E8%A1%8Cnpm-script%E5%91%BD%E4%BB%A4" aria-hidden="true"><span class="icon icon-link"></span></a>执行npm script命令</h4>
+<p><code class="language-text">lerna run &lt;script&gt; -- [..args]</code></p>
+<ul>
+<li><code class="language-text">lerna run test</code>：则会执行所有子项目中的<code class="language-text">test</code>。</li>
+<li><code class="language-text">lerna run --scope package1 test</code>：只执行<code class="language-text">package1</code>中的<code class="language-text">test</code>。</li>
+<li><code class="language-text">lerna run --ignore package-* test</code>：只执行除了匹配<code class="language-text">package-*</code>外的项目中的<code class="language-text">test</code></li>
+</ul>
+<h4 id="执行任意命令" class="heading"><a href="#%E6%89%A7%E8%A1%8C%E4%BB%BB%E6%84%8F%E5%91%BD%E4%BB%A4" aria-hidden="true"><span class="icon icon-link"></span></a>执行任意命令</h4>
+<p><code class="language-text">lerna exec -- &lt;command&gt; [..args]</code>
+于<code class="language-text">lerna run</code>类似，只不过它可以执行任意命令。
+eg: <code class="language-text">lerna exec -- rm -rf ./node_modules</code></p>
+<h4 id="其他命令" class="heading"><a href="#%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4" aria-hidden="true"><span class="icon icon-link"></span></a>其他命令</h4>
+<ul>
+<li><code class="language-text">lerna bootstrap</code>：安装各子项目依赖，对相互引用的项目进行软连接，在子项目中执行<code class="language-text">npm run prepublish</code>和<code class="language-text">npm run prepare</code><ul>
+<li><code class="language-text">--hoist [glob]</code>：会将子项目的匹配的依赖(eg：<code class="language-text">eslint</code>, <code class="language-text">jest</code>等)，统一放在根目录的<code class="language-text">node_modules</code>中，减少安装时间，但仅限<code class="language-text">npmClient=npm</code></li>
+<li><code class="language-text">—nohoist [glob]</code>: 匹配的依赖(eg: <code class="language-text">babel</code>)会安装到子项目中的<code class="language-text">node_modules</code>中</li>
+</ul></li>
+<li><code class="language-text">lerna clean</code>：删除子项目的<code class="language-text">node_modules</code></li>
+<li><code class="language-text">lerna link</code>：同<code class="language-text">bootstrap</code>第二步。</li>
+</ul>
+<h3 id="进阶使用" class="heading"><a href="#%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8" aria-hidden="true"><span class="icon icon-link"></span></a>进阶使用</h3>
+<p>待续</p>
+]]></description><link>http://zwingz.github.io/posts/416348095.html</link><guid isPermaLink="false">416348095</guid><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sat, 02 Mar 2019 02:48:23 GMT</pubDate></item><item><title><![CDATA[2018，不普通的一年]]></title><description><![CDATA[<p>2018对我个人来说是很重要的一年</p>
 <p>在4月份, 我辞去了一份965的工作</p>
 <p>跟着前同事去了一家9:30 - 8:00 大小周的创业公司</p>
 <h2 id="过去，我学到了什么" class="heading"><a href="#%E8%BF%87%E5%8E%BB%EF%BC%8C%E6%88%91%E5%AD%A6%E5%88%B0%E4%BA%86%E4%BB%80%E4%B9%88" aria-hidden="true"><span class="icon icon-link"></span></a>过去，我学到了什么</h2>
