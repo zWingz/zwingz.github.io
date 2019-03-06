@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Wed, 06 Mar 2019 09:58:29 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 06 Mar 2019 09:58:29 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用github issues搭建博客]]></title><description><![CDATA[<p>通过<code class="language-text">issues</code>来生成博客，并自动部署到<code class="language-text">gh-page</code>。</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Wed, 06 Mar 2019 10:04:56 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 06 Mar 2019 10:04:56 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用github issues搭建博客]]></title><description><![CDATA[<p>通过<code class="language-text">issues</code>来写博客文章，并自动部署到<code class="language-text">gh-page</code>。</p>
 <h3 id="介绍" class="heading"><a href="#%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span class="icon icon-link"></span></a>介绍</h3>
 <ul>
 <li><a href="https://acyort.com/">acyort</a> 引擎核心，用来管理插件、工作流以及<code class="language-text">html</code>输出等。</li>
@@ -88,7 +88,6 @@
 <span class="token key atrule">plugins</span><span class="token punctuation">:</span>
   <span class="token punctuation">-</span> acyort<span class="token punctuation">-</span>plugin<span class="token punctuation">-</span>fetch<span class="token punctuation">-</span>issues
   <span class="token punctuation">-</span> acyort<span class="token punctuation">-</span>donob<span class="token punctuation">-</span>renderer
-  <span class="token punctuation">-</span> acyort<span class="token punctuation">-</span>plugin<span class="token punctuation">-</span>rss
 </code></pre></div>
 </li>
 <li>
