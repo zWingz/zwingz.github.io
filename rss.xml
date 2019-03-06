@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Wed, 06 Mar 2019 10:06:45 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 06 Mar 2019 10:06:45 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[自动部署基于issues的静态博客]]></title><description><![CDATA[<p>通过<code class="language-text">issues</code>来写博客文章，并自动部署到<code class="language-text">gh-page</code>。</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Wed, 06 Mar 2019 10:08:04 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 06 Mar 2019 10:08:04 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[自动部署基于issues的静态博客]]></title><description><![CDATA[<p>通过<code class="language-text">issues</code>来写博客文章，并自动部署到<code class="language-text">gh-page</code>。</p>
 <h3 id="介绍" class="heading"><a href="#%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span class="icon icon-link"></span></a>介绍</h3>
 <ul>
 <li><a href="https://acyort.com/">acyort</a> 引擎核心，用来管理插件、工作流以及<code class="language-text">html</code>输出等。</li>
@@ -153,7 +153,7 @@
 <li><a href="https://github.com/zWingz/acyort-donob-plugins">acyort-donob-plugins</a></li>
 <li><a href="https://github.com/zWingz/my-blog-config">blog-config</a></li>
 </ul>
-]]></description><link>http://zwingz.github.io/posts/417715171.html</link><guid isPermaLink="false">417715171</guid><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Wed, 06 Mar 2019 09:55:14 GMT</pubDate></item><item><title><![CDATA[Lerna使用介绍]]></title><description><![CDATA[<p><a href="https://github.com/lerna/lerna">lerna</a>用于管理多<code class="language-text">package</code>，且各<code class="language-text">package</code>可能会互相引用的项目。</p>
+]]></description><link>http://zwingz.github.io/posts/417715171.html</link><guid isPermaLink="false">417715171</guid><category><![CDATA[工具介绍]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Wed, 06 Mar 2019 09:55:14 GMT</pubDate></item><item><title><![CDATA[Lerna使用介绍]]></title><description><![CDATA[<p><a href="https://github.com/lerna/lerna">lerna</a>用于管理多<code class="language-text">package</code>，且各<code class="language-text">package</code>可能会互相引用的项目。</p>
 <p><code class="language-text">lerna</code>通过两种方式管理子项目的版本号：</p>
 <ul>
 <li>Fixed/Locked mode (default)：每次执行<code class="language-text">lerna publish</code>都会将所涉及到的包升级到最新一个版本，开发者只需要确定发布下一个<code class="language-text">version</code>。</li>
@@ -257,7 +257,7 @@
 <p>尚未实践过，具体还需参考<a href="https://github.com/lerna/lerna/blob/514bc57a53/commands/version/README.md#--conventional-commits">README</a></p>
 <h2 id="结语" class="heading"><a href="#%E7%BB%93%E8%AF%AD" aria-hidden="true"><span class="icon icon-link"></span></a>结语</h2>
 <p><code class="language-text">lerna</code>的使用已介绍完毕，上述内容可满足日常开发需求，更多详情还需参考官方文档。</p>
-]]></description><link>http://zwingz.github.io/posts/416348095.html</link><guid isPermaLink="false">416348095</guid><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sat, 02 Mar 2019 02:48:23 GMT</pubDate></item><item><title><![CDATA[2018，不普通的一年]]></title><description><![CDATA[<p>2018对我个人来说是很重要的一年</p>
+]]></description><link>http://zwingz.github.io/posts/416348095.html</link><guid isPermaLink="false">416348095</guid><category><![CDATA[Front End]]></category><category><![CDATA[工具介绍]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sat, 02 Mar 2019 02:48:23 GMT</pubDate></item><item><title><![CDATA[2018，不普通的一年]]></title><description><![CDATA[<p>2018对我个人来说是很重要的一年</p>
 <p>在4月份, 我辞去了一份965的工作</p>
 <p>跟着前同事去了一家9:30 - 8:00 大小周的创业公司</p>
 <h2 id="过去，我学到了什么" class="heading"><a href="#%E8%BF%87%E5%8E%BB%EF%BC%8C%E6%88%91%E5%AD%A6%E5%88%B0%E4%BA%86%E4%BB%80%E4%B9%88" aria-hidden="true"><span class="icon icon-link"></span></a>过去，我学到了什么</h2>
