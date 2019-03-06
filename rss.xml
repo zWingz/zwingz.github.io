@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Tue, 05 Mar 2019 15:25:34 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 05 Mar 2019 15:25:34 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[Lerna使用介绍]]></title><description><![CDATA[<p><a href="https://github.com/lerna/lerna">lerna</a>用于管理多<code class="language-text">package</code>，且各<code class="language-text">package</code>可能会互相引用的项目。</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Wed, 06 Mar 2019 03:30:38 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 06 Mar 2019 03:30:38 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[Lerna使用介绍]]></title><description><![CDATA[<p><a href="https://github.com/lerna/lerna">lerna</a>用于管理多<code class="language-text">package</code>，且各<code class="language-text">package</code>可能会互相引用的项目。</p>
 <p><code class="language-text">lerna</code>通过两种方式管理子项目的版本号：</p>
 <ul>
 <li>Fixed/Locked mode (default)：每次执行<code class="language-text">lerna publish</code>都会将所涉及到的包升级到最新一个版本，开发者只需要确定发布下一个<code class="language-text">version</code>。</li>
@@ -9,8 +9,8 @@
 <h4 id="install-安装" class="heading"><a href="#install-%E5%AE%89%E8%A3%85" aria-hidden="true"><span class="icon icon-link"></span></a>Install 安装</h4>
 <p><code class="language-text">yarn global add lerna</code></p>
 <h4 id="init-初始化项目" class="heading"><a href="#init-%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE" aria-hidden="true"><span class="icon icon-link"></span></a>Init 初始化项目</h4>
-<p><code class="language-text">lerna init</code>
-命令执行完毕后，会在生成对应的目录结构。</p>
+<p><code class="language-text">lerna init</code></p>
+<p>命令执行完毕后，会在生成对应的目录结构。</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">lerna-repo/
   package.json
   lerna.json
@@ -32,8 +32,8 @@
   <span class="token string">"packages"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"packages/*"</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h4 id="create-创建子项目" class="heading"><a href="#create-%E5%88%9B%E5%BB%BA%E5%AD%90%E9%A1%B9%E7%9B%AE" aria-hidden="true"><span class="icon icon-link"></span></a>Create 创建子项目</h4>
-<p><code class="language-text">lerna create &lt;name&gt;</code>
-创建一个子项目，并会根据交互提示生成对应的<code class="language-text">package.json</code></p>
+<p><code class="language-text">lerna create &lt;name&gt;</code></p>
+<p>创建一个子项目，并会根据交互提示生成对应的<code class="language-text">package.json</code></p>
 <h4 id="add-添加依赖" class="heading"><a href="#add-%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96" aria-hidden="true"><span class="icon icon-link"></span></a>Add 添加依赖</h4>
 <p><code class="language-text">lerna add &lt;package&gt;[@version] [--dev] [--exact]</code></p>
 <ul>
@@ -46,8 +46,8 @@
 <li><code class="language-text">-dev</code>：添加到<code class="language-text">devDependencies</code></li>
 <li><code class="language-text">--exact</code>: 只安装特定版本</li>
 </ul>
-<p>如果添加的是子项目，则会通过<code class="language-text">link</code>软连接到对应的项目中。
-<code class="language-text">lerna add package1 --scope=package2</code></p>
+<p>如果添加的是子项目，则会通过<code class="language-text">link</code>软连接到对应的项目中。</p>
+<p><code class="language-text">lerna add package1 --scope=package2</code></p>
 <h4 id="run-执行npm-script命令" class="heading"><a href="#run-%E6%89%A7%E8%A1%8Cnpm-script%E5%91%BD%E4%BB%A4" aria-hidden="true"><span class="icon icon-link"></span></a>Run 执行npm script命令</h4>
 <p><code class="language-text">lerna run &lt;script&gt; -- [..args]</code></p>
 <ul>
@@ -57,8 +57,8 @@
 </ul>
 <h4 id="exec-执行任意命令" class="heading"><a href="#exec-%E6%89%A7%E8%A1%8C%E4%BB%BB%E6%84%8F%E5%91%BD%E4%BB%A4" aria-hidden="true"><span class="icon icon-link"></span></a>Exec 执行任意命令</h4>
 <p><code class="language-text">lerna exec -- &lt;command&gt; [..args]</code></p>
-<p>与<code class="language-text">lerna run</code>类似，只不过它可以执行任意命令。
-eg: <code class="language-text">lerna exec -- rm -rf ./node_modules</code></p>
+<p>与<code class="language-text">lerna run</code>类似，只不过它可以执行任意命令。</p>
+<p>eg: <code class="language-text">lerna exec -- rm -rf ./node_modules</code></p>
 <h4 id="其他命令" class="heading"><a href="#%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4" aria-hidden="true"><span class="icon icon-link"></span></a>其他命令</h4>
 <ul>
 <li><code class="language-text">lerna bootstrap</code>：安装各子项目依赖，对相互引用的项目进行软连接，在子项目中执行<code class="language-text">npm run prepublish</code>和<code class="language-text">npm run prepare</code><ul>
@@ -295,10 +295,10 @@ eg: <code class="language-text">lerna exec -- rm -rf ./node_modules</code></p>
 </ul>
 <p>希望2019也是不普通的一年</p>
 ]]></description><link>http://zwingz.github.io/posts/403552116.html</link><guid isPermaLink="false">403552116</guid><category><![CDATA[生活]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sun, 27 Jan 2019 13:40:58 GMT</pubDate></item><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[<h2 id="前言" class="heading"><a href="#%E5%89%8D%E8%A8%80" aria-hidden="true"><span class="icon icon-link"></span></a>前言</h2>
-<p>最近第一次给一个项目写一个完整的测试流程, 也算是我第一次写完整的测试.
-于是记一下整个测试流程
-<a href="https://github.com/zWingz/react-image">项目地址</a>
-目前项目使用的测试框架是主流的<code class="language-text">jest</code>+<code class="language-text">enzyme</code></p>
+<p>最近第一次给一个项目写一个完整的测试流程, 也算是我第一次写完整的测试.</p>
+<p>于是记一下整个测试流程</p>
+<p><a href="https://github.com/zWingz/react-image">项目地址</a></p>
+<p>目前项目使用的测试框架是主流的<code class="language-text">jest</code>+<code class="language-text">enzyme</code></p>
 <h2 id="依赖" class="heading"><a href="#%E4%BE%9D%E8%B5%96" aria-hidden="true"><span class="icon icon-link"></span></a>依赖</h2>
 <h3 id="必要依赖" class="heading"><a href="#%E5%BF%85%E8%A6%81%E4%BE%9D%E8%B5%96" aria-hidden="true"><span class="icon icon-link"></span></a>必要依赖</h3>
 <ul>
@@ -450,14 +450,14 @@ eg: <code class="language-text">lerna exec -- rm -rf ./node_modules</code></p>
 <li>simulate</li>
 </ul>
 <h2 id="进行测试" class="heading"><a href="#%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95" aria-hidden="true"><span class="icon icon-link"></span></a>进行测试</h2>
-<p>编写完<code class="language-text">test case</code>后, 只要调用<code class="language-text">jest</code>即可进行测试, 同时会输出覆盖率
-如果带上<code class="language-text">--watch</code>则可以监听文件改动并进行测试</p>
+<p>编写完<code class="language-text">test case</code>后, 只要调用<code class="language-text">jest</code>即可进行测试, 同时会输出覆盖率</p>
+<p>如果带上<code class="language-text">--watch</code>则可以监听文件改动并进行测试</p>
 <h2 id="上传测试覆盖率" class="heading"><a href="#%E4%B8%8A%E4%BC%A0%E6%B5%8B%E8%AF%95%E8%A6%86%E7%9B%96%E7%8E%87" aria-hidden="true"><span class="icon icon-link"></span></a>上传测试覆盖率</h2>
-<p>目前使用<code class="language-text">Codecov</code>来管理测试覆盖率
-如果在本地上传, 则需要带上<code class="language-text">token</code>, 如果通过<code class="language-text">travisCi</code>, 则不需要, 直接调用<code class="language-text">codecov</code>即可。</p>
+<p>目前使用<code class="language-text">Codecov</code>来管理测试覆盖率</p>
+<p>如果在本地上传, 则需要带上<code class="language-text">token</code>, 如果通过<code class="language-text">travisCi</code>, 则不需要, 直接调用<code class="language-text">codecov</code>即可。</p>
 <h2 id="完结" class="heading"><a href="#%E5%AE%8C%E7%BB%93" aria-hidden="true"><span class="icon icon-link"></span></a>完结</h2>
-<p>至此， 整套<code class="language-text">jest</code>+<code class="language-text">enzyme</code>测试流程已经跑完.
-目前看来没有用高更深的测试功能, 比如说<code class="language-text">jsdom</code>, <code class="language-text">enzyme.render</code>等</p>
+<p>至此， 整套<code class="language-text">jest</code>+<code class="language-text">enzyme</code>测试流程已经跑完.</p>
+<p>目前看来没有用高更深的测试功能, 比如说<code class="language-text">jsdom</code>, <code class="language-text">enzyme.render</code>等</p>
 ]]></description><link>http://zwingz.github.io/posts/383783892.html</link><guid isPermaLink="false">383783892</guid><category><![CDATA[Front End]]></category><category><![CDATA[React]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 23 Nov 2018 11:07:18 GMT</pubDate></item><item><title><![CDATA[多package下babel编译问题]]></title><description><![CDATA[<h2 id="项目背景" class="heading"><a href="#%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>项目背景</h2>
 <p>之前一直使用<code class="language-text">typescript</code> + <code class="language-text">babel</code> 编译项目</p>
 <p><code class="language-text">typescript</code>作用只是单纯用来做强类型检查, <code class="language-text">babel</code>则真正用来编译代码.</p>
@@ -465,8 +465,8 @@ eg: <code class="language-text">lerna exec -- rm -rf ./node_modules</code></p>
   <span class="token property">"target"</span><span class="token operator">:</span> <span class="token string">"exnext"</span>
 <span class="token punctuation">}</span>
 </code></pre></div>
-<p>偶然一次机会, 发现编译后的部分代码并没有编译<code class="language-text">object-rest-spread</code>
-而这部分代码全都在一个子目录下</p>
+<p>偶然一次机会, 发现编译后的部分代码并没有编译<code class="language-text">object-rest-spread</code></p>
+<p>而这部分代码全都在一个子目录下</p>
 <p>由于我的项目使用了<code class="language-text">git-submodules</code>来管理组件, 所以该组件目录下带有<code class="language-text">package.json</code>文件</p>
 <p>恰好这部分文件只经过了<code class="language-text">typescript</code>的编译, 而没有经过<code class="language-text">babel</code></p>
 <p>其他<code class="language-text">Page</code>都正确的被<code class="language-text">babel</code>编译, 不存在问题.</p>
@@ -474,8 +474,8 @@ eg: <code class="language-text">lerna exec -- rm -rf ./node_modules</code></p>
 <h2 id="问题原因" class="heading"><a href="#%E9%97%AE%E9%A2%98%E5%8E%9F%E5%9B%A0" aria-hidden="true"><span class="icon icon-link"></span></a>问题原因</h2>
 <p>当项目目录中含有多个<code class="language-text">package.json</code>时候, 原有的<code class="language-text">.babelrc</code>已经不再适用</p>
 <p><img src="https://user-images.githubusercontent.com/13031838/48480504-a09f9300-e845-11e8-9edc-3f42bb145c2f.png" alt="image">.</p>
-<p>这时候经过<code class="language-text">webpack</code>编译
-只有<code class="language-text">src</code>下的文件会被正确编译, <code class="language-text">sub</code>下的文件不会被<code class="language-text">babel</code>编译</p>
+<p>这时候经过<code class="language-text">webpack</code>编译</p>
+<p>只有<code class="language-text">src</code>下的文件会被正确编译, <code class="language-text">sub</code>下的文件不会被<code class="language-text">babel</code>编译</p>
 <p>此时<code class="language-text">webpack</code>会报错</p>
 <p><img src="https://user-images.githubusercontent.com/13031838/48480915-d4c78380-e846-11e8-80e5-b4bc1c518474.png" alt="image"></p>
 <p>原因就是这部分文件没有被<code class="language-text">babel</code>正确编译</p>
@@ -483,8 +483,8 @@ eg: <code class="language-text">lerna exec -- rm -rf ./node_modules</code></p>
 <p>官方有<a href="https://babeljs.io/docs/en/config-files#project-wide-configuration">详细说明</a></p>
 <p>将<code class="language-text">.babelrc</code>改成<code class="language-text">babel.config.js</code>, 此时<code class="language-text">sub</code>下的文件可以被正确编译</p>
 <p><img src="https://user-images.githubusercontent.com/13031838/48481024-15270180-e847-11e8-909b-3af7c5a7b209.png" alt="image"></p>
-<p>当然, 使用<code class="language-text">babel.config.js</code>还可以灵活的配置各个<code class="language-text">package</code>中<code class="language-text">babel</code>编译规则.
-具体的还是请看官方文档</p>
+<p>当然, 使用<code class="language-text">babel.config.js</code>还可以灵活的配置各个<code class="language-text">package</code>中<code class="language-text">babel</code>编译规则.</p>
+<p>具体的还是请看官方文档</p>
 ]]></description><link>http://zwingz.github.io/posts/380665113.html</link><guid isPermaLink="false">380665113</guid><category><![CDATA[Babel]]></category><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Wed, 14 Nov 2018 11:56:24 GMT</pubDate></item><item><title><![CDATA[使用Fabric+docker部署前端项目]]></title><description><![CDATA[<h2 id="部署过程" class="heading"><a href="#%E9%83%A8%E7%BD%B2%E8%BF%87%E7%A8%8B" aria-hidden="true"><span class="icon icon-link"></span></a>部署过程</h2>
 <ul>
 <li>合并<code class="language-text">develop</code>到<code class="language-text">master</code></li>
@@ -571,8 +571,8 @@ c <span class="token operator">=</span> Connection<span class="token punctuation
 <p>但是对于私有<code class="language-text">gitlab</code>, 同时又没有部署<code class="language-text">gitlab-runner</code>或者不想接入第三方的话</p>
 <p><code class="language-text">fabric</code>是个不错的选择</p>
 ]]></description><link>http://zwingz.github.io/posts/346031510.html</link><guid isPermaLink="false">346031510</guid><category><![CDATA[Depoly]]></category><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 31 Jul 2018 04:32:38 GMT</pubDate></item><item><title><![CDATA[记一下从Vue转向React的感想]]></title><description><![CDATA[<h1 id="关于react-想说几点" class="heading"><a href="#%E5%85%B3%E4%BA%8Ereact-%E6%83%B3%E8%AF%B4%E5%87%A0%E7%82%B9" aria-hidden="true"><span class="icon icon-link"></span></a>关于React, 想说几点</h1>
-<p>没有干货, 只有感想.
-没有源码分析, 只有需求实现.</p>
+<p>没有干货, 只有感想.</p>
+<p>没有源码分析, 只有需求实现.</p>
 <h2 id="react跟vue对比" class="heading"><a href="#react%E8%B7%9Fvue%E5%AF%B9%E6%AF%94" aria-hidden="true"><span class="icon icon-link"></span></a>React跟Vue对比</h2>
 <p>之前写过一篇<a href="https://zwing.site/posts/275254986.html">vue后台系统开发实践</a></p>
 <p>那时候主要写<code class="language-text">vue</code>, 有时间也会关注下<code class="language-text">React</code>相关内容, 但没有实际开发经验.</p>
@@ -786,9 +786,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
         <span class="token punctuation">}</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
-<p>此时Promise已经可以完成异步操作.
-但是Promise还有一个关键特点是可以链式调用. 目前是还没有实现链式调用这一步.
-具体代码看<a href="https://github.com/zWingz/Promise/blob/master/promise2.js">promise2.js</a></p>
+<p>此时Promise已经可以完成异步操作.</p>
+<p>但是Promise还有一个关键特点是可以链式调用. 目前是还没有实现链式调用这一步.</p>
+<p>具体代码看<a href="https://github.com/zWingz/Promise/blob/master/promise2.js">promise2.js</a></p>
 <h3 id="接下来继续看下规范怎么说" class="heading"><a href="#%E6%8E%A5%E4%B8%8B%E6%9D%A5%E7%BB%A7%E7%BB%AD%E7%9C%8B%E4%B8%8B%E8%A7%84%E8%8C%83%E6%80%8E%E4%B9%88%E8%AF%B4" aria-hidden="true"><span class="icon icon-link"></span></a>接下来继续看下规范怎么说</h3>
 <p>Promise 解决过程</p>
 <ul>
@@ -971,11 +971,11 @@ Promise<span class="token punctuation">.</span><span class="token function">reje
 <ul>
 <li>
 <p>Promise.resolve</p>
-<p>  根据arg的不同, 会执行不同的操作
-- arg为Promise实例, 则原封不动的返回这个实例
-- arg为thenable对象, 则会将arg转成promise, 并且立即执行<code class="language-text">arg.then</code>方法(并不代表同步, 而是本轮事件循环结束时执行)
-- arg不满足上述情况, 则返回一个新的Promise实例, 状态为resolved, 终值为arg
-因此<code class="language-text">Promise.resolve</code>是一个更方便的创建<code class="language-text">Promise</code>实例的方法.</p>
+<p>  根据arg的不同, 会执行不同的操作</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text"> - arg为Promise实例, 则原封不动的返回这个实例
+ - arg为thenable对象, 则会将arg转成promise, 并且立即执行`arg.then`方法(并不代表同步, 而是本轮事件循环结束时执行)
+ - arg不满足上述情况, 则返回一个新的Promise实例, 状态为resolved, 终值为arg</code></pre></div>
+<p>  因此<code class="language-text">Promise.resolve</code>是一个更方便的创建<code class="language-text">Promise</code>实例的方法.</p>
 </li>
 <li>
 <p>Promise.reject</p>
@@ -1133,8 +1133,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><img src="https://zwing.site/imgur/44394098.jpg"></p>
 <h2 id="最后" class="heading"><a href="#%E6%9C%80%E5%90%8E" aria-hidden="true"><span class="icon icon-link"></span></a>最后</h2>
 <p>这次戚风蛋糕第一次尝试，还是挺不错的，评个80分吧。</p>
-<p>本来是打算弄芝士蛋糕，奈何没有奶油奶酪，只能做原味戚风蛋糕了。
-下次可以买奶油奶酪试试做芝士蛋糕。</p>
+<p>本来是打算弄芝士蛋糕，奈何没有奶油奶酪，只能做原味戚风蛋糕了。</p>
+<p>下次可以买奶油奶酪试试做芝士蛋糕。</p>
 <p>周末做了下蛋包饭，差点就做成了蛋炒饭。</p>
 <p>原因还是材料太多了，炒起来鸡蛋都保不住。</p>
 <p>不过吃起来还是挺好吃，可能下次要注意下材料分量，鸡蛋能包起来就更好吃了。</p>
@@ -1270,8 +1270,8 @@ User <span class="token function">git</span>
 IdentityFile ~/.ssh/id_rsa_gitlab</code></pre></div>
 </li>
 <li>
-<p>注入密码（重启后失效）
-<code class="language-text">ssh-add -k ~/.ssh/id_rsa_gitlab</code></p>
+<p>注入密码（重启后失效）</p>
+<p><code class="language-text">ssh-add -k ~/.ssh/id_rsa_gitlab</code></p>
 </li>
 </ul>
 <h2 id="vscode-编辑器" class="heading"><a href="#vscode-%E7%BC%96%E8%BE%91%E5%99%A8" aria-hidden="true"><span class="icon icon-link"></span></a><a href="https://code.visualstudio.com/">vscode</a> 编辑器</h2>
@@ -1291,29 +1291,29 @@ IdentityFile ~/.ssh/id_rsa_gitlab</code></pre></div>
 <h3 id="绝对定位" class="heading"><a href="#%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D" aria-hidden="true"><span class="icon icon-link"></span></a>绝对定位</h3>
 <ul>
 <li>
-<p>实现方式
-这种应该是最普遍也是最简单的方式.</p>
+<p>实现方式</p>
+<p>这种应该是最普遍也是最简单的方式.</p>
 <p>就是将一个表格分成多个表格.</p>
 <p>包括表头/左侧/右侧/表体, 共四个表格</p>
 <p>然后通过 css 方式将表头以及两侧固定</p>
 <p>之后通过 scroll 事件的监听,同步表头以及两侧的 scroll 值,就可以达到固定的效果</p>
 </li>
 <li>
-<p>优点
-实现起来简单,而且无缝滚动</p>
+<p>优点</p>
+<p>实现起来简单,而且无缝滚动</p>
 </li>
 <li>
-<p>缺点
-表格都是使用 table-layout:fixed; 使得每个单元格宽度固定.</p>
+<p>缺点</p>
+<p>表格都是使用 table-layout:fixed; 使得每个单元格宽度固定.</p>
 <p>如果不使用 fixed 的话.则需要一个 <col> 管理每一列的宽度.</p>
 <p>这样不能达到宽度自适应的情况</p>
 <p>滚动必须是局部滚动.而不是跟随全局.</p>
 </li>
 <li>
-<p>例子
-elementUI 的表格就是这样实现的.
-<img src="https://zwing.site/imgur/39962386.jpg">
-同一个表格的表头,表体分别复制了3次.用来形成表头和两侧的固定.</p>
+<p>例子</p>
+<p>elementUI 的表格就是这样实现的.</p>
+<p><img src="https://zwing.site/imgur/39962386.jpg"></p>
+<p>同一个表格的表头,表体分别复制了3次.用来形成表头和两侧的固定.</p>
 <p>使用绝对定位固定两侧.</p>
 <p>通过管理 scroll 的值管理表头以及两侧滚动.</p>
 <p>这样就会导致 dom 数量的增加.</p>
@@ -1321,8 +1321,8 @@ elementUI 的表格就是这样实现的.
 </ul>
 <h2 id="css-方法---position-sticky" class="heading"><a href="#css-%E6%96%B9%E6%B3%95---position-sticky" aria-hidden="true"><span class="icon icon-link"></span></a>css 方法 - position: sticky</h2>
 <p>此方法原生支持固定表头.</p>
-<p>但是目前<a href="https://caniuse.com/#feat=css-sticky">兼容性</a>不客观
-<img src="https://zwing.site/imgur/67634294.jpg"></p>
+<p>但是目前<a href="https://caniuse.com/#feat=css-sticky">兼容性</a>不客观</p>
+<p><img src="https://zwing.site/imgur/67634294.jpg"></p>
 <h2 id="本文实现" class="heading"><a href="#%E6%9C%AC%E6%96%87%E5%AE%9E%E7%8E%B0" aria-hidden="true"><span class="icon icon-link"></span></a>本文实现</h2>
 <ul>
 <li><a href="http://zwing.site/vue-fixed-table/release/demo.html">DEMO</a>(原谅我没弄样式)</li>
@@ -1347,8 +1347,8 @@ elementUI 的表格就是这样实现的.
 <p>由于是内部系统, 使用 chrome 居多.所以 firefox 和 safari 下只做了兼容性处理.</p>
 <h3 id="第二版" class="heading"><a href="#%E7%AC%AC%E4%BA%8C%E7%89%88" aria-hidden="true"><span class="icon icon-link"></span></a>第二版</h3>
 <p>在第一版完成后, 基本实现了固定表格头功能. 而且在 chrome 下表现顺畅.</p>
-<p>于是着手实现固定两侧.这里实现原理一样.所以很容易实现
-<img src="https://zwing.site/imgur/60520413.jpg"></p>
+<p>于是着手实现固定两侧.这里实现原理一样.所以很容易实现</p>
+<p><img src="https://zwing.site/imgur/60520413.jpg"></p>
 <p>这种虽然右侧是固定在浏览器右侧.</p>
 <p>但是整体页面还是被撑开的.</p>
 <p>那么对于表格上下的其他组件,他们依旧是被浏览器隐藏.需要横向滚动才能看到.</p>
@@ -1386,10 +1386,8 @@ elementUI 的表格就是这样实现的.
 <p>就是就是额外添加一个虚拟滚动条的组件.</p>
 <p>当容器底部被浏览器隐藏时候.则平移这个滚动条至屏幕底部</p>
 <ul>
-<li>原生滚动条被隐藏时候,显示虚拟滚动条
-<img src="https://zwing.site/imgur/24267221.jpg"></li>
-<li>原生滚动条显示时候,隐藏虚拟滚动条
-<img src="https://zwing.site/imgur/61056576.jpg"></li>
+<li>原生滚动条被隐藏时候,显示虚拟滚动条<img src="https://zwing.site/imgur/24267221.jpg"></li>
+<li>原生滚动条显示时候,隐藏虚拟滚动条<img src="https://zwing.site/imgur/61056576.jpg"></li>
 </ul>
 <p>这样, 既能使得页面不被撑开. 同时高度也不需要限定在100%.</p>
 <p>刚好能满足需求.</p>
@@ -1649,16 +1647,16 @@ IdentityFile ~/.ssh/id_rsa_gitlab
 ssh-add -k ~/.ssh/id_rsa_gitlab</code></pre></div>
 <h3 id="简单快捷完成git配置了" class="heading"><a href="#%E7%AE%80%E5%8D%95%E5%BF%AB%E6%8D%B7%E5%AE%8C%E6%88%90git%E9%85%8D%E7%BD%AE%E4%BA%86" aria-hidden="true"><span class="icon icon-link"></span></a>简单快捷完成git配置了</h3>
 ]]></description><link>http://zwingz.github.io/posts/293431355.html</link><guid isPermaLink="false">293431355</guid><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 01 Feb 2018 07:37:09 GMT</pubDate></item><item><title><![CDATA[记一次webpack优化 --- 从babelrc和UglifyPlugin下手]]></title><description><![CDATA[<h2 id="优化前" class="heading"><a href="#%E4%BC%98%E5%8C%96%E5%89%8D" aria-hidden="true"><span class="icon icon-link"></span></a>优化前</h2>
-<p>先来看优化前打包速度
-大的第三方库大概有vue+axios+vueRouter+vuex+elementUI(datepicker, message两个插件)+jquery
-打包总体积为2648k, 一共14个chunk(使用了异步路由)
-<img src="https://user-images.githubusercontent.com/13031838/35665400-19f380fc-0761-11e8-944b-85a5117364c2.png" alt="image"></p>
+<p>先来看优化前打包速度</p>
+<p>大的第三方库大概有vue+axios+vueRouter+vuex+elementUI(datepicker, message两个插件)+jquery</p>
+<p>打包总体积为2648k, 一共14个chunk(使用了异步路由)</p>
+<p><img src="https://user-images.githubusercontent.com/13031838/35665400-19f380fc-0761-11e8-944b-85a5117364c2.png" alt="image"></p>
 <p>在我本地打包一次需要31s</p>
 <p><img src="https://user-images.githubusercontent.com/13031838/35664714-26a6075a-075e-11e8-8df9-1cde8b4f1878.png" alt="image"></p>
 <p>而在服务器打包时候则要70s以上, 这里就不贴图了. </p>
 <h2 id="优化后" class="heading"><a href="#%E4%BC%98%E5%8C%96%E5%90%8E" aria-hidden="true"><span class="icon icon-link"></span></a>优化后</h2>
-<p>优化后时间
-打包总体积上升为2700k, 上升了50k</p>
+<p>优化后时间</p>
+<p>打包总体积上升为2700k, 上升了50k</p>
 <p><img src="https://user-images.githubusercontent.com/13031838/35665453-3ce893ea-0761-11e8-8d79-2c8b3555acb5.png" alt="image"></p>
 <p>本地打包18s</p>
 <p><img src="https://user-images.githubusercontent.com/13031838/35664879-c88ec336-075e-11e8-88c0-a61590c97cad.png" alt="image"></p>
@@ -1667,8 +1665,8 @@ ssh-add -k ~/.ssh/id_rsa_gitlab</code></pre></div>
 <p><strong>提升很明显有没有</strong></p>
 <h2 id="修改了哪些地方" class="heading"><a href="#%E4%BF%AE%E6%94%B9%E4%BA%86%E5%93%AA%E4%BA%9B%E5%9C%B0%E6%96%B9" aria-hidden="true"><span class="icon icon-link"></span></a>修改了哪些地方?</h2>
 <h3 id="uglifeplugin" class="heading"><a href="#uglifeplugin" aria-hidden="true"><span class="icon icon-link"></span></a>UglifePlugin</h3>
-<p>主要修改地方还是在UglifyPlugin配置中
-由于我是用的并不是webpack自带的,而是独立的<a href="https://github.com/webpack-contrib/uglifyjs-webpack-plugin">uglifyjs-webpack-plugin</a></p>
+<p>主要修改地方还是在UglifyPlugin配置中</p>
+<p>由于我是用的并不是webpack自带的,而是独立的<a href="https://github.com/webpack-contrib/uglifyjs-webpack-plugin">uglifyjs-webpack-plugin</a></p>
 <p>其实官方使用的也是这个插件. 只不过官方使用的暂且不是最新版,而webpack4.0-beta已经使用此插件最新版本</p>
 <p>用法很简单</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> UglifyJsPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'uglifyjs-webpack-plugin'</span><span class="token punctuation">)</span>
@@ -1834,14 +1832,14 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>但是在commit的时候添加了一层pre-commit来对修改的文件执行eslint.</p>
 <p>这样就确保上传到git的代码是经过eslint检查的</p>
 <p>这样既能确保开发不被干扰,也能确保代码能按照规范.</p>
-]]></description><link>http://zwingz.github.io/posts/293426099.html</link><guid isPermaLink="false">293426099</guid><category><![CDATA[Front End]]></category><category><![CDATA[Webpack]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 01 Feb 2018 07:13:03 GMT</pubDate></item><item><title><![CDATA[烹饪和烘焙的点滴]]></title><description><![CDATA[<p>突然想写些什么..
-那就写下这周做了什么吃的..
-除了晚餐之外.
-这周做了特别的可能就是<strong>炸薯条</strong>, <strong>火烧云</strong>以及<strong>芒果千层</strong>了.
-下面就大概回忆下过程</p>
+]]></description><link>http://zwingz.github.io/posts/293426099.html</link><guid isPermaLink="false">293426099</guid><category><![CDATA[Front End]]></category><category><![CDATA[Webpack]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 01 Feb 2018 07:13:03 GMT</pubDate></item><item><title><![CDATA[烹饪和烘焙的点滴]]></title><description><![CDATA[<p>突然想写些什么..</p>
+<p>那就写下这周做了什么吃的..</p>
+<p>除了晚餐之外.</p>
+<p>这周做了特别的可能就是<strong>炸薯条</strong>, <strong>火烧云</strong>以及<strong>芒果千层</strong>了.</p>
+<p>下面就大概回忆下过程</p>
 <h2 id="炸薯条" class="heading"><a href="#%E7%82%B8%E8%96%AF%E6%9D%A1" aria-hidden="true"><span class="icon icon-link"></span></a>炸薯条</h2>
-<p>  其实炸薯条本不是本人的意思, 只是女友说突然想吃薯条, 就在买菜的时候买多了一个土豆.
-由于不是本人的意思,过程也只是大概记得.</p>
+<p>  其实炸薯条本不是本人的意思, 只是女友说突然想吃薯条, 就在买菜的时候买多了一个土豆.</p>
+<p>  由于不是本人的意思,过程也只是大概记得.</p>
 <ul>
 <li>土豆去皮, 切成条</li>
 <li>用保鲜袋装好,放冰箱冷冻(其实嘛.我也不知道这一步是不是必须,也可能是那晚我们吃得饱,所以才放冰箱,留到下次弄得)</li>
@@ -1851,13 +1849,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <li>油热了之后把薯条放进去炸就ok了..</li>
 <li>炸完捞出可以再撒些盐. 然后放置一阵子就能吃了</li>
 </ul>
-<p>其实一开始全程都是女友在弄.只不过她炸的时候油放的太少了..然后跑过来跟我说像是在炒薯条..
-于是乎我就自己上了..其实这也是我第一次炸薯条.
-炸完之后油也只能倒掉.感觉很浪费.炸一个土豆用了1/3瓶油..
-感觉以后都不会再炸东西了.除非量大. 这里就没图了.很简单的</p>
+<p>其实一开始全程都是女友在弄.只不过她炸的时候油放的太少了..然后跑过来跟我说像是在炒薯条..</p>
+<p>于是乎我就自己上了..其实这也是我第一次炸薯条.</p>
+<p>炸完之后油也只能倒掉.感觉很浪费.炸一个土豆用了1/3瓶油..</p>
+<p>感觉以后都不会再炸东西了.除非量大. 这里就没图了.很简单的</p>
 <h2 id="火烧云" class="heading"><a href="#%E7%81%AB%E7%83%A7%E4%BA%91" aria-hidden="true"><span class="icon icon-link"></span></a>火烧云</h2>
-<p>  这个其实我上星期就有做过了.只不过做失败了.
-其实就是面包再加工一下啦, 外表看起来逼格挺高. 吃起来也还ok</p>
+<p>  这个其实我上星期就有做过了.只不过做失败了.</p>
+<p>  其实就是面包再加工一下啦, 外表看起来逼格挺高. 吃起来也还ok</p>
 <ul>
 <li>材料(鸡蛋两个, 吐司(方包)4片, 炼奶, 沙拉酱)</li>
 <li>蛋清分离, 用蛋清分离器分离, 将蛋清倒入无水碗中, 然后将蛋黄放另外一个碗(两个鸡蛋的蛋清可以放于同一个碗中, 蛋黄必须放于两个不同的碗, 同时蛋黄一定不能破, 一旦破了混入到了蛋清中,就不容易打发蛋清了, 上周失败就是因为分离的时候蛋黄破了, 导致打发失败)</li>
@@ -1874,41 +1872,34 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>就是由于上周失败了, 并且找到原因, 所以这周就铁了心要把它完成. 当然这里肯定有图了</p>
 <ul>
 <li>
-<p>这是入烤箱前
-<img src="https://zwing.site/imgur/645802.jpg"></p>
+<p>这是入烤箱前</p>
+<p><img src="https://zwing.site/imgur/645802.jpg"></p>
 </li>
 <li>
-<p>烤完后
-<img src="https://zwing.site/imgur/84359394.jpg">
-味道还是不错的, 也挺简单.</p>
+<p>烤完后</p>
+<p><img src="https://zwing.site/imgur/84359394.jpg"></p>
+<p>味道还是不错的, 也挺简单.</p>
 </li>
 </ul>
 <h2 id="芒果千层" class="heading"><a href="#%E8%8A%92%E6%9E%9C%E5%8D%83%E5%B1%82" aria-hidden="true"><span class="icon icon-link"></span></a>芒果千层</h2>
-<p>做这个芒果千层, 耗时3小时, 也是不容易啊
-这里先上图, 之后再补充制作过程
-<img src="https://zwing.site/imgur/38760413.jpg"></p>
+<p>做这个芒果千层, 耗时3小时, 也是不容易啊</p>
+<p>这里先上图, 之后再补充制作过程</p>
+<p><img src="https://zwing.site/imgur/38760413.jpg"></p>
 <h2 id="其他" class="heading"><a href="#%E5%85%B6%E4%BB%96" aria-hidden="true"><span class="icon icon-link"></span></a>其他</h2>
-<p>其实烤箱双十一就购入了, 同时也购入了一批烘焙工具,从此入了烘焙的坑,
-不入不知道, 一入深似海
-这里就顺便贴下图吧.过程就先忽略了</p>
+<p>其实烤箱双十一就购入了, 同时也购入了一批烘焙工具,从此入了烘焙的坑,</p>
+<p>不入不知道, 一入深似海</p>
+<p>这里就顺便贴下图吧.过程就先忽略了</p>
 <ul>
-<li>鸡蛋布丁
-<img src="https://zwing.site/imgur/42554020.jpg"></li>
+<li>鸡蛋布丁<img src="https://zwing.site/imgur/42554020.jpg"></li>
 </ul>
 <ul>
-<li>西多士
-<img src="https://zwing.site/imgur/69072942.jpg">
-<img src="https://raw.githubusercontent.com/zWingz/imgur/master/52877777.jpg"></li>
+<li>西多士<img src="https://zwing.site/imgur/69072942.jpg"><img src="https://raw.githubusercontent.com/zWingz/imgur/master/52877777.jpg"></li>
 </ul>
 <ul>
-<li>蛋挞
-<img src="https://zwing.site/imgur/59916873.jpg">
-<img src="https://zwing.site/imgur/70796582.jpg">
-<img src="https://zwing.site/imgur/48233877.jpg"></li>
+<li>蛋挞<img src="https://zwing.site/imgur/59916873.jpg"><img src="https://zwing.site/imgur/70796582.jpg"><img src="https://zwing.site/imgur/48233877.jpg"></li>
 </ul>
 <ul>
-<li>风琴土豆
-<img src="https://zwing.site/imgur/33495732.jpg"></li>
+<li>风琴土豆<img src="https://zwing.site/imgur/33495732.jpg"></li>
 </ul>
 ]]></description><link>http://zwingz.github.io/posts/292217983.html</link><guid isPermaLink="false">292217983</guid><category><![CDATA[烘焙]]></category><category><![CDATA[生活]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sun, 28 Jan 2018 16:34:04 GMT</pubDate></item><item><title><![CDATA[vue后台系统开发实践]]></title><description><![CDATA[<h1 id="vue后台系统开发实践" class="heading"><a href="#vue%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5" aria-hidden="true"><span class="icon icon-link"></span></a>Vue后台系统开发实践</h1>
 <h2 id="依赖库" class="heading"><a href="#%E4%BE%9D%E8%B5%96%E5%BA%93" aria-hidden="true"><span class="icon icon-link"></span></a>依赖库</h2>
@@ -2107,9 +2098,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h2 id="建议" class="heading"><a href="#%E5%BB%BA%E8%AE%AE" aria-hidden="true"><span class="icon icon-link"></span></a>建议</h2>
 <ol>
 <li>
-<p>如果对组件进行for命令,必须加上:key,这是官方指定.
-但对于原生dom进行for循环时候.其实可以不加:key,或者使用index作为key.
-一旦设置了key,只有key得值不一样,会直接销毁重建dom. 那么用index作为key的话,则只会更新dom而不会销毁重建</p>
+<p>如果对组件进行for命令,必须加上:key,这是官方指定.</p>
+<p>但对于原生dom进行for循环时候.其实可以不加:key,或者使用index作为key. </p>
+<p>一旦设置了key,只有key得值不一样,会直接销毁重建dom. 那么用index作为key的话,则只会更新dom而不会销毁重建</p>
 </li>
 <li>
 <p>任何通过addEventListeners添加的监听事件,销毁时最好使用removeEventListeners给去掉</p>
