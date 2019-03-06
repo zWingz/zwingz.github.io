@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Wed, 06 Mar 2019 09:55:36 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 06 Mar 2019 09:55:36 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用github issues搭建博客]]></title><description><![CDATA[<p>通过<code class="language-text">issues</code>来生成博客，并自动部署到<code class="language-text">gh-page</code>。</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Wed, 06 Mar 2019 09:58:29 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 06 Mar 2019 09:58:29 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用github issues搭建博客]]></title><description><![CDATA[<p>通过<code class="language-text">issues</code>来生成博客，并自动部署到<code class="language-text">gh-page</code>。</p>
 <h3 id="介绍" class="heading"><a href="#%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span class="icon icon-link"></span></a>介绍</h3>
 <ul>
 <li><a href="https://acyort.com/">acyort</a> 引擎核心，用来管理插件、工作流以及<code class="language-text">html</code>输出等。</li>
@@ -12,7 +12,6 @@
 <li>在 <a href="https://circleci.com">circleCi</a> 加入对应的<code class="language-text">repo</code>并创建 <a href="https://circleci.com/account/api">circleci token</a>(需要保存下来)</li>
 <li>在<code class="language-text">circleci</code>中对应项目加入<code class="language-text">variable</code>.</li>
 <li>在<code class="language-text">repo</code>中添加<code class="language-text">webhook</code></li>
-<li><code class="language-text">https://circleci.com/api/v1.1/project/github/:username/:project/tree/:branch?circle-token=:token</code></li>
 <li>写<code class="language-text">issues</code></li>
 </ul>
 <h3 id="关于-gh-pages" class="heading"><a href="#%E5%85%B3%E4%BA%8E-gh-pages" aria-hidden="true"><span class="icon icon-link"></span></a>关于 gh-pages</h3>
@@ -140,7 +139,7 @@
 <li>点<code class="language-text">settings</code></li>
 <li>点<code class="language-text">webhook</code></li>
 <li>点<code class="language-text">Add webhook</code></li>
-<li><code class="language-text">Payload URL</code>填入<code class="language-text">https://circleci.com/api/v1.1/project/github/:username/:project/tree/:branch?circle-token=:token</code>(自行替换相应字段, 其中<code class="language-text">:token</code>是从<code class="language-text">circleci</code>中申请的<code class="language-text">token</code>)</li>
+<li><code class="language-text">Payload URL</code>填入'<a href="https://circleci.com/api/v1.1/project/github/:username/:project/tree/:branch?circle-token=:token">https://circleci.com/api/v1.1/project/github/:username/:project/tree/:branch?circle-token=:token</a>' (自行替换相应字段), 其中<code class="language-text">:token</code>是从<code class="language-text">circleci</code>中申请的<code class="language-text">token</code>)</li>
 <li><code class="language-text">Content-Type</code>选择<code class="language-text">application/json</code></li>
 <li>下面选择<code class="language-text">let me select xxx</code>, 并勾选<code class="language-text">issues</code>选项</li>
 <li>最下面点击<code class="language-text">save</code></li>
