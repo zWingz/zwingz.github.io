@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 07 Mar 2019 16:46:00 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 07 Mar 2019 16:46:00 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[自动部署基于issues的静态博客]]></title><description><![CDATA[<p>通过<code class="language-text">issues</code>来写博客文章，并自动部署到<code class="language-text">gh-page</code>。</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sat, 16 Mar 2019 09:06:38 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 16 Mar 2019 09:06:38 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[自动部署基于issues的静态博客]]></title><description><![CDATA[<p>通过<code class="language-text">issues</code>来写博客文章，并自动部署到<code class="language-text">gh-page</code>。</p>
 <h3 id="介绍" class="heading"><a href="#%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span class="icon icon-link"></span></a>介绍</h3>
 <ul>
 <li><a href="https://acyort.com/">acyort</a> 引擎核心，用来管理插件、工作流以及<code class="language-text">html</code>输出等。</li>
@@ -649,44 +649,52 @@
 <li>npm run test (如果需要)</li>
 <li>npm run build</li>
 </ul>
-<h2 id="docker配置-使用dockernode完成编译" class="heading"><a href="#docker%E9%85%8D%E7%BD%AE-%E4%BD%BF%E7%94%A8dockernode%E5%AE%8C%E6%88%90%E7%BC%96%E8%AF%91" aria-hidden="true"><span class="icon icon-link"></span></a>Docker配置, 使用docker+node完成编译</h2>
-<p>使用docker来部署, 则线上不需要有<code class="language-text">node</code>环境.</p>
-<h3 id="使用docker安装依赖" class="heading"><a href="#%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96" aria-hidden="true"><span class="icon icon-link"></span></a>使用docker安装依赖</h3>
+<h2 id="利用docker-compose运行node" class="heading"><a href="#%E5%88%A9%E7%94%A8docker-compose%E8%BF%90%E8%A1%8Cnode" aria-hidden="true"><span class="icon icon-link"></span></a>利用docker-compose运行node</h2>
+<p>使用docker来跑<code class="language-text">node</code>, 则线上不需要有<code class="language-text">node</code>环境.</p>
 <ul>
 <li>将本地目录映射到<code class="language-text">docker</code>中</li>
 <li>在<code class="language-text">docker</code>中跑<code class="language-text">npm</code>命令</li>
 </ul>
-<div class="gatsby-highlight" data-language="docker"><pre class="language-docker"><code class="language-docker"><span class="token comment"># docker-compose.yml</span>
-version<span class="token punctuation">:</span> <span class="token string">'3'</span>
-services<span class="token punctuation">:</span>
-  depoly<span class="token punctuation">:</span>
-    container_name<span class="token punctuation">:</span> project<span class="token punctuation">-</span>container
-    image<span class="token punctuation">:</span> node<span class="token punctuation">:</span>carbon
-    working_dir<span class="token punctuation">:</span> /project
-    volumes<span class="token punctuation">:</span>
-        <span class="token punctuation">-</span> .<span class="token punctuation">:</span>/project</code></pre></div>
-<h2 id="shell脚本-更好的执行docker" class="heading"><a href="#shell%E8%84%9A%E6%9C%AC-%E6%9B%B4%E5%A5%BD%E7%9A%84%E6%89%A7%E8%A1%8Cdocker" aria-hidden="true"><span class="icon icon-link"></span></a>Shell脚本, 更好的执行docker</h2>
+<div class="gatsby-highlight" data-language="yaml"><pre class="language-yaml"><code class="language-yaml"><span class="token comment"># docker-compose.yml</span>
+<span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3'</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">depoly</span><span class="token punctuation">:</span>
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> project<span class="token punctuation">-</span>container
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> node<span class="token punctuation">:</span>carbon
+    <span class="token key atrule">working_dir</span><span class="token punctuation">:</span> /project
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> .<span class="token punctuation">:</span>/project
+</code></pre></div>
+<p>然后编可以通过命令<code class="language-text">docker-compose run --rm deploy yarn xxx</code>来执行<code class="language-text">npm</code>命令</p>
+<h2 id="利用makefile更好的执行命令" class="heading"><a href="#%E5%88%A9%E7%94%A8makefile%E6%9B%B4%E5%A5%BD%E7%9A%84%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4" aria-hidden="true"><span class="icon icon-link"></span></a>利用makefile更好的执行命令</h2>
+<div class="gatsby-highlight" data-language="makefile"><pre class="language-makefile"><code class="language-makefile"><span class="token symbol">build</span><span class="token punctuation">:</span>
+  docker-compose run --rm deploy yarn build
+
+<span class="token symbol">install</span><span class="token punctuation">:</span>
+  docker-compose run --rm deploy yarn install --production
+
+<span class="token symbol">dev</span><span class="token punctuation">:</span>
+<span class="token symbol">  docker-compose run --rm -p 8080</span><span class="token punctuation">:</span>8080 deploy yarn dev
+
+<span class="token comment"># 因为当前build目录和build命令冲突, 用以下关键词区分两者</span>
+<span class="token builtin">.PHONY</span><span class="token punctuation">:</span> build</code></pre></div>
+<h2 id="shell脚本-更好的执行makefile" class="heading"><a href="#shell%E8%84%9A%E6%9C%AC-%E6%9B%B4%E5%A5%BD%E7%9A%84%E6%89%A7%E8%A1%8Cmakefile" aria-hidden="true"><span class="icon icon-link"></span></a>Shell脚本, 更好的执行makefile</h2>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
 
-<span class="token comment"># 判断最近一次提交是否修改过package-lock, 以及node_modules是否为空</span>
-<span class="token comment"># 如果是, 则重新执行npm install</span>
-package<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> <span class="token function">diff</span> --name-only HEAD~ HEAD <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">"package-lock.json"</span><span class="token variable">)</span></span>
+<span class="token function">trap</span> <span class="token string">"kill 0"</span> SIGINT
 
-<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d <span class="token string">"./node_modules"</span> -o -n <span class="token string">"<span class="token variable">$package</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-  <span class="token keyword">echo</span> -e <span class="token string">"\n\033[41;37m Install dependence:\033[0m\n "</span>
-  <span class="token comment"># 跑docker命令</span>
-  docker-compose run --rm depoly <span class="token function">npm</span> <span class="token function">install</span>
+<span class="token comment"># 如果带了 -i 参数, 则需要安装依赖</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">"<span class="token variable">$1</span>"</span> <span class="token operator">==</span> <span class="token string">"-i"</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+  <span class="token keyword">echo</span> -e <span class="token string">"\n\033[41;37m Install dependencies:\033[0m\n "</span>
+  <span class="token function">make</span> <span class="token function">install</span>
   <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">"<span class="token variable">$?</span>"</span> <span class="token operator">==</span> 1 <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
     <span class="token keyword">echo</span> -e <span class="token string">"\t\033[31m Error in npm install, pleace check your package.json\n\033[0m"</span>
     <span class="token keyword">exit</span> 1
   <span class="token keyword">fi</span>
 <span class="token keyword">fi</span><span class="token punctuation">;</span>
 
-<span class="token comment"># 执行编译</span>
 <span class="token keyword">echo</span> -e <span class="token string">"\n\n\033[41;37m Build... :\033[0m\n "</span>
-
-<span class="token comment"># 跑docker命令</span>
-docker-compose run --rm depoly <span class="token function">npm</span> run build
+<span class="token function">make</span> build
 <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">"<span class="token variable">$?</span>"</span> <span class="token operator">==</span> 1 <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
   <span class="token keyword">echo</span> -e <span class="token string">"\t\033[31m Error in npm run build \n\033[0m"</span>
   <span class="token keyword">exit</span> 1
