@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Fri, 19 Apr 2019 06:35:41 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 19 Apr 2019 06:35:41 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[在小程序中使用base64展示图片]]></title><description><![CDATA[<h3 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h3>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 22 Apr 2019 09:29:49 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 22 Apr 2019 09:29:49 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[在小程序中使用base64展示图片]]></title><description><![CDATA[<h3 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h3>
 <ul>
 <li>项目使用<code class="language-text">taro</code>进行开发</li>
 <li>需求是通过<code class="language-text">api</code>请求, 获取图片的<code class="language-text">base64</code>字符串, 并且将图片展示出来</li>
@@ -800,6 +800,7 @@ pathArr.forEach((each, index) =&gt; {
 <ul>
 <li>如果使用<code class="language-text">babel</code>，则需要<code class="language-text">babel-jest</code></li>
 <li>如果使用<code class="language-text">typescript</code>， 则需要<code class="language-text">ts-jest</code></li>
+<li>如果需要<code class="language-text">snapshot</code>, 则需要 <code class="language-text">enzyme-to-json</code></li>
 </ul>
 <h2 id="jest-配置" class="heading"><a href="#jest-%E9%85%8D%E7%BD%AE" aria-hidden="true"><span class="icon icon-link"></span></a>Jest 配置</h2>
 <p>起初项目使用<code class="language-text">babel</code>进行编译，后面统一转成了<code class="language-text">ts</code></p>
@@ -807,16 +808,19 @@ pathArr.forEach((each, index) =&gt; {
   <span class="token property">"jest"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">"moduleNameMapper"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
       <span class="token property">"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|scss)$"</span><span class="token operator">:</span> <span class="token string">"&lt;rootDir>/test/utils.ts"</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">// 将静态资源匹配到utils.ts中</span>
     <span class="token property">"moduleFileExtensions"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"ts"</span><span class="token punctuation">,</span> <span class="token string">"tsx"</span><span class="token punctuation">,</span> <span class="token string">"js"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token property">"setupTestFrameworkScriptFile"</span><span class="token operator">:</span> <span class="token string">"&lt;rootDir>/test/setup.ts"</span><span class="token punctuation">,</span>
-    <span class="token property">"collectCoverageFrom"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"src/**/*.{ts,tsx}"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token property">"coverageDirectory"</span><span class="token operator">:</span> <span class="token string">"./coverage/"</span><span class="token punctuation">,</span>
+    <span class="token property">"setupFilesAfterEnv"</span><span class="token operator">:</span> <span class="token string">"&lt;rootDir>/test/setup.ts"</span><span class="token punctuation">,</span> <span class="token comment">// jest环境初始化</span>
+    <span class="token property">"collectCoverageFrom"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"src/**/*.{ts,tsx}"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 覆盖率收集</span>
+    <span class="token property">"coverageDirectory"</span><span class="token operator">:</span> <span class="token string">"./coverage/"</span><span class="token punctuation">,</span> <span class="token comment">// 覆盖率输出目录</span>
     <span class="token property">"collectCoverage"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token property">"transform"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token property">"^.+\\.(ts|tsx)$"</span><span class="token operator">:</span> <span class="token string">"ts-jest"</span>
+      <span class="token property">"^.+\\.(ts|tsx)$"</span><span class="token operator">:</span> <span class="token string">"ts-jest"</span> <span class="token comment">// 如果是babel, 则为babel-jest</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token property">"testMatch"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"**/__test__/*.(ts|tsx)"</span><span class="token punctuation">]</span>
+    <span class="token property">"testMatch"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"**/__test__/*.(ts|tsx)"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"snapshotSerializers"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token string">"enzyme-to-json/serializer"</span> <span class="token comment">// 用来适配 toMatchSnapshot</span>
+    <span class="token punctuation">]</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre></div>
@@ -826,7 +830,7 @@ pathArr.forEach((each, index) =&gt; {
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// /test/utils.ts</span>
 <span class="token keyword">module</span><span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token string">'test-file-stub'</span>
 </code></pre></div>
-<h3 id="setuptestframeworkscriptfile" class="heading"><a href="#setuptestframeworkscriptfile" aria-hidden="true"><span class="icon icon-link"></span></a>setupTestFrameworkScriptFile</h3>
+<h3 id="setupfilesafterenv" class="heading"><a href="#setupfilesafterenv" aria-hidden="true"><span class="icon icon-link"></span></a>setupFilesAfterEnv</h3>
 <blockquote>
 <p>The path to a module that runs some code to configure or set up the testing framework before each test. </p>
 </blockquote>
