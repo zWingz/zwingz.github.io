@@ -1,4 +1,146 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 28 Apr 2019 09:27:20 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 28 Apr 2019 09:27:20 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[在小程序中使用base64展示图片]]></title><description><![CDATA[<h3 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h3>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 29 Apr 2019 03:57:49 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 29 Apr 2019 03:57:49 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[js中关于base64的一些事]]></title><description><![CDATA[<h3 id="介绍" class="heading"><a href="#%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span class="icon icon-link"></span></a>介绍</h3>
+<p><code class="language-text">base64</code>其实是一种编码转换方式, 将<code class="language-text">ASCII</code>字符转换成普通文本, 是网络上最常见的用于传输8Bit字节代码的编码方式之一。</p>
+<p><code class="language-text">base64</code>由字母<code class="language-text">a-z</code>、<code class="language-text">A-Z</code>、<code class="language-text">0-9</code>以及<code class="language-text">+</code>和<code class="language-text">/</code>, 再加上作为垫字的<code class="language-text">=</code>, 一共65字符组成一个基本字符集,  其他所有字符都可以根据一定规则, 转换成该字符集中的字符。</p>
+<blockquote>
+<p><code class="language-text">abcde</code> => <code class="language-text">YWJjZGU=</code></p>
+<p><code class="language-text">ABCDE</code> => <code class="language-text">QUJDREU=</code></p>
+</blockquote>
+<p>在日常开发中, 最常见的便是将<code class="language-text">blob</code>和<code class="language-text">base64</code>之间相互转换.</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// blob to base64</span>
+<span class="token keyword">function</span> <span class="token function">blobTobase64</span><span class="token punctuation">(</span><span class="token parameter">blob</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> fileReader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileReader</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">let</span> base64 <span class="token operator">=</span> <span class="token string">''</span>
+  fileReader<span class="token punctuation">.</span><span class="token function-variable function">onload</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    base64 <span class="token operator">=</span> fileReader<span class="token punctuation">.</span>result <span class="token comment">// 读取base64</span>
+  <span class="token punctuation">}</span>
+  fileReader<span class="token punctuation">.</span><span class="token function">readAsDataURL</span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span> <span class="token comment">// 读取blob</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// base64 to blob</span>
+<span class="token keyword">function</span> <span class="token function">dataURItoBlob</span><span class="token punctuation">(</span><span class="token parameter">dataURI</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> mimeString <span class="token operator">=</span> dataURI
+    <span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">','</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    <span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">':'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+    <span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">';'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token comment">// mime类型</span>
+  <span class="token keyword">var</span> byteString <span class="token operator">=</span> <span class="token function">atob</span><span class="token punctuation">(</span>dataURI<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">','</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">//base64 解码</span>
+  <span class="token keyword">var</span> arrayBuffer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayBuffer</span><span class="token punctuation">(</span>byteString<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token comment">//创建ArrayBuffer</span>
+  <span class="token keyword">var</span> intArray <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Uint8Array</span><span class="token punctuation">(</span>arrayBuffer<span class="token punctuation">)</span> <span class="token comment">//创建视图</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> byteString<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    intArray<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> byteString<span class="token punctuation">.</span><span class="token function">charCodeAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Blob</span><span class="token punctuation">(</span><span class="token punctuation">[</span>intArray<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> type<span class="token punctuation">:</span> mimeString <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// 转成 blob</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<h3 id="编码和解码" class="heading"><a href="#%E7%BC%96%E7%A0%81%E5%92%8C%E8%A7%A3%E7%A0%81" aria-hidden="true"><span class="icon icon-link"></span></a>编码和解码</h3>
+<h4 id="浏览器" class="heading"><a href="#%E6%B5%8F%E8%A7%88%E5%99%A8" aria-hidden="true"><span class="icon icon-link"></span></a>浏览器</h4>
+<p>最新的浏览器自带了两个方法用于<code class="language-text">base64</code>的编码和解码</p>
+<p>分别是<code class="language-text">atob</code>和<code class="language-text">btoa</code></p>
+<ul>
+<li>atob：将<code class="language-text">base64</code>转成<code class="language-text">8bit</code>字节码</li>
+<li>btoa：将<code class="language-text">8bit</code>字节码转成<code class="language-text">base64</code></li>
+</ul>
+<p>对于旧版浏览器, 可以使用<a href="https://github.com/dankogai/js-base64">js-base64</a></p>
+<p>####Node</p>
+<p>目前<code class="language-text">node</code>中还不支持使用<code class="language-text">atob</code>和<code class="language-text">btoa</code>，但是可以通过<code class="language-text">Buffer</code>来实现, <a href="http://nodejs.cn/api/buffer.html#buffer_class_method_buffer_from_array">参考文档</a></p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> btoa <span class="token operator">===</span> <span class="token string">'undefined'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  global<span class="token punctuation">.</span><span class="token function-variable function">btoa</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> Buffer<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token string">'base64'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> atob <span class="token operator">===</span> <span class="token string">'undefined'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  global<span class="token punctuation">.</span><span class="token function-variable function">atob</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">b64Encoded</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> Buffer<span class="token punctuation">.</span><span class="token function">frome</span><span class="token punctuation">(</span>b64Encoded<span class="token punctuation">,</span> <span class="token string">'base64'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<h3 id="转换方式" class="heading"><a href="#%E8%BD%AC%E6%8D%A2%E6%96%B9%E5%BC%8F" aria-hidden="true"><span class="icon icon-link"></span></a>转换方式</h3>
+<blockquote>
+<p>base64编码方式对于中文是不适用的, 因为中文对应多个字节, 因此可以先使用<code class="language-text">encodeURIComponent</code>编码后再进行<code class="language-text">base64</code>编码.</p>
+</blockquote>
+<p><a href="https://github.com/zWingz/base64">源码</a></p>
+<h4 id="编码" class="heading"><a href="#%E7%BC%96%E7%A0%81" aria-hidden="true"><span class="icon icon-link"></span></a>编码</h4>
+<ol>
+<li>
+<p>每三个字节作为一组，每个字节8bit, 一共是24个二进制位。</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token string">'ABCD'</span><span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token string">'ABC'</span><span class="token punctuation">,</span> <span class="token string">'D'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token string">'01000001010000100100001'</span><span class="token punctuation">,</span> <span class="token string">'01000100'</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token comment">// 每三字节做一组 // 转成8bit</span>
+</code></pre></div>
+</li>
+<li>
+<p>将每组的24个二进制位再细分为四组，每组有6个二进制位, 此时为二维数组。</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token punctuation">;</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'010000'</span><span class="token punctuation">,</span> <span class="token string">'010100'</span><span class="token punctuation">,</span> <span class="token string">'001001'</span><span class="token punctuation">,</span> <span class="token string">'000011'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'010001'</span><span class="token punctuation">,</span> <span class="token string">'00'</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+</code></pre></div>
+<ul>
+<li>二个字节的情况：将这二个字节的一共16个二进制位, 按照上面的规则, 转成三组, 那么最后一项只有4位，则在后面加两个0, 补够6位,  并在第三步对应位置加上垫字符<code class="language-text">=</code>。</li>
+<li>一个字节的情况：将这一个字节的8个二进制位，按照上面的规则转成二组, 那么最后一项只有2位, 则在后面加上四个0, 并在第三步对应位置加上两个垫字符<code class="language-text">=</code>。</li>
+<li>简单说就是, 缺多少位就在后面补多少个0, 直到满6位。<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token punctuation">;</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'010000'</span><span class="token punctuation">,</span> <span class="token string">'010100'</span><span class="token punctuation">,</span> <span class="token string">'001001'</span><span class="token punctuation">,</span> <span class="token string">'000011'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'010001'</span><span class="token punctuation">,</span> <span class="token string">'000000'</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>在每组前面加两个00，扩展成32个二进制位，即四个字节。</p>
+<blockquote>
+<p>规则是这么说, 但这一步我觉得可以忽略, 因为<code class="language-text">00101010</code>和<code class="language-text">101010</code> 是一样的</p>
+</blockquote>
+</li>
+<li>
+<p>将每组对应的二进制转成十进制,  在<code class="language-text">base64char</code>字符集中找到对应的字符。</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token punctuation">;</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'Q'</span><span class="token punctuation">,</span> <span class="token string">'U'</span><span class="token punctuation">,</span> <span class="token string">'J'</span><span class="token punctuation">,</span> <span class="token string">'D'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'R'</span><span class="token punctuation">,</span> <span class="token string">'A'</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+</code></pre></div>
+<ul>
+<li>
+<p>每一组都最终都应该转成四个字符</p>
+</li>
+<li>
+<p>如果不足四个字符, 说明明文中并不足3字节, 因此需要补上垫字符<code class="language-text">=</code>, 补够四个字符</p>
+</li>
+</ul>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token punctuation">;</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'Q'</span><span class="token punctuation">,</span> <span class="token string">'U'</span><span class="token punctuation">,</span> <span class="token string">'J'</span><span class="token punctuation">,</span> <span class="token string">'D'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'R'</span><span class="token punctuation">,</span> <span class="token string">'A'</span><span class="token punctuation">,</span> <span class="token string">'='</span><span class="token punctuation">,</span> <span class="token string">'='</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+</code></pre></div>
+</li>
+<li>
+<p>将最后的结果连接成字符串, 则为最终编码结果。</p>
+<blockquote>
+<p>'ABCD' > 'QUJDRA=='</p>
+</blockquote>
+</li>
+</ol>
+<p>根据编码方式来看, 每3个字节将会被编码成四个字符, 如果不足3个字节, 则补上垫字符<code class="language-text">=</code>, 缺几个就补几个。</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token function">btoa</span><span class="token punctuation">(</span><span class="token string">'A'</span><span class="token punctuation">)</span> <span class="token comment">// "QQ=="</span>
+<span class="token function">btoa</span><span class="token punctuation">(</span><span class="token string">'AB'</span><span class="token punctuation">)</span> <span class="token comment">// "QUI="</span>
+<span class="token function">btoa</span><span class="token punctuation">(</span><span class="token string">'ABC'</span><span class="token punctuation">)</span> <span class="token comment">// "QUJD"</span>
+<span class="token function">btoa</span><span class="token punctuation">(</span><span class="token string">'ABCD'</span><span class="token punctuation">)</span> <span class="token comment">// "QUJDRA=="</span>
+</code></pre></div>
+<h4 id="解码" class="heading"><a href="#%E8%A7%A3%E7%A0%81" aria-hidden="true"><span class="icon icon-link"></span></a>解码</h4>
+<p>解码步骤就是跟编码步骤反过来</p>
+<ol>
+<li>每四个字节分为一组。</li>
+<li>将每组的中除了垫字符<code class="language-text">=</code>外的字符, 在<code class="language-text">base64char</code>字符集中找到所在下标。</li>
+<li>将十进制下标转成二进制, 如果不够6位（一定不会超过6位）, 则在前面补<code class="language-text">0</code>。<ol>
+<li>如果遇到垫字符<code class="language-text">=</code>, 说明其明文不足3字节, 则根据垫字符<code class="language-text">=</code>的数量, 在该组最后一项中去掉对应个数的<code class="language-text">0</code></li>
+<li>一个垫字符, 则去掉两个<code class="language-text">0</code></li>
+<li>两个垫字符, 则去掉四个<code class="language-text">0</code></li>
+</ol></li>
+<li>将每组中的二进制字符串连接，此时字符串长度一定是8的倍数，然后每8位分割成一个字节。</li>
+<li>通过<code class="language-text">String.fromCharCode</code>将二进制转成字符, 然后拼接</li>
+<li>将各个字符连接, 为最终解码结果。</li>
+</ol>
+<h3 id="题外-进制转换" class="heading"><a href="#%E9%A2%98%E5%A4%96-%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2" aria-hidden="true"><span class="icon icon-link"></span></a>题外-进制转换</h3>
+<ul>
+<li>parseInt(str, radix): 根据radix可以将字符串转成十进制</li>
+<li>initValue.toString(radix): 将initValue转成其他进制</li>
+</ul>
+<blockquote>
+<p>n进制转十进制</p>
+<p>parseInt('1000', 2) > 8</p>
+<p>parseInt('1000', 16) > 4096</p>
+<p>进制间转换</p>
+<p>(10).toString(2) > "1010" // 10进制转2进制</p>
+<p>(0xff).toString(2) > "11111111" // 16进制转2进制</p>
+</blockquote>
+<h3 id="参考" class="heading"><a href="#%E5%8F%82%E8%80%83" aria-hidden="true"><span class="icon icon-link"></span></a>参考</h3>
+<p><a href="https://www.zhangxinxu.com/wordpress/2018/08/js-base64-atob-btoa-encode-decode/">原来浏览器原生支持JS Base64编码解码</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2008/06/base64.html">Base64笔记</a></p>
+]]></description><link>http://zwingz.github.io/posts/438141674.html</link><guid isPermaLink="false">438141674</guid><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Mon, 29 Apr 2019 03:57:26 GMT</pubDate></item><item><title><![CDATA[在小程序中使用base64展示图片]]></title><description><![CDATA[<h3 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h3>
 <ul>
 <li>项目使用<code class="language-text">taro</code>进行开发</li>
 <li>需求是通过<code class="language-text">api</code>请求, 获取图片的<code class="language-text">base64</code>字符串, 并且将图片展示出来</li>
