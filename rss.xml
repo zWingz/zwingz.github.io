@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 29 Apr 2019 03:58:47 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 29 Apr 2019 03:58:47 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[js中关于base64的一些事]]></title><description><![CDATA[<h3 id="介绍" class="heading"><a href="#%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span class="icon icon-link"></span></a>介绍</h3>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 29 Apr 2019 04:07:50 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 29 Apr 2019 04:07:50 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[js中关于base64的一些事]]></title><description><![CDATA[<h2 id="js中关于base64的一些事" class="heading"><a href="#js%E4%B8%AD%E5%85%B3%E4%BA%8Ebase64%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B" aria-hidden="true"><span class="icon icon-link"></span></a>js中关于base64的一些事</h2>
+<h3 id="介绍" class="heading"><a href="#%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span class="icon icon-link"></span></a>介绍</h3>
 <p><code class="language-text">base64</code>其实是一种编码转换方式, 将<code class="language-text">ASCII</code>字符转换成普通文本, 是网络上最常见的用于传输8Bit字节代码的编码方式之一。</p>
 <p><code class="language-text">base64</code>由字母<code class="language-text">a-z</code>、<code class="language-text">A-Z</code>、<code class="language-text">0-9</code>以及<code class="language-text">+</code>和<code class="language-text">/</code>, 再加上作为垫字的<code class="language-text">=</code>, 一共65字符组成一个基本字符集,  其他所有字符都可以根据一定规则, 转换成该字符集中的字符。</p>
 <blockquote>
@@ -129,14 +130,20 @@
 <li>parseInt(str, radix): 根据radix可以将字符串转成十进制</li>
 <li>initValue.toString(radix): 将initValue转成其他进制</li>
 </ul>
-<blockquote>
-<p>n进制转十进制</p>
-<p>parseInt('1000', 2) > 8</p>
-<p>parseInt('1000', 16) > 4096</p>
-<p>进制间转换</p>
-<p>(10).toString(2) > "1010" // 10进制转2进制</p>
-<p>(0xff).toString(2) > "11111111" // 16进制转2进制</p>
-</blockquote>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// n进制转十进制</span>
+<span class="token function">parseInt</span><span class="token punctuation">(</span><span class="token string">'1000'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">// 8</span>
+<span class="token function">parseInt</span><span class="token punctuation">(</span><span class="token string">'1000'</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">(</span>
+  <span class="token comment">// 4096</span>
+
+  <span class="token comment">// 进制间转换</span>
+  <span class="token number">10</span>
+<span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">(</span>
+    <span class="token comment">// "1010", 10进制转2进制</span>
+    <span class="token number">0xff</span>
+  <span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">// "11111111", 16进制转2进制</span>
+</code></pre></div>
 <h3 id="参考" class="heading"><a href="#%E5%8F%82%E8%80%83" aria-hidden="true"><span class="icon icon-link"></span></a>参考</h3>
 <p><a href="https://www.zhangxinxu.com/wordpress/2018/08/js-base64-atob-btoa-encode-decode/">原来浏览器原生支持JS Base64编码解码</a></p>
 <p><a href="http://www.ruanyifeng.com/blog/2008/06/base64.html">Base64笔记</a></p>
