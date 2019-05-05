@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 29 Apr 2019 06:23:15 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 29 Apr 2019 06:23:15 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[js中关于base64的一些事]]></title><description><![CDATA[<h3 id="介绍" class="heading"><a href="#%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span class="icon icon-link"></span></a>介绍</h3>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 05 May 2019 10:54:53 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 05 May 2019 10:54:53 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[js中关于base64的一些事]]></title><description><![CDATA[<h3 id="介绍" class="heading"><a href="#%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span class="icon icon-link"></span></a>介绍</h3>
 <p><code class="language-text">base64</code>其实是一种编码转换方式, 将<code class="language-text">ASCII</code>字符转换成普通文本, 是网络上最常见的用于传输8Bit字节代码的编码方式之一。</p>
 <p><code class="language-text">base64</code>由字母<code class="language-text">a-z</code>、<code class="language-text">A-Z</code>、<code class="language-text">0-9</code>以及<code class="language-text">+</code>和<code class="language-text">/</code>, 再加上作为垫字的<code class="language-text">=</code>, 一共65字符组成一个基本字符集,  其他所有字符都可以根据一定规则, 转换成该字符集中的字符。</p>
 <blockquote>
@@ -146,7 +146,7 @@
 <h3 id="参考" class="heading"><a href="#%E5%8F%82%E8%80%83" aria-hidden="true"><span class="icon icon-link"></span></a>参考</h3>
 <p><a href="https://www.zhangxinxu.com/wordpress/2018/08/js-base64-atob-btoa-encode-decode/">原来浏览器原生支持JS Base64编码解码</a></p>
 <p><a href="http://www.ruanyifeng.com/blog/2008/06/base64.html">Base64笔记</a></p>
-]]></description><link>http://zwingz.github.io/posts/438141674.html</link><guid isPermaLink="false">438141674</guid><category><![CDATA[Js]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Mon, 29 Apr 2019 03:57:26 GMT</pubDate></item><item><title><![CDATA[在小程序中使用base64展示图片]]></title><description><![CDATA[<h3 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h3>
+]]></description><link>undefined/posts/438141674.html</link><guid isPermaLink="false">438141674</guid><category><![CDATA[Js]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Mon, 29 Apr 2019 03:57:26 GMT</pubDate></item><item><title><![CDATA[在小程序中使用base64展示图片]]></title><description><![CDATA[<h3 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h3>
 <ul>
 <li>项目使用<code class="language-text">taro</code>进行开发</li>
 <li>需求是通过<code class="language-text">api</code>请求, 获取图片的<code class="language-text">base64</code>字符串, 并且将图片展示出来</li>
@@ -226,7 +226,7 @@ Object<span class="token punctuation">.</span><span class="token function">assig
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>image</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{{m1.join(arr)}}<span class="token punctuation">"</span></span> <span class="token attr-name">mode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>aspectFill<span class="token punctuation">"</span></span> <span class="token attr-name">lazy-load</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>image</span><span class="token punctuation">></span></span>
 </code></pre></div>
 <p>这样便能使用<code class="language-text">base64</code>来展示图片。</p>
-]]></description><link>http://zwingz.github.io/posts/434058564.html</link><guid isPermaLink="false">434058564</guid><category><![CDATA[小程序]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Wed, 17 Apr 2019 02:04:08 GMT</pubDate></item><item><title><![CDATA[isPlainObject 判断一个纯对象]]></title><description><![CDATA[<h2 id="判断是否为对象" class="heading"><a href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BA%E5%AF%B9%E8%B1%A1" aria-hidden="true"><span class="icon icon-link"></span></a>判断是否为对象</h2>
+]]></description><link>undefined/posts/434058564.html</link><guid isPermaLink="false">434058564</guid><category><![CDATA[小程序]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Wed, 17 Apr 2019 02:04:08 GMT</pubDate></item><item><title><![CDATA[isPlainObject 判断一个纯对象]]></title><description><![CDATA[<h2 id="判断是否为对象" class="heading"><a href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BA%E5%AF%B9%E8%B1%A1" aria-hidden="true"><span class="icon icon-link"></span></a>判断是否为对象</h2>
 <p>其实<code class="language-text">js</code>中一切都是对象, 但是这里讨论的对象只是一般对象, 非数组/字符串/方法/等等</p>
 <p>形如<code class="language-text">{}</code>, <code class="language-text">Object.create()</code>, <code class="language-text">new AnyClass()</code> 等等</p>
 <h3 id="typeof" class="heading"><a href="#typeof" aria-hidden="true"><span class="icon icon-link"></span></a>typeof</h3>
@@ -343,7 +343,7 @@ Object<span class="token punctuation">.</span><span class="token function">assig
   <span class="token keyword">return</span> Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token operator">===</span> proto
 <span class="token punctuation">}</span>
 </code></pre></div>
-]]></description><link>http://zwingz.github.io/posts/429400472.html</link><guid isPermaLink="false">429400472</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 04 Apr 2019 17:35:40 GMT</pubDate></item><item><title><![CDATA[介绍三个React组件]]></title><description><![CDATA[<p>简单介绍三个React组件吧。</p>
+]]></description><link>undefined/posts/429400472.html</link><guid isPermaLink="false">429400472</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 04 Apr 2019 17:35:40 GMT</pubDate></item><item><title><![CDATA[介绍三个React组件]]></title><description><![CDATA[<p>简单介绍三个React组件吧。</p>
 <ul>
 <li>Image</li>
 <li>Table</li>
@@ -481,7 +481,7 @@ pathArr.forEach((each, index) =&gt; {
 <p>不过对于<code class="language-text">DatePicker</code>这类组件，我想我还是直接用<code class="language-text">antd</code>的吧</p>
 <hr>
 <p>希望这几个组件能帮到你.</p>
-]]></description><link>http://zwingz.github.io/posts/427994027.html</link><guid isPermaLink="false">427994027</guid><category><![CDATA[Component]]></category><category><![CDATA[React]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 02 Apr 2019 02:30:29 GMT</pubDate></item><item><title><![CDATA[自动部署基于issues的静态博客]]></title><description><![CDATA[<p>通过<code class="language-text">issues</code>来写博客文章，并自动部署到<code class="language-text">gh-page</code>。</p>
+]]></description><link>undefined/posts/427994027.html</link><guid isPermaLink="false">427994027</guid><category><![CDATA[Component]]></category><category><![CDATA[React]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 02 Apr 2019 02:30:29 GMT</pubDate></item><item><title><![CDATA[自动部署基于issues的静态博客]]></title><description><![CDATA[<p>通过<code class="language-text">issues</code>来写博客文章，并自动部署到<code class="language-text">gh-page</code>。</p>
 <h3 id="介绍" class="heading"><a href="#%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span class="icon icon-link"></span></a>介绍</h3>
 <ul>
 <li><a href="https://acyort.com/">acyort</a> 引擎核心，用来管理插件、工作流以及<code class="language-text">html</code>输出等。</li>
@@ -636,7 +636,7 @@ pathArr.forEach((each, index) =&gt; {
 <li><a href="https://github.com/zWingz/acyort-donob-plugins">acyort-donob-plugins</a></li>
 <li><a href="https://github.com/zWingz/my-blog-config">blog-config</a></li>
 </ul>
-]]></description><link>http://zwingz.github.io/posts/417715171.html</link><guid isPermaLink="false">417715171</guid><category><![CDATA[工具介绍]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Wed, 06 Mar 2019 09:55:14 GMT</pubDate></item><item><title><![CDATA[lerna与lerna-changelog使用介绍]]></title><description><![CDATA[<p><a href="https://github.com/lerna/lerna">lerna</a>用于管理多<code class="language-text">package</code>，且各<code class="language-text">package</code>可能会互相引用的项目。</p>
+]]></description><link>undefined/posts/417715171.html</link><guid isPermaLink="false">417715171</guid><category><![CDATA[工具介绍]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Wed, 06 Mar 2019 09:55:14 GMT</pubDate></item><item><title><![CDATA[lerna与lerna-changelog使用介绍]]></title><description><![CDATA[<p><a href="https://github.com/lerna/lerna">lerna</a>用于管理多<code class="language-text">package</code>，且各<code class="language-text">package</code>可能会互相引用的项目。</p>
 <p><code class="language-text">lerna</code>通过两种方式管理子项目的版本号：</p>
 <ul>
 <li>Fixed/Locked mode (default)：每次执行<code class="language-text">lerna publish</code>都会将所涉及到的包升级到最新一个版本，开发者只需要确定发布下一个<code class="language-text">version</code>。</li>
@@ -740,7 +740,7 @@ pathArr.forEach((each, index) =&gt; {
 <p>尚未实践过，具体还需参考<a href="https://github.com/lerna/lerna/blob/514bc57a53/commands/version/README.md#--conventional-commits">README</a></p>
 <h2 id="结语" class="heading"><a href="#%E7%BB%93%E8%AF%AD" aria-hidden="true"><span class="icon icon-link"></span></a>结语</h2>
 <p><code class="language-text">lerna</code>的使用已介绍完毕，上述内容可满足日常开发需求，更多详情还需参考官方文档。</p>
-]]></description><link>http://zwingz.github.io/posts/416348095.html</link><guid isPermaLink="false">416348095</guid><category><![CDATA[Front End]]></category><category><![CDATA[工具介绍]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sat, 02 Mar 2019 02:48:23 GMT</pubDate></item><item><title><![CDATA[2018，不普通的一年]]></title><description><![CDATA[<p>2018对我个人来说是很重要的一年</p>
+]]></description><link>undefined/posts/416348095.html</link><guid isPermaLink="false">416348095</guid><category><![CDATA[Front End]]></category><category><![CDATA[工具介绍]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sat, 02 Mar 2019 02:48:23 GMT</pubDate></item><item><title><![CDATA[2018，不普通的一年]]></title><description><![CDATA[<p>2018对我个人来说是很重要的一年</p>
 <p>在4月份, 我辞去了一份965的工作</p>
 <p>跟着前同事去了一家9:30 - 8:00 大小周的创业公司</p>
 <h2 id="过去，我学到了什么" class="heading"><a href="#%E8%BF%87%E5%8E%BB%EF%BC%8C%E6%88%91%E5%AD%A6%E5%88%B0%E4%BA%86%E4%BB%80%E4%B9%88" aria-hidden="true"><span class="icon icon-link"></span></a>过去，我学到了什么</h2>
@@ -932,7 +932,7 @@ pathArr.forEach((each, index) =&gt; {
 </li>
 </ul>
 <p>希望2019也是不普通的一年</p>
-]]></description><link>http://zwingz.github.io/posts/403552116.html</link><guid isPermaLink="false">403552116</guid><category><![CDATA[生活]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sun, 27 Jan 2019 13:40:58 GMT</pubDate></item><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[<h2 id="前言" class="heading"><a href="#%E5%89%8D%E8%A8%80" aria-hidden="true"><span class="icon icon-link"></span></a>前言</h2>
+]]></description><link>undefined/posts/403552116.html</link><guid isPermaLink="false">403552116</guid><category><![CDATA[生活]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sun, 27 Jan 2019 13:40:58 GMT</pubDate></item><item><title><![CDATA[使用jest+enzyme测试react组件]]></title><description><![CDATA[<h2 id="前言" class="heading"><a href="#%E5%89%8D%E8%A8%80" aria-hidden="true"><span class="icon icon-link"></span></a>前言</h2>
 <p>最近第一次给一个项目写一个完整的测试流程, 也算是我第一次写完整的测试.</p>
 <p>于是记一下整个测试流程</p>
 <p><a href="https://github.com/zWingz/react-image">项目地址</a></p>
@@ -1100,7 +1100,7 @@ pathArr.forEach((each, index) =&gt; {
 <h2 id="完结" class="heading"><a href="#%E5%AE%8C%E7%BB%93" aria-hidden="true"><span class="icon icon-link"></span></a>完结</h2>
 <p>至此， 整套<code class="language-text">jest</code>+<code class="language-text">enzyme</code>测试流程已经跑完.</p>
 <p>目前看来没有用高更深的测试功能, 比如说<code class="language-text">jsdom</code>, <code class="language-text">enzyme.render</code>等</p>
-]]></description><link>http://zwingz.github.io/posts/383783892.html</link><guid isPermaLink="false">383783892</guid><category><![CDATA[Front End]]></category><category><![CDATA[React]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 23 Nov 2018 11:07:18 GMT</pubDate></item><item><title><![CDATA[多package下babel编译问题]]></title><description><![CDATA[<h2 id="项目背景" class="heading"><a href="#%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>项目背景</h2>
+]]></description><link>undefined/posts/383783892.html</link><guid isPermaLink="false">383783892</guid><category><![CDATA[Front End]]></category><category><![CDATA[React]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 23 Nov 2018 11:07:18 GMT</pubDate></item><item><title><![CDATA[多package下babel编译问题]]></title><description><![CDATA[<h2 id="项目背景" class="heading"><a href="#%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>项目背景</h2>
 <p>之前一直使用<code class="language-text">typescript</code> + <code class="language-text">babel</code> 编译项目</p>
 <p><code class="language-text">typescript</code>作用只是单纯用来做强类型检查, <code class="language-text">babel</code>则真正用来编译代码.</p>
 <div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
@@ -1127,7 +1127,7 @@ pathArr.forEach((each, index) =&gt; {
 <p><img src="https://user-images.githubusercontent.com/13031838/48481024-15270180-e847-11e8-909b-3af7c5a7b209.png" alt="image"></p>
 <p>当然, 使用<code class="language-text">babel.config.js</code>还可以灵活的配置各个<code class="language-text">package</code>中<code class="language-text">babel</code>编译规则.</p>
 <p>具体的还是请看官方文档</p>
-]]></description><link>http://zwingz.github.io/posts/380665113.html</link><guid isPermaLink="false">380665113</guid><category><![CDATA[Babel]]></category><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Wed, 14 Nov 2018 11:56:24 GMT</pubDate></item><item><title><![CDATA[使用Fabric+docker部署前端项目]]></title><description><![CDATA[<h2 id="部署过程" class="heading"><a href="#%E9%83%A8%E7%BD%B2%E8%BF%87%E7%A8%8B" aria-hidden="true"><span class="icon icon-link"></span></a>部署过程</h2>
+]]></description><link>undefined/posts/380665113.html</link><guid isPermaLink="false">380665113</guid><category><![CDATA[Babel]]></category><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Wed, 14 Nov 2018 11:56:24 GMT</pubDate></item><item><title><![CDATA[使用Fabric+docker部署前端项目]]></title><description><![CDATA[<h2 id="部署过程" class="heading"><a href="#%E9%83%A8%E7%BD%B2%E8%BF%87%E7%A8%8B" aria-hidden="true"><span class="icon icon-link"></span></a>部署过程</h2>
 <ul>
 <li>合并<code class="language-text">develop</code>到<code class="language-text">master</code></li>
 <li><code class="language-text">push</code>代码</li>
@@ -1220,7 +1220,7 @@ c <span class="token operator">=</span> Connection<span class="token punctuation
 <p>上述过程其实完全可以由各种<code class="language-text">CI</code>完成</p>
 <p>但是对于私有<code class="language-text">gitlab</code>, 同时又没有部署<code class="language-text">gitlab-runner</code>或者不想接入第三方的话</p>
 <p><code class="language-text">fabric</code>是个不错的选择</p>
-]]></description><link>http://zwingz.github.io/posts/346031510.html</link><guid isPermaLink="false">346031510</guid><category><![CDATA[Depoly]]></category><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 31 Jul 2018 04:32:38 GMT</pubDate></item><item><title><![CDATA[记一下从Vue转向React的感想]]></title><description><![CDATA[<h1 id="关于react-想说几点" class="heading"><a href="#%E5%85%B3%E4%BA%8Ereact-%E6%83%B3%E8%AF%B4%E5%87%A0%E7%82%B9" aria-hidden="true"><span class="icon icon-link"></span></a>关于React, 想说几点</h1>
+]]></description><link>undefined/posts/346031510.html</link><guid isPermaLink="false">346031510</guid><category><![CDATA[Depoly]]></category><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 31 Jul 2018 04:32:38 GMT</pubDate></item><item><title><![CDATA[记一下从Vue转向React的感想]]></title><description><![CDATA[<h1 id="关于react-想说几点" class="heading"><a href="#%E5%85%B3%E4%BA%8Ereact-%E6%83%B3%E8%AF%B4%E5%87%A0%E7%82%B9" aria-hidden="true"><span class="icon icon-link"></span></a>关于React, 想说几点</h1>
 <p>没有干货, 只有感想.</p>
 <p>没有源码分析, 只有需求实现.</p>
 <h2 id="react跟vue对比" class="heading"><a href="#react%E8%B7%9Fvue%E5%AF%B9%E6%AF%94" aria-hidden="true"><span class="icon icon-link"></span></a>React跟Vue对比</h2>
@@ -1294,7 +1294,7 @@ browserHistory<span class="token punctuation">.</span><span class="token functio
 <li>部分组件的实现</li>
 </ul>
 <p>...后续再补</p>
-]]></description><link>http://zwingz.github.io/posts/339905815.html</link><guid isPermaLink="false">339905815</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><category><![CDATA[React]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 10 Jul 2018 15:56:23 GMT</pubDate></item><item><title><![CDATA[Promise/A+规范以及实现]]></title><description><![CDATA[<h1 id="promise-实现原理" class="heading"><a href="#promise-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86" aria-hidden="true"><span class="icon icon-link"></span></a>Promise 实现原理</h1>
+]]></description><link>undefined/posts/339905815.html</link><guid isPermaLink="false">339905815</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><category><![CDATA[React]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 10 Jul 2018 15:56:23 GMT</pubDate></item><item><title><![CDATA[Promise/A+规范以及实现]]></title><description><![CDATA[<h1 id="promise-实现原理" class="heading"><a href="#promise-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86" aria-hidden="true"><span class="icon icon-link"></span></a>Promise 实现原理</h1>
 <p><a href="https://github.com/zWingz/Promise">源码</a></p>
 <h2 id="promise基本用法" class="heading"><a href="#promise%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95" aria-hidden="true"><span class="icon icon-link"></span></a>Promise基本用法</h2>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1741,7 +1741,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h2 id="参考" class="heading"><a href="#%E5%8F%82%E8%80%83" aria-hidden="true"><span class="icon icon-link"></span></a>参考</h2>
 <p><a href="http://www.ituring.com.cn/article/66566">【翻译】Promises/A+规范</a></p>
 <p><a href="http://es6.ruanyifeng.com/#docs/promise#Promise-prototype-finally">ECMAScript 6入门</a></p>
-]]></description><link>http://zwingz.github.io/posts/316337025.html</link><guid isPermaLink="false">316337025</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 20 Apr 2018 16:40:56 GMT</pubDate></item><item><title><![CDATA[初次制作戚风蛋糕（6寸）]]></title><description><![CDATA[<h2 id="材料" class="heading"><a href="#%E6%9D%90%E6%96%99" aria-hidden="true"><span class="icon icon-link"></span></a>材料</h2>
+]]></description><link>undefined/posts/316337025.html</link><guid isPermaLink="false">316337025</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 20 Apr 2018 16:40:56 GMT</pubDate></item><item><title><![CDATA[初次制作戚风蛋糕（6寸）]]></title><description><![CDATA[<h2 id="材料" class="heading"><a href="#%E6%9D%90%E6%96%99" aria-hidden="true"><span class="icon icon-link"></span></a>材料</h2>
 <ul>
 <li>低筋面粉 45g</li>
 <li>鸡蛋 3个</li>
@@ -1788,7 +1788,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>周末做了下蛋包饭，差点就做成了蛋炒饭。</p>
 <p>原因还是材料太多了，炒起来鸡蛋都保不住。</p>
 <p>不过吃起来还是挺好吃，可能下次要注意下材料分量，鸡蛋能包起来就更好吃了。</p>
-]]></description><link>http://zwingz.github.io/posts/310330786.html</link><guid isPermaLink="false">310330786</guid><category><![CDATA[杂事]]></category><category><![CDATA[烘焙]]></category><category><![CDATA[生活]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sun, 01 Apr 2018 15:13:17 GMT</pubDate></item><item><title><![CDATA[记：再一次制作蛋挞。]]></title><description><![CDATA[<h2 id="材料" class="heading"><a href="#%E6%9D%90%E6%96%99" aria-hidden="true"><span class="icon icon-link"></span></a>材料</h2>
+]]></description><link>undefined/posts/310330786.html</link><guid isPermaLink="false">310330786</guid><category><![CDATA[杂事]]></category><category><![CDATA[烘焙]]></category><category><![CDATA[生活]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sun, 01 Apr 2018 15:13:17 GMT</pubDate></item><item><title><![CDATA[记：再一次制作蛋挞。]]></title><description><![CDATA[<h2 id="材料" class="heading"><a href="#%E6%9D%90%E6%96%99" aria-hidden="true"><span class="icon icon-link"></span></a>材料</h2>
 <ul>
 <li>蛋黄3个 (蛋清分离，只要蛋黄)</li>
 <li>糖霜 10g （太少了，下次可以试着20g）</li>
@@ -1827,7 +1827,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li>不够甜，需要加多点糖。</li>
 <li>面粉太多了，有点沉底。</li>
 </ul>
-]]></description><link>http://zwingz.github.io/posts/308242286.html</link><guid isPermaLink="false">308242286</guid><category><![CDATA[杂事]]></category><category><![CDATA[烘焙]]></category><category><![CDATA[生活]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sat, 24 Mar 2018 09:13:45 GMT</pubDate></item><item><title><![CDATA[开发环境搭建]]></title><description><![CDATA[<h1 id="mac开发环境" class="heading"><a href="#mac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83" aria-hidden="true"><span class="icon icon-link"></span></a>mac开发环境</h1>
+]]></description><link>undefined/posts/308242286.html</link><guid isPermaLink="false">308242286</guid><category><![CDATA[杂事]]></category><category><![CDATA[烘焙]]></category><category><![CDATA[生活]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sat, 24 Mar 2018 09:13:45 GMT</pubDate></item><item><title><![CDATA[开发环境搭建]]></title><description><![CDATA[<h1 id="mac开发环境" class="heading"><a href="#mac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83" aria-hidden="true"><span class="icon icon-link"></span></a>mac开发环境</h1>
 <h2 id="安装-brew" class="heading"><a href="#%E5%AE%89%E8%A3%85-brew" aria-hidden="true"><span class="icon icon-link"></span></a>安装 brew</h2>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">/usr/bin/ruby -e <span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">curl</span> -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="token variable">)</span></span>"</span></code></pre></div>
 <h2 id="终端环境" class="heading"><a href="#%E7%BB%88%E7%AB%AF%E7%8E%AF%E5%A2%83" aria-hidden="true"><span class="icon icon-link"></span></a>终端环境</h2>
@@ -1931,7 +1931,7 @@ IdentityFile ~/.ssh/id_rsa_gitlab</code></pre></div>
 <li>同步 Setting</li>
 <li>主要插件<code class="language-text">eslint</code> <code class="language-text">vetur</code> <code class="language-text">document this</code> <code class="language-text">javascript code snippets</code> <code class="language-text">project manager</code></li>
 </ul>
-]]></description><link>http://zwingz.github.io/posts/303526921.html</link><guid isPermaLink="false">303526921</guid><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 08 Mar 2018 15:45:19 GMT</pubDate></item><item><title><![CDATA[vue组件-固定表格]]></title><description><![CDATA[<h1 id="固定表格" class="heading"><a href="#%E5%9B%BA%E5%AE%9A%E8%A1%A8%E6%A0%BC" aria-hidden="true"><span class="icon icon-link"></span></a>固定表格</h1>
+]]></description><link>undefined/posts/303526921.html</link><guid isPermaLink="false">303526921</guid><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 08 Mar 2018 15:45:19 GMT</pubDate></item><item><title><![CDATA[vue组件-固定表格]]></title><description><![CDATA[<h1 id="固定表格" class="heading"><a href="#%E5%9B%BA%E5%AE%9A%E8%A1%A8%E6%A0%BC" aria-hidden="true"><span class="icon icon-link"></span></a>固定表格</h1>
 <p>后台管理系统,多多少少会有列表页.</p>
 <p>而列表页又正是由表格形成.</p>
 <p>但是原生的表头并不能固定头部以及两侧.</p>
@@ -2087,7 +2087,7 @@ IdentityFile ~/.ssh/id_rsa_gitlab</code></pre></div>
 <p>后续会继续优化</p>
 <h2 id="放假了-过年了" class="heading"><a href="#%E6%94%BE%E5%81%87%E4%BA%86-%E8%BF%87%E5%B9%B4%E4%BA%86" aria-hidden="true"><span class="icon icon-link"></span></a>放假了, 过年了</h2>
 <p>祝大家新年快乐 !</p>
-]]></description><link>http://zwingz.github.io/posts/295960409.html</link><guid isPermaLink="false">295960409</guid><category><![CDATA[Front End]]></category><category><![CDATA[Vue]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 09 Feb 2018 18:10:56 GMT</pubDate></item><item><title><![CDATA[使用vuexStore.registerModule构建命令式组件]]></title><description><![CDATA[<h2 id="命令式组件" class="heading"><a href="#%E5%91%BD%E4%BB%A4%E5%BC%8F%E7%BB%84%E4%BB%B6" aria-hidden="true"><span class="icon icon-link"></span></a>命令式组件</h2>
+]]></description><link>undefined/posts/295960409.html</link><guid isPermaLink="false">295960409</guid><category><![CDATA[Front End]]></category><category><![CDATA[Vue]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 09 Feb 2018 18:10:56 GMT</pubDate></item><item><title><![CDATA[使用vuexStore.registerModule构建命令式组件]]></title><description><![CDATA[<h2 id="命令式组件" class="heading"><a href="#%E5%91%BD%E4%BB%A4%E5%BC%8F%E7%BB%84%E4%BB%B6" aria-hidden="true"><span class="icon icon-link"></span></a>命令式组件</h2>
 <p>例如Notification, MessageBox, Alert, ConfirmBox 等等</p>
 <p>这类组件都是通过命令式来调用.</p>
 <p>例如<code class="language-text">elementUi</code>中<code class="language-text">this.$message</code>或者<code class="language-text">Message</code>来调用.</p>
@@ -2170,7 +2170,7 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
 <p>这种方法是入侵式的</p>
 <p>但是可以很方便的追踪组件状态, 而且实现起来也很方便.</p>
 <p>在自己开发组件的时候可以考虑</p>
-]]></description><link>http://zwingz.github.io/posts/294718179.html</link><guid isPermaLink="false">294718179</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><category><![CDATA[Vue]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 06 Feb 2018 11:04:40 GMT</pubDate></item><item><title><![CDATA[Eventloop中的microtask和macrotask]]></title><description><![CDATA[<h1 id="eventloop" class="heading"><a href="#eventloop" aria-hidden="true"><span class="icon icon-link"></span></a>EventLoop</h1>
+]]></description><link>undefined/posts/294718179.html</link><guid isPermaLink="false">294718179</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><category><![CDATA[Vue]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 06 Feb 2018 11:04:40 GMT</pubDate></item><item><title><![CDATA[Eventloop中的microtask和macrotask]]></title><description><![CDATA[<h1 id="eventloop" class="heading"><a href="#eventloop" aria-hidden="true"><span class="icon icon-link"></span></a>EventLoop</h1>
 <p>js是单线程的, 所有异步都需要经过Eventloop(事件循环).这里不介绍eventloop</p>
 <p> 主要记录下eventloop中的microtask 和macrotask</p>
 <h2 id="microtask" class="heading"><a href="#microtask" aria-hidden="true"><span class="icon icon-link"></span></a>microtask</h2>
@@ -2260,7 +2260,7 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
   microTimerFunc <span class="token operator">=</span> macroTimerFunc
 <span class="token punctuation">}</span>
 </code></pre></div>
-]]></description><link>http://zwingz.github.io/posts/294602245.html</link><guid isPermaLink="false">294602245</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 06 Feb 2018 01:35:11 GMT</pubDate></item><item><title><![CDATA[多个git 配置ssh key]]></title><description><![CDATA[<h2 id="安装" class="heading"><a href="#%E5%AE%89%E8%A3%85" aria-hidden="true"><span class="icon icon-link"></span></a>安装</h2>
+]]></description><link>undefined/posts/294602245.html</link><guid isPermaLink="false">294602245</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Tue, 06 Feb 2018 01:35:11 GMT</pubDate></item><item><title><![CDATA[多个git 配置ssh key]]></title><description><![CDATA[<h2 id="安装" class="heading"><a href="#%E5%AE%89%E8%A3%85" aria-hidden="true"><span class="icon icon-link"></span></a>安装</h2>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">brew <span class="token function">install</span> <span class="token function">git</span>
 <span class="token comment"># or</span>
 <span class="token comment"># apt-get install git</span>
@@ -2297,7 +2297,7 @@ IdentityFile ~/.ssh/id_rsa_gitlab
 <span class="token comment"># 注入密码,下次不需要再输密码(除非重启)</span>
 ssh-add -k ~/.ssh/id_rsa_gitlab</code></pre></div>
 <h3 id="简单快捷完成git配置了" class="heading"><a href="#%E7%AE%80%E5%8D%95%E5%BF%AB%E6%8D%B7%E5%AE%8C%E6%88%90git%E9%85%8D%E7%BD%AE%E4%BA%86" aria-hidden="true"><span class="icon icon-link"></span></a>简单快捷完成git配置了</h3>
-]]></description><link>http://zwingz.github.io/posts/293431355.html</link><guid isPermaLink="false">293431355</guid><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 01 Feb 2018 07:37:09 GMT</pubDate></item><item><title><![CDATA[记一次webpack优化 --- 从babelrc和UglifyPlugin下手]]></title><description><![CDATA[<h2 id="优化前" class="heading"><a href="#%E4%BC%98%E5%8C%96%E5%89%8D" aria-hidden="true"><span class="icon icon-link"></span></a>优化前</h2>
+]]></description><link>undefined/posts/293431355.html</link><guid isPermaLink="false">293431355</guid><category><![CDATA[Front End]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 01 Feb 2018 07:37:09 GMT</pubDate></item><item><title><![CDATA[记一次webpack优化 --- 从babelrc和UglifyPlugin下手]]></title><description><![CDATA[<h2 id="优化前" class="heading"><a href="#%E4%BC%98%E5%8C%96%E5%89%8D" aria-hidden="true"><span class="icon icon-link"></span></a>优化前</h2>
 <p>先来看优化前打包速度</p>
 <p>大的第三方库大概有vue+axios+vueRouter+vuex+elementUI(datepicker, message两个插件)+jquery</p>
 <p>打包总体积为2648k, 一共14个chunk(使用了异步路由)</p>
@@ -2483,7 +2483,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>但是在commit的时候添加了一层pre-commit来对修改的文件执行eslint.</p>
 <p>这样就确保上传到git的代码是经过eslint检查的</p>
 <p>这样既能确保开发不被干扰,也能确保代码能按照规范.</p>
-]]></description><link>http://zwingz.github.io/posts/293426099.html</link><guid isPermaLink="false">293426099</guid><category><![CDATA[Front End]]></category><category><![CDATA[Webpack]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 01 Feb 2018 07:13:03 GMT</pubDate></item><item><title><![CDATA[烹饪和烘焙的点滴]]></title><description><![CDATA[<p>突然想写些什么..</p>
+]]></description><link>undefined/posts/293426099.html</link><guid isPermaLink="false">293426099</guid><category><![CDATA[Front End]]></category><category><![CDATA[Webpack]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 01 Feb 2018 07:13:03 GMT</pubDate></item><item><title><![CDATA[烹饪和烘焙的点滴]]></title><description><![CDATA[<p>突然想写些什么..</p>
 <p>那就写下这周做了什么吃的..</p>
 <p>除了晚餐之外.</p>
 <p>这周做了特别的可能就是<strong>炸薯条</strong>, <strong>火烧云</strong>以及<strong>芒果千层</strong>了.</p>
@@ -2552,7 +2552,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <ul>
 <li>风琴土豆<img src="https://zwing.site/imgur/33495732.jpg"></li>
 </ul>
-]]></description><link>http://zwingz.github.io/posts/292217983.html</link><guid isPermaLink="false">292217983</guid><category><![CDATA[烘焙]]></category><category><![CDATA[生活]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sun, 28 Jan 2018 16:34:04 GMT</pubDate></item><item><title><![CDATA[vue后台系统开发实践]]></title><description><![CDATA[<h1 id="vue后台系统开发实践" class="heading"><a href="#vue%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5" aria-hidden="true"><span class="icon icon-link"></span></a>Vue后台系统开发实践</h1>
+]]></description><link>undefined/posts/292217983.html</link><guid isPermaLink="false">292217983</guid><category><![CDATA[烘焙]]></category><category><![CDATA[生活]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Sun, 28 Jan 2018 16:34:04 GMT</pubDate></item><item><title><![CDATA[vue后台系统开发实践]]></title><description><![CDATA[<h1 id="vue后台系统开发实践" class="heading"><a href="#vue%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5" aria-hidden="true"><span class="icon icon-link"></span></a>Vue后台系统开发实践</h1>
 <h2 id="依赖库" class="heading"><a href="#%E4%BE%9D%E8%B5%96%E5%BA%93" aria-hidden="true"><span class="icon icon-link"></span></a>依赖库</h2>
 <ul>
 <li>vue@2.4.4</li>
@@ -2773,4 +2773,4 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><a href="https://fundebug.com/">Fundebug</a></p>
 <p><a href="https://www.easy-mock.com/">EasyMock</a></p>
 <p><a href="http://apizza.cc/account">Apizza</a></p>
-]]></description><link>http://zwingz.github.io/posts/275254986.html</link><guid isPermaLink="false">275254986</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><category><![CDATA[Vue]]></category><category><![CDATA[Webpack]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Mon, 20 Nov 2017 07:02:07 GMT</pubDate></item></channel></rss>
+]]></description><link>undefined/posts/275254986.html</link><guid isPermaLink="false">275254986</guid><category><![CDATA[Front End]]></category><category><![CDATA[Js]]></category><category><![CDATA[Vue]]></category><category><![CDATA[Webpack]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Mon, 20 Nov 2017 07:02:07 GMT</pubDate></item></channel></rss>
