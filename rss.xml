@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sat, 20 Jul 2019 10:46:01 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 20 Jul 2019 10:46:01 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[Hyrule, 基于github的博客+图床管理工具]]></title><description><![CDATA[<p>本篇博客就在<a href="https://github.com/zWingz/Hyrule">Hyrule</a>下完成</p>
-<p><img src="https://raw.githubusercontent.com/zWingz/imgur/master/1563553940621.png"></p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sat, 20 Jul 2019 11:18:24 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 20 Jul 2019 11:18:24 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[Hyrule, 基于github的博客+图床管理工具]]></title><description><![CDATA[<p>本篇博客就在<a href="https://github.com/zWingz/Hyrule">Hyrule</a>下完成。</p>
 <p>请先参考, <a href="https://zwing.site/posts/417715171.html">自动部署基于issues的静态博客</a>, 再配合<code class="language-text">Hyrule</code>食用。</p>
-<h3 id="开发缘由" class="heading"><a href="#%E5%BC%80%E5%8F%91%E7%BC%98%E7%94%B1" aria-hidden="true"><span class="icon icon-link"></span></a>开发缘由</h3>
+<p><img src="https://raw.githubusercontent.com/zWingz/imgur/master/1563553940621.png"></p>
+<h2 id="开发缘由" class="heading"><a href="#%E5%BC%80%E5%8F%91%E7%BC%98%E7%94%B1" aria-hidden="true"><span class="icon icon-link"></span></a>开发缘由</h2>
 <p>之前一直用<code class="language-text">issues</code>来写博客, 使用<a href="https://github.com/acyortjs/acyort">acyory</a>和<a href="https://github.com/zWingz/acyort-donob-plugins">plugin</a>完成博客搭建. 对我来说已经算很方便, 我只需要打开github即可写自己的博客。</p>
 <p>但是有些不足点就是：</p>
 <ul>
@@ -12,12 +12,42 @@
 </ul>
 <p>后面找到了<a href="https://github.com/Molunerfinn/PicGo">picgo</a>, 再配合<a href="https://github.com/zWingz/picgo-plugin-github-plus">plugin</a>, 可以很好的把github当做图片, 并且在博客中使用。</p>
 <p>目前需要解决的点就剩下写作体验和博文管理。</p>
-<p>有于是乎就有了<code class="language-text">Hyrule</code>这个App</p>
-<h3 id="功能介绍" class="heading"><a href="#%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span class="icon icon-link"></span></a>功能介绍</h3>
-<h4 id="图片管理" class="heading"><a href="#%E5%9B%BE%E7%89%87%E7%AE%A1%E7%90%86" aria-hidden="true"><span class="icon icon-link"></span></a>图片管理</h4>
+<p>有于是乎就有了<code class="language-text">Hyrule</code>这个App。</p>
+<h2 id="功能介绍" class="heading"><a href="#%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span class="icon icon-link"></span></a>功能介绍</h2>
+<h3 id="图片管理" class="heading"><a href="#%E5%9B%BE%E7%89%87%E7%AE%A1%E7%90%86" aria-hidden="true"><span class="icon icon-link"></span></a>图片管理</h3>
 <p><code class="language-text">picgo</code>是个很强大的图床工具, 可以通过自己编写插件来完成不同站点的图床管理。</p>
-<p>但对于我自己来说, 我需要的只是<code class="language-text">github</code>, 虽然已有插件支持<code class="language-text">github</code>图片同步, 但是对我来说还是不够,我希望能结合博客一起管理。</p>
-<p>在<code class="language-text">Hyrule</code>中, 管理图片是个很简单的事情, 只需要添加对应的图床<code class="language-text">repo</code>, 不管是<code class="language-text">private</code>还是<code class="language-text">public</code>。</p>
+<p>但对于我自己来说, 我需要的只是<code class="language-text">github</code>, 虽然已有插件支持<code class="language-text">github</code>图片同步, 但是对我来说远不够。</p>
+<h4 id="多图床管理" class="heading"><a href="#%E5%A4%9A%E5%9B%BE%E5%BA%8A%E7%AE%A1%E7%90%86" aria-hidden="true"><span class="icon icon-link"></span></a>多图床管理</h4>
+<p>在<code class="language-text">Hyrule</code>中, 管理图片是个很简单的事情,  不管是<code class="language-text">private</code>还是<code class="language-text">public</code>，只需要添加对应的图床<code class="language-text">repo</code>即可。而且可以很方便的切换不同图床。但是<code class="language-text">private</code>有一点不足的是，它无法分享，以及获取的时候会稍慢，这是跟<code class="language-text">github</code>有关，后续讲开发经历时候再详细说。</p>
+<h4 id="文件夹管理" class="heading"><a href="#%E6%96%87%E4%BB%B6%E5%A4%B9%E7%AE%A1%E7%90%86" aria-hidden="true"><span class="icon icon-link"></span></a>文件夹管理</h4>
+<p>除了支持多图床，还支持文件夹形式。</p>
+<h4 id="批量管理" class="heading"><a href="#%E6%89%B9%E9%87%8F%E7%AE%A1%E7%90%86" aria-hidden="true"><span class="icon icon-link"></span></a>批量管理</h4>
+<p>支持批量上传/删除图片，但是有一点不足的是，由于<code class="language-text">git commit</code>的问题，最终必须逐个上传或删除，但用户操作上可以支持批量操作。</p>
+<h4 id="更多功能" class="heading"><a href="#%E6%9B%B4%E5%A4%9A%E5%8A%9F%E8%83%BD" aria-hidden="true"><span class="icon icon-link"></span></a>更多功能</h4>
+<p>等待各位提<code class="language-text">feature request</code>。</p>
+<h3 id="issues管理" class="heading"><a href="#issues%E7%AE%A1%E7%90%86" aria-hidden="true"><span class="icon icon-link"></span></a>Issues管理</h3>
+<p>当然，这个功能不一定所有人都需要用到。</p>
+<h4 id="同步编写预览" class="heading"><a href="#%E5%90%8C%E6%AD%A5%E7%BC%96%E5%86%99%E9%A2%84%E8%A7%88" aria-hidden="true"><span class="icon icon-link"></span></a>同步编写预览</h4>
+<p>内置<code class="language-text">vscode</code>的<a href="https://github.com/microsoft/monaco-editor">monaco-editor</a>，让写文章就跟写代码一样方便。同时可以同步预览，但是同步滚动的话可能目前做的还不够完美。</p>
+<h4 id="直接上传图片" class="heading"><a href="#%E7%9B%B4%E6%8E%A5%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87" aria-hidden="true"><span class="icon icon-link"></span></a>直接上传图片</h4>
+<p>其实<code class="language-text">picgo</code>也有<code class="language-text">vscode</code>的插件<a href="https://github.com/PicGo/vs-picgo">vs-picgo</a>，其实就是在<code class="language-text">vscode</code>粘贴图片直接上传到对应图床上，我很喜欢这个功能。</p>
+<p>在<code class="language-text">Hyrul</code>中，你可以先上传图片到图床，然后复制其<code class="language-text">markdown</code>格式链接粘贴在文章中。也可以直接在编辑器中上传，它会自动上传到所选的图床中。（当然，前提是需要提供一个<code class="language-text">repo</code>来做默认图床）</p>
+<p>在编写同时，也可以同时浏览图片。</p>
+<p><img src="https://raw.githubusercontent.com/zWingz/abcdefg/master/1563620678505.png"></p>
+<p><img src="https://raw.githubusercontent.com/zWingz/abcdefg/master/1563620700381.png"></p>
+<h4 id="保存草稿" class="heading"><a href="#%E4%BF%9D%E5%AD%98%E8%8D%89%E7%A8%BF" aria-hidden="true"><span class="icon icon-link"></span></a>保存草稿</h4>
+<p>当文章写到一半，但又不想这么快发布的话，可以保存到本地，下次继续写。</p>
+<h4 id="更多功能-1" class="heading"><a href="#%E6%9B%B4%E5%A4%9A%E5%8A%9F%E8%83%BD-1" aria-hidden="true"><span class="icon icon-link"></span></a>更多功能</h4>
+<p>等待各位提<code class="language-text">feature request</code>。</p>
+<h3 id="结语" class="heading"><a href="#%E7%BB%93%E8%AF%AD" aria-hidden="true"><span class="icon icon-link"></span></a>结语</h3>
+<p>目前来说，这<code class="language-text">App</code>已经满足我日常写博客需求。</p>
+<p>除了这点，我觉得最重要的是个人在开发过程中的经验积累，包括界面交互设计（虽然目前很丑）、功能设计、技术调研等等。</p>
+<p>开发过程中也遇到了不少问题，后续会写一遍文章来记录相关内容。</p>
+<h3 id="感谢" class="heading"><a href="#%E6%84%9F%E8%B0%A2" aria-hidden="true"><span class="icon icon-link"></span></a>感谢</h3>
+<ul>
+<li><a href="https://github.com/Molunerfinn/PicGo">picgo</a></li>
+<li><a href="https://github.com/hackjutsu/Lepton">Lepton</a> （界面参考、代码参考）</li>
+</ul>
 ]]></description><link>undefined/posts/470423296.html</link><guid isPermaLink="false">470423296</guid><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 19 Jul 2019 16:32:52 GMT</pubDate></item><item><title><![CDATA[js中关于base64的一些事]]></title><description><![CDATA[<h3 id="介绍" class="heading"><a href="#%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span class="icon icon-link"></span></a>介绍</h3>
 <p><code class="language-text">base64</code>其实是一种编码转换方式, 将<code class="language-text">ASCII</code>字符转换成普通文本, 是网络上最常见的用于传输8Bit字节代码的编码方式之一。</p>
 <p><code class="language-text">base64</code>由字母<code class="language-text">a-z</code>、<code class="language-text">A-Z</code>、<code class="language-text">0-9</code>以及<code class="language-text">+</code>和<code class="language-text">/</code>, 再加上作为垫字的<code class="language-text">=</code>, 一共65字符组成一个基本字符集,  其他所有字符都可以根据一定规则, 转换成该字符集中的字符。</p>
