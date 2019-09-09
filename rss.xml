@@ -1,6 +1,52 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 05 Sep 2019 05:32:07 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 05 Sep 2019 05:32:07 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[electron+react开发实践]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 09 Sep 2019 16:03:11 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 09 Sep 2019 16:03:11 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[electron+react开发实践]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
 <p><a href="https://github.com/zWingz/Hyrule">Hyrule</a></p>
-<p>先占坑, 有空写</p>
+<p>本文也是在Hyrule下完成</p>
+<h2 id="技术栈以及主要依赖" class="heading"><a href="#%E6%8A%80%E6%9C%AF%E6%A0%88%E4%BB%A5%E5%8F%8A%E4%B8%BB%E8%A6%81%E4%BE%9D%E8%B5%96" aria-hidden="true"><span class="icon icon-link"></span></a>技术栈以及主要依赖</h2>
+<ul>
+<li><a href="https://github.com/facebook/react">react</a></li>
+<li><a href="https://github.com/ant-design/ant-design">antd</a></li>
+<li><a href="https://github.com/electron/electron">electron</a></li>
+<li><a href="https://github.com/microsoft/TypeScript">typescript</a></li>
+<li><a href="https://github.com/microsoft/monaco-editor">monaco-editor</a></li>
+<li><a href="https://github.com/remarkjs/remark">remark</a></li>
+</ul>
+<p>electron提供跨平台PC端运行环境，使用react+antd构建UI界面</p>
+<p>monaco-editor提供编辑器功能，使用remark转换markdown</p>
+<h2 id="electron" class="heading"><a href="#electron" aria-hidden="true"><span class="icon icon-link"></span></a>electron</h2>
+<p>electron作用就是提供多端运行环境，实际开发体验跟一般Web开发无二</p>
+<p>万事开头难，初次接触的确不知道如何入手，github上也有相应的模板</p>
+<ul>
+<li><a href="https://github.com/SimulatedGREG/electron-vue">electron-vue</a></li>
+<li><a href="https://github.com/electron-react-boilerplate/electron-react-boilerplate">electron-react-boilerplate</a></li>
+</ul>
+<p>不管模板如何，核心还是如何在electron中加载html</p>
+<p>electron分为主进程(main)和渲染进程(renderer)，主进程可以跟操作系统打交道，渲染进程可以说跟页面打交道，因此只需要在主进程创建一个<code class="language-text">window</code>来跑页面即可。</p>
+<p>如果只是开发普通页面，那只要加载html即可，如果使用webpack开发，则开发时候需要在electron中访问dev-server提供的页面</p>
+<div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> win <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BrowserWindow</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token comment">// 创建一个window, 用于加载html</span>
+  title<span class="token punctuation">:</span> app<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  minHeight<span class="token punctuation">:</span> <span class="token number">750</span><span class="token punctuation">,</span>
+  minWidth<span class="token punctuation">:</span> <span class="token number">1090</span><span class="token punctuation">,</span>
+  webPreferences<span class="token punctuation">,</span>
+  show<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// 避免app启动时候显示出白屏</span>
+  backgroundColor<span class="token punctuation">:</span> <span class="token string">'#2e2c29'</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>isDev<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  win<span class="token punctuation">.</span><span class="token function">loadURL</span><span class="token punctuation">(</span><span class="token string">'http://localhost:8989/'</span><span class="token punctuation">)</span> <span class="token comment">// 开发环境访问dev-server提供的页面</span>
+  <span class="token comment">// 配置react-dev-tool</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span>
+    <span class="token keyword">default</span><span class="token punctuation">:</span> installExtension<span class="token punctuation">,</span>
+    <span class="token constant">REACT_DEVELOPER_TOOLS</span>
+  <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token string">'electron-devtools-installer'</span><span class="token punctuation">)</span>
+  <span class="token function">installExtension</span><span class="token punctuation">(</span><span class="token constant">REACT_DEVELOPER_TOOLS</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">name</span> <span class="token operator">=></span> <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`Added Extension:  </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token parameter">err</span> <span class="token operator">=></span> <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'An error occurred: '</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token comment">// win.webContents.openDevTools()</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 生产环境直接加载index.html</span>
+  win<span class="token punctuation">.</span><span class="token function">loadFile</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>__dirname<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/../../../renderer/index.html`</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 ]]></description><link>undefined/posts/489535157.html</link><guid isPermaLink="false">489535157</guid><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 05 Sep 2019 05:29:20 GMT</pubDate></item><item><title><![CDATA[Hyrule, 基于github的博客+图床管理工具]]></title><description><![CDATA[<p>本篇博客就在<a href="https://github.com/zWingz/Hyrule">Hyrule</a>下完成。</p>
 <p>请先参考, <a href="https://zwing.site/posts/417715171.html">自动部署基于issues的静态博客</a>, 再配合<code class="language-text">Hyrule</code>食用。</p>
 <p><img src="https://raw.githubusercontent.com/zWingz/imgur/master/1563553940621.png"></p>
