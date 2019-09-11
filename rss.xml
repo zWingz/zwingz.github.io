@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 09 Sep 2019 16:03:11 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 09 Sep 2019 16:03:11 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[electron+react开发实践]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Wed, 11 Sep 2019 15:40:54 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 11 Sep 2019 15:40:54 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[electron+react开发实践]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
 <p><a href="https://github.com/zWingz/Hyrule">Hyrule</a></p>
 <p>本文也是在Hyrule下完成</p>
 <h2 id="技术栈以及主要依赖" class="heading"><a href="#%E6%8A%80%E6%9C%AF%E6%A0%88%E4%BB%A5%E5%8F%8A%E4%B8%BB%E8%A6%81%E4%BE%9D%E8%B5%96" aria-hidden="true"><span class="icon icon-link"></span></a>技术栈以及主要依赖</h2>
@@ -12,7 +12,7 @@
 </ul>
 <p>electron提供跨平台PC端运行环境，使用react+antd构建UI界面</p>
 <p>monaco-editor提供编辑器功能，使用remark转换markdown</p>
-<h2 id="electron" class="heading"><a href="#electron" aria-hidden="true"><span class="icon icon-link"></span></a>electron</h2>
+<h2 id="electron如何运行web" class="heading"><a href="#electron%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8Cweb" aria-hidden="true"><span class="icon icon-link"></span></a>electron如何运行web</h2>
 <p>electron作用就是提供多端运行环境，实际开发体验跟一般Web开发无二</p>
 <p>万事开头难，初次接触的确不知道如何入手，github上也有相应的模板</p>
 <ul>
@@ -20,7 +20,7 @@
 <li><a href="https://github.com/electron-react-boilerplate/electron-react-boilerplate">electron-react-boilerplate</a></li>
 </ul>
 <p>不管模板如何，核心还是如何在electron中加载html</p>
-<p>electron分为主进程(main)和渲染进程(renderer)，主进程可以跟操作系统打交道，渲染进程可以说跟页面打交道，因此只需要在主进程创建一个<code class="language-text">window</code>来跑页面即可。</p>
+<p>electron分为主进程(main)和渲染进程(renderer)，主进程可以跟操作系统打交道，渲染进程可以说跟页面打交道(webapp)，因此只需要在主进程创建一个<code class="language-text">window</code>来跑页面即可。</p>
 <p>如果只是开发普通页面，那只要加载html即可，如果使用webpack开发，则开发时候需要在electron中访问dev-server提供的页面</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> win <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BrowserWindow</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   <span class="token comment">// 创建一个window, 用于加载html</span>
@@ -47,6 +47,41 @@
   win<span class="token punctuation">.</span><span class="token function">loadFile</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>__dirname<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/../../../renderer/index.html`</span></span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </code></pre></div>
+<p>至此, 就可以在electron中运行开发的webapp, 剩下的工作便跟日常开发一样</p>
+<h2 id="项目启动" class="heading"><a href="#%E9%A1%B9%E7%9B%AE%E5%90%AF%E5%8A%A8" aria-hidden="true"><span class="icon icon-link"></span></a>项目启动</h2>
+<p>如上面所说, 在启动开发环境时候, 需要两个进程</p>
+<ul>
+<li>devServer: 使用webpack来启动webapp开发环境</li>
+<li>electron: 直接使用node来执行main.js, 启动electron</li>
+</ul>
+<p>但由于使用typescript来开发, 在web端可以由webpack来完成, 那么在electron中, 则多了一步来编译</p>
+<p>因此整个开发环境启动有三步</p>
+<ul>
+<li>dev:web  启动dev-server</li>
+<li>dev:main 编译main.ts到./dist/main.js</li>
+<li>dev:electron 执行main.js, 启动electron(借助nodemon来自动重启)</li>
+</ul>
+<p>目前还未特意去寻找一键启动方法, 因此启动步骤稍微多</p>
+<div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"dev:web"</span><span class="token operator">:</span> <span class="token string">"node ./build/devServer.js"</span><span class="token punctuation">,</span>
+    <span class="token property">"build:web"</span><span class="token operator">:</span> <span class="token string">"webpack --progress --hide-modules --colors --config=build/prod.conf.js"</span><span class="token punctuation">,</span>
+    <span class="token property">"dev:main"</span><span class="token operator">:</span> <span class="token string">"yarn build:main --watch"</span><span class="token punctuation">,</span>
+    <span class="token property">"build:main"</span><span class="token operator">:</span> <span class="token string">"tsc -p tsconfig.electron.json"</span><span class="token punctuation">,</span>
+    <span class="token property">"dev:electron"</span><span class="token operator">:</span> <span class="token string">"nodemon --watch ./dist/main --exec electron ./dist/electron/src/main/main.js"</span><span class="token punctuation">,</span>
+    <span class="token property">"build:package"</span><span class="token operator">:</span> <span class="token string">"electron-builder --config ./electronrc.js -mwl"</span><span class="token punctuation">,</span>
+    <span class="token property">"build"</span><span class="token operator">:</span> <span class="token string">"yarn build:web &amp;&amp; yarn build:main &amp;&amp; yarn build:package"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<h2 id="项目开发" class="heading"><a href="#%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91" aria-hidden="true"><span class="icon icon-link"></span></a>项目开发</h2>
+<p>接下来, 只需要重点开发webapp即可, electron端可以作为辅助, 提供一些系统级别调用功能</p>
+<p>下面讲讲开发过程中遇到的问题以及解决方法</p>
+<h3 id="github-oauth" class="heading"><a href="#github-oauth" aria-hidden="true"><span class="icon icon-link"></span></a>github oauth</h3>
+<h3 id="github-api开发" class="heading"><a href="#github-api%E5%BC%80%E5%8F%91" aria-hidden="true"><span class="icon icon-link"></span></a>github api开发</h3>
+<h3 id="github-私有仓库如何加载图片" class="heading"><a href="#github-%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%A6%82%E4%BD%95%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87" aria-hidden="true"><span class="icon icon-link"></span></a>github 私有仓库如何加载图片</h3>
+<h3 id="monaco编辑器加载" class="heading"><a href="#monaco%E7%BC%96%E8%BE%91%E5%99%A8%E5%8A%A0%E8%BD%BD" aria-hidden="true"><span class="icon icon-link"></span></a>monaco编辑器加载</h3>
+<h3 id="markdown预览以及滚动同步" class="heading"><a href="#markdown%E9%A2%84%E8%A7%88%E4%BB%A5%E5%8F%8A%E6%BB%9A%E5%8A%A8%E5%90%8C%E6%AD%A5" aria-hidden="true"><span class="icon icon-link"></span></a>markdown预览以及滚动同步</h3>
 ]]></description><link>undefined/posts/489535157.html</link><guid isPermaLink="false">489535157</guid><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 05 Sep 2019 05:29:20 GMT</pubDate></item><item><title><![CDATA[Hyrule, 基于github的博客+图床管理工具]]></title><description><![CDATA[<p>本篇博客就在<a href="https://github.com/zWingz/Hyrule">Hyrule</a>下完成。</p>
 <p>请先参考, <a href="https://zwing.site/posts/417715171.html">自动部署基于issues的静态博客</a>, 再配合<code class="language-text">Hyrule</code>食用。</p>
 <p><img src="https://raw.githubusercontent.com/zWingz/imgur/master/1563553940621.png"></p>
