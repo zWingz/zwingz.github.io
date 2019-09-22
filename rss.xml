@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 12 Sep 2019 17:50:01 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 12 Sep 2019 17:50:01 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[electron+react开发实践]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 22 Sep 2019 15:34:51 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 22 Sep 2019 15:34:51 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[electron+react开发实践]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
 <p><a href="https://github.com/zWingz/Hyrule">Hyrule</a></p>
 <p>本文也是在Hyrule下完成</p>
 <h2 id="技术栈以及主要依赖" class="heading"><a href="#%E6%8A%80%E6%9C%AF%E6%A0%88%E4%BB%A5%E5%8F%8A%E4%B8%BB%E8%A6%81%E4%BE%9D%E8%B5%96" aria-hidden="true"><span class="icon icon-link"></span></a>技术栈以及主要依赖</h2>
@@ -147,7 +147,7 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
 </ul>
 <h3 id="api-service开发" class="heading"><a href="#api-service%E5%BC%80%E5%8F%91" aria-hidden="true"><span class="icon icon-link"></span></a>api service开发</h3>
 <p>做api service开发只是为了更快速调动github api</p>
-<p>npm上也有[@rest/octokit], 已经封装好了所有github api, 文档也足够齐全, 但由于笨app用到接口不多, 因此我选择了自行封装</p>
+<p>npm上也有<a href="https://github.com/octokit/rest.js">@octokit/rest</a>, 已经封装好了所有github api, 文档也足够齐全, 但由于笨app用到接口不多, 因此我选择了自行封装</p>
 <p>列举下所用接口</p>
 <ul>
 <li>获取当前用户</li>
@@ -167,7 +167,33 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
 <li>上传图片和删除图片</li>
 </ul>
 <p>看似所需要接口不多, 但实际开发起来还是花了不少时间, 不过更多是在优化流程上</p>
-<h3 id="github-私有仓库如何加载图片" class="heading"><a href="#github-%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%A6%82%E4%BD%95%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87" aria-hidden="true"><span class="icon icon-link"></span></a>github 私有仓库如何加载图片</h3>
+<h3 id="如何加载github图片" class="heading"><a href="#%E5%A6%82%E4%BD%95%E5%8A%A0%E8%BD%BDgithub%E5%9B%BE%E7%89%87" aria-hidden="true"><span class="icon icon-link"></span></a>如何加载github图片</h3>
+<p>github仓库分为了public和private, 而public仓库的文件可以直接通过<code class="language-text">https://raw.githubusercontent.com/user/repo/${branch-or-sha}/${path-to-file}</code>访问. 而private则需要通过token方式访问</p>
+<ul>
+<li><a href="https://developer.github.com/v3/git/blobs/#git-blobs">git-blobs</a>: 可以获取任何文件, 返回base64</li>
+<li><a href="https://developer.github.com/v3/repos/contents/#get-contents">contents</a>: 可以获取1mb以内的文件, 返回base64</li>
+<li>通过<code class="language-text">https://access_token@github.com/user/repo/path/to/file</code> 由于此形式有安全隐患, 因此无法直接用在<code class="language-text">&lt;img /&gt;</code>上, 但是可以通过<code class="language-text">curl</code>形式使用</li>
+<li>带上<code class="language-text">Authorization</code>访问raw.githubusercontent.com<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token function">fetch</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`https://raw.githubusercontent.com/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>owner<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>repo<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/master/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  headers<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    Authorization<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`token </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>_token<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div></li>
+</ul>
+<p>对于public的仓库, 直接通过<code class="language-text">img</code>标签即可, 对于private, 则需要多一步处理.</p>
+<p>通过github api获取图片base64后拼接上MIME赋值给<code class="language-text">img.src</code>即可, 如果觉得base64太长, 可以进一步转成blob-url, 并且加上缓存, 则对于同一张图片只需要加载一次即可.</p>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token comment">// base64转blob</span>
+<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">b64toblob</span><span class="token punctuation">(</span>b64Data<span class="token punctuation">,</span> contentType <span class="token operator">=</span> <span class="token string">'application/octet-stream'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> url <span class="token operator">=</span> <span class="token template-string"><span class="token string">`data:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>contentType<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">;base64,</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>b64Data<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span>
+  <span class="token keyword">const</span> response <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+  <span class="token keyword">const</span> blob <span class="token operator">=</span> <span class="token keyword">await</span> response<span class="token punctuation">.</span><span class="token function">blob</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> blob
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p>按理说上面的方法已经很好地解决private图片加载, 但由于使用了<a href="https://github.com/zWingz/react-image">react-image</a>图片组件, 会自动根据图片加载情况添加对应加载状态, 如果使用上述方法, 会导致图片先显示<code class="language-text">error</code>然后才转成正常图片.</p>
+<p>想要private图片也能直接通过src形式加载, 需要一个"后台"帮我们加载图片, 然后返回对应的<code class="language-text">http response</code></p>
+<p>而electron上可以<a href="https://electronjs.org/docs/api/protocol#protocol">自定义协议</a>, 并进行拦截, 那么我们可以定义一个<code class="language-text">github:</code>协议, 所有该<code class="language-text">url</code>都由electron拦截并处理</p>
+<p>这里我选择了<a href="https://electronjs.org/docs/api/protocol#protocolregisterstreamprotocolscheme-handler-completion">streamprotocol</a></p>
 <h3 id="cache缓存" class="heading"><a href="#cache%E7%BC%93%E5%AD%98" aria-hidden="true"><span class="icon icon-link"></span></a>cache缓存</h3>
 <h3 id="异步队列" class="heading"><a href="#%E5%BC%82%E6%AD%A5%E9%98%9F%E5%88%97" aria-hidden="true"><span class="icon icon-link"></span></a>异步队列</h3>
 <h3 id="monaco编辑器加载" class="heading"><a href="#monaco%E7%BC%96%E8%BE%91%E5%99%A8%E5%8A%A0%E8%BD%BD" aria-hidden="true"><span class="icon icon-link"></span></a>monaco编辑器加载</h3>
