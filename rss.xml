@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 22 Sep 2019 15:34:51 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 22 Sep 2019 15:34:51 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[electron+react开发实践]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 23 Sep 2019 14:32:37 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 23 Sep 2019 14:32:37 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[electron+react开发实践]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
 <p><a href="https://github.com/zWingz/Hyrule">Hyrule</a></p>
 <p>本文也是在Hyrule下完成</p>
 <h2 id="技术栈以及主要依赖" class="heading"><a href="#%E6%8A%80%E6%9C%AF%E6%A0%88%E4%BB%A5%E5%8F%8A%E4%B8%BB%E8%A6%81%E4%BE%9D%E8%B5%96" aria-hidden="true"><span class="icon icon-link"></span></a>技术栈以及主要依赖</h2>
@@ -191,12 +191,199 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
 <span class="token punctuation">}</span>
 </code></pre></div>
 <p>按理说上面的方法已经很好地解决private图片加载, 但由于使用了<a href="https://github.com/zWingz/react-image">react-image</a>图片组件, 会自动根据图片加载情况添加对应加载状态, 如果使用上述方法, 会导致图片先显示<code class="language-text">error</code>然后才转成正常图片.</p>
-<p>想要private图片也能直接通过src形式加载, 需要一个"后台"帮我们加载图片, 然后返回对应的<code class="language-text">http response</code></p>
-<p>而electron上可以<a href="https://electronjs.org/docs/api/protocol#protocol">自定义协议</a>, 并进行拦截, 那么我们可以定义一个<code class="language-text">github:</code>协议, 所有该<code class="language-text">url</code>都由electron拦截并处理</p>
+<p>想要private图片也能直接通过src形式加载, 需要一个"后台"帮我们加载图片, 然后返回对应的<code class="language-text">http response</code>, 而恰好electron上可以<a href="https://electronjs.org/docs/api/protocol#protocol">自定义协议</a>, 并进行拦截, 那么我们可以定义一个<code class="language-text">github:</code>协议, 所有该<code class="language-text">url</code>都由electron拦截并处理</p>
 <p>这里我选择了<a href="https://electronjs.org/docs/api/protocol#protocolregisterstreamprotocolscheme-handler-completion">streamprotocol</a></p>
+<p>整体流程大概如下:</p>
+<ul>
+<li>electron注册自定义协议<code class="language-text">github://</code></li>
+<li>构造图片src: <code class="language-text">github://${repo}/${sha}/${name}</code></li>
+<li>electron拦截请求, 解析得到<code class="language-text">repo</code>, <code class="language-text">sha</code>和<code class="language-text">name</code>信息</li>
+<li>electron发起github api, 得到图片的base64</li>
+<li>将base64转成buffer, 并构造成<code class="language-text">Readable</code>后返回</li>
+</ul>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token comment">// 注册协议</span>
+<span class="token keyword">function</span> <span class="token function">registerStreamProtocol</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  protocol<span class="token punctuation">.</span><span class="token function">registerStreamProtocol</span><span class="token punctuation">(</span><span class="token string">'github'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> url <span class="token punctuation">}</span> <span class="token operator">=</span> req
+    <span class="token function">getImageByApi</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token function">getToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> callback<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">getImageByApi</span><span class="token punctuation">(</span>
+  url<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  _token<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">callback</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">stream<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>NodeJS<span class="token punctuation">.</span>ReadableStream<span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>Electron<span class="token punctuation">.</span>StreamProtocolResponse<span class="token punctuation">)</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 解析url</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">,</span> src<span class="token punctuation">]</span> <span class="token operator">=</span> url<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'//'</span><span class="token punctuation">)</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>src<span class="token punctuation">)</span> <span class="token keyword">return</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>owner<span class="token punctuation">,</span> repo<span class="token punctuation">,</span> sha<span class="token punctuation">,</span> name<span class="token punctuation">]</span> <span class="token operator">=</span> src<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">,</span> ext<span class="token punctuation">]</span> <span class="token operator">=</span> name<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span>
+  <span class="token comment">// 获取图片数据</span>
+  <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`https://api.github.com/repos/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>owner<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>repo<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/git/blobs/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>sha<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    headers<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      Authorization<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`token </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>_token<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">,</span>
+      <span class="token string">'content-type'</span><span class="token punctuation">:</span> <span class="token string">'application/json'</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token builtin">any</span>
+    <span class="token comment">// 转成Buffer</span>
+    <span class="token keyword">const</span> buf <span class="token operator">=</span> Buffer<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>content<span class="token punctuation">,</span> <span class="token string">'base64'</span><span class="token punctuation">)</span>
+    <span class="token comment">// 构造Readable</span>
+    <span class="token keyword">const</span> read <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Readable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    read<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span>
+    read<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+    res<span class="token punctuation">.</span>headers
+    <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      statusCode<span class="token punctuation">:</span> res<span class="token punctuation">.</span>status<span class="token punctuation">,</span>
+      data<span class="token punctuation">:</span> read<span class="token punctuation">,</span>
+      <span class="token comment">// 将对应头部也带上</span>
+      headers<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">'Content-Length'</span><span class="token punctuation">:</span> data<span class="token punctuation">.</span>size<span class="token punctuation">,</span>
+        <span class="token string">'Content-Type'</span><span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`image/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>ext<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">,</span>
+        <span class="token string">'Cache-Control:'</span><span class="token punctuation">:</span> <span class="token string">'public'</span><span class="token punctuation">,</span>
+        <span class="token string">'Accept-Ranges'</span><span class="token punctuation">:</span> <span class="token string">'bytes'</span><span class="token punctuation">,</span>
+        Status<span class="token punctuation">:</span> res<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'Status'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        Date<span class="token punctuation">:</span> res<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'date'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        Etag<span class="token punctuation">:</span> res<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'etag'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">'Last-Modified'</span><span class="token punctuation">:</span> res<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'Last-Modified'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p>除了使用github api, 也可以直接通过<code class="language-text">raw</code>获取, 类似一个请求转发</p>
+<p>按道理这样返回该请求的相应是最直接的方法, 但是该方法是在太慢了, 对node不够精通, 暂时想不到原因</p>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">getImageByRaw</span><span class="token punctuation">(</span>
+  url<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  _token<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">callback</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>
+    <span class="token parameter">stream<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>NodeJS<span class="token punctuation">.</span>ReadableStream<span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>Electron<span class="token punctuation">.</span>StreamProtocolResponse<span class="token punctuation">)</span></span>
+  <span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">void</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">,</span> src<span class="token punctuation">]</span> <span class="token operator">=</span> url<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'//'</span><span class="token punctuation">)</span>
+  <span class="token comment">// /repos/:owner/:repo/git/blobs/:sha</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>owner<span class="token punctuation">,</span> repo<span class="token punctuation">,</span> <span class="token punctuation">,</span> name<span class="token punctuation">]</span> <span class="token operator">=</span> src<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+  <span class="token comment">// 直接fetch raw文件, 并且带上authorization即可</span>
+  <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`https://raw.githubusercontent.com/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>owner<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>repo<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/master/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    headers<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      Authorization<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`token </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>_token<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token comment">// 直接返回reabable</span>
+    <span class="token comment">// 但是太慢了, 不知道为何</span>
+    <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      headers<span class="token punctuation">:</span> res<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token function">raw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      data<span class="token punctuation">:</span> res<span class="token punctuation">.</span>body<span class="token punctuation">,</span>
+      statusCode<span class="token punctuation">:</span> res<span class="token punctuation">.</span>status
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <h3 id="cache缓存" class="heading"><a href="#cache%E7%BC%93%E5%AD%98" aria-hidden="true"><span class="icon icon-link"></span></a>cache缓存</h3>
+<p>在图片管理中目录结构, 其实就是对应git上的一棵<code class="language-text">tree</code>, 而要达到同步效果, 必须从github中拉取对应的<code class="language-text">tree data</code></p>
+<p>但其实只需要在该tree第一次加载时候去github拉取数据, 一旦数据拉取到本地, 后续目录读取就可以脱离github</p>
+<ul>
+<li>第一次访问根目录</li>
+<li>拉取master目录结构</li>
+<li>进入目录A</li>
+<li>根据目录A的<code class="language-text">sha</code>拉取其目录结构</li>
+<li>返回根目录</li>
+<li>直接读取缓存中目录结构</li>
+</ul>
+<p>可见所有目录只需要拉取一次数据即可, 后续操作只需要在本地cache中完成</p>
+<p>那么可以构造一个简单的缓存数据结构</p>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">class</span> <span class="token class-name">Cache</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  _cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">[</span>k<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token constant">T</span>
+  <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token keyword">set</span><span class="token punctuation">(</span>key<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> data<span class="token punctuation">:</span> <span class="token constant">T</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> data
+  <span class="token punctuation">}</span>
+  <span class="token keyword">get</span><span class="token punctuation">(</span>key<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> ret <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+    <span class="token keyword">return</span> ret
+  <span class="token punctuation">}</span>
+  <span class="token function">has</span><span class="token punctuation">(</span><span class="token parameter">key<span class="token punctuation">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> key <span class="token keyword">in</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_cache
+  <span class="token punctuation">}</span>
+  <span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_cache <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">type</span> ImgType <span class="token operator">=</span> <span class="token punctuation">{</span>
+  name<span class="token punctuation">:</span> <span class="token builtin">string</span>
+  url<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token builtin">string</span>
+  sha<span class="token punctuation">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">type</span> DirType <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">[</span>k<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">type</span> DataJsonType <span class="token operator">=</span> <span class="token punctuation">{</span>
+  images<span class="token punctuation">:</span> ImgType<span class="token punctuation">[</span><span class="token punctuation">]</span>
+  dir<span class="token punctuation">:</span> DirType
+  sha<span class="token punctuation">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ImageCache</span> <span class="token keyword">extends</span> <span class="token class-name">Cache</span><span class="token operator">&lt;</span>DataJsonType<span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token function">addImg</span><span class="token punctuation">(</span><span class="token parameter">path<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> img<span class="token punctuation">:</span> ImgType</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">.</span>images<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">delImg</span><span class="token punctuation">(</span><span class="token parameter">path<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> img<span class="token punctuation">:</span> ImgType</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> cac <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+    cac<span class="token punctuation">.</span>images <span class="token operator">=</span> cac<span class="token punctuation">.</span>images<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">each</span> <span class="token operator">=></span> each<span class="token punctuation">.</span>sha <span class="token operator">!==</span> img<span class="token punctuation">.</span>sha<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p>只要缓存中没有对应的key, 则从github上面拉取数据, 如果存在则直接在该缓存中操作, 每次增加或删除图片, 只需要更新其<code class="language-text">sha</code>即可.</p>
+<p>举例:</p>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">class</span> <span class="token class-name">ImageKit</span> <span class="token punctuation">{</span>
+  <span class="token function">uploadImage</span><span class="token punctuation">(</span><span class="token parameter">path<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> img<span class="token punctuation">:</span> UploadImageType</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> filename <span class="token punctuation">}</span> <span class="token operator">=</span> img
+    <span class="token keyword">const</span> d <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">uploadImg</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">// 获取缓存中数据</span>
+    cache<span class="token punctuation">.</span><span class="token function">addImg</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      name<span class="token punctuation">:</span> filename<span class="token punctuation">,</span>
+      sha<span class="token punctuation">:</span> d<span class="token punctuation">.</span>sha
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p>对于issues也是同样方法来缓存, 只不过数据结构有点变化, 这里就不叙述.</p>
 <h3 id="异步队列" class="heading"><a href="#%E5%BC%82%E6%AD%A5%E9%98%9F%E5%88%97" aria-hidden="true"><span class="icon icon-link"></span></a>异步队列</h3>
+<p>github api有提供批量操作tree的<a href="https://developer.github.com/v3/git/trees/#create-a-tree">接口</a>, 但是并没有想象中那么容易使用, 反而有点复杂</p>
+<p>在这里便没有考虑通过操作tree形式完成批量上传, 而是将批量上传拆分成一个个任务逐个上传, 也就说在交互上批量, 实际上还是单一.</p>
+<p>这里用了<a href="https://github.com/zWingz/lite-queue">lite-queue</a>来管理异步队列(这个库也是后来才拆出来的), 使用方法很简单</p>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> queue <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Queue</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> d <span class="token operator">=</span> <span class="token keyword">await</span> queue<span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token builtin">Promise</span><span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token comment">// 1000</span>
+</code></pre></div>
+<p>其实就是根据调用顺序, 保证上一个<code class="language-text">promise</code>执行完后才执行下一个, 并且提供正确的回调和类似<code class="language-text">Promise.all</code>操作</p>
 <h3 id="monaco编辑器加载" class="heading"><a href="#monaco%E7%BC%96%E8%BE%91%E5%99%A8%E5%8A%A0%E8%BD%BD" aria-hidden="true"><span class="icon icon-link"></span></a>monaco编辑器加载</h3>
+<p>这里选择<a href="https://microsoft.github.io/monaco-editor/">monaco-editor</a>作为编辑器, 对于使用<code class="language-text">vscode</code>的开发者来说这样更容易上手</p>
+<p>如何初始化, <a href="https://github.com/microsoft/monaco-editor/blob/master/docs/integrate-esm.md">官方文档</a>有详细说明, 下面附上初始化配置</p>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">this</span><span class="token punctuation">.</span>editor <span class="token operator">=</span> monaco<span class="token punctuation">.</span>editor<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'monaco-editor'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  value<span class="token punctuation">:</span> content<span class="token punctuation">,</span>
+  language<span class="token punctuation">:</span> <span class="token string">'markdown'</span><span class="token punctuation">,</span>
+  automaticLayout<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  minimap<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    enabled<span class="token punctuation">:</span> <span class="token boolean">false</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  wordWrap<span class="token punctuation">:</span> <span class="token string">'wordWrapColumn'</span><span class="token punctuation">,</span>
+  lineNumbers<span class="token punctuation">:</span> <span class="token string">'off'</span><span class="token punctuation">,</span>
+  roundedSelection<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  theme<span class="token punctuation">:</span> <span class="token string">'vs-dark'</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
+<h4 id="添加快捷键监听" class="heading"><a href="#%E6%B7%BB%E5%8A%A0%E5%BF%AB%E6%8D%B7%E9%94%AE%E7%9B%91%E5%90%AC" aria-hidden="true"><span class="icon icon-link"></span></a>添加快捷键监听</h4>
+<h4 id="粘贴图片直接上传" class="heading"><a href="#%E7%B2%98%E8%B4%B4%E5%9B%BE%E7%89%87%E7%9B%B4%E6%8E%A5%E4%B8%8A%E4%BC%A0" aria-hidden="true"><span class="icon icon-link"></span></a>粘贴图片直接上传</h4>
 <h3 id="markdown预览以及滚动同步" class="heading"><a href="#markdown%E9%A2%84%E8%A7%88%E4%BB%A5%E5%8F%8A%E6%BB%9A%E5%8A%A8%E5%90%8C%E6%AD%A5" aria-hidden="true"><span class="icon icon-link"></span></a>markdown预览以及滚动同步</h3>
 ]]></description><link>undefined/posts/489535157.html</link><guid isPermaLink="false">489535157</guid><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 05 Sep 2019 05:29:20 GMT</pubDate></item><item><title><![CDATA[Hyrule, 基于github的博客+图床管理工具]]></title><description><![CDATA[<p>本篇博客就在<a href="https://github.com/zWingz/Hyrule">Hyrule</a>下完成。</p>
 <p>请先参考, <a href="https://zwing.site/posts/417715171.html">自动部署基于issues的静态博客</a>, 再配合<code class="language-text">Hyrule</code>食用。</p>
