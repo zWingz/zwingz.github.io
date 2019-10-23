@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Fri, 27 Sep 2019 12:05:05 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 27 Sep 2019 12:05:05 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[electron+react开发实践]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Wed, 23 Oct 2019 14:32:58 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 23 Oct 2019 14:32:58 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[electron+react开发实践]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
 <p><a href="https://github.com/zWingz/Hyrule">Hyrule</a></p>
 <p>本文也是在Hyrule下完成</p>
 <h2 id="技术栈以及主要依赖" class="heading"><a href="#%E6%8A%80%E6%9C%AF%E6%A0%88%E4%BB%A5%E5%8F%8A%E4%B8%BB%E8%A6%81%E4%BE%9D%E8%B5%96" aria-hidden="true"><span class="icon icon-link"></span></a>技术栈以及主要依赖</h2>
@@ -525,8 +525,59 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
 </code></pre></div>
 <p>此时滚动已经有了较好的同步, 虽然算不上完美, 但我觉得还是一个不错的解决方案.</p>
 <h2 id="项目打包" class="heading"><a href="#%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85" aria-hidden="true"><span class="icon icon-link"></span></a>项目打包</h2>
-<h3 id="项目编译" class="heading"><a href="#%E9%A1%B9%E7%9B%AE%E7%BC%96%E8%AF%91" aria-hidden="true"><span class="icon icon-link"></span></a>项目编译</h3>
-<h3 id="electron构建" class="heading"><a href="#electron%E6%9E%84%E5%BB%BA" aria-hidden="true"><span class="icon icon-link"></span></a>electron构建</h3>
+<p>使用了<a href="https://github.com/electron-userland/electron-builder">electron-builder</a>尽心打包, 只需添加<code class="language-text">electronrc.js</code>配置文件即可</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  productName<span class="token punctuation">:</span> <span class="token string">'App name'</span><span class="token punctuation">,</span> <span class="token comment">// App 名称</span>
+  appId<span class="token punctuation">:</span> <span class="token string">'com.App.name'</span><span class="token punctuation">,</span> <span class="token comment">// 程序的唯一标识符</span>
+  directories<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    output<span class="token punctuation">:</span> <span class="token string">'package'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  files<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'dist/**/*'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 构建好的dist目录</span>
+  <span class="token comment">// copyright: 'Copyright © 2019 zWing',</span>
+  asar<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// 是否加密</span>
+  artifactName<span class="token punctuation">:</span> <span class="token string">'${productName}-${version}.${ext}'</span><span class="token punctuation">,</span>
+  <span class="token comment">// compression: 'maximum', // 压缩程度</span>
+  dmg<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// MacOS dmg形式安装完后的界面</span>
+    contents<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        x<span class="token punctuation">:</span> <span class="token number">410</span><span class="token punctuation">,</span>
+        y<span class="token punctuation">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
+        type<span class="token punctuation">:</span> <span class="token string">'link'</span><span class="token punctuation">,</span>
+        path<span class="token punctuation">:</span> <span class="token string">'/Applications'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        x<span class="token punctuation">:</span> <span class="token number">130</span><span class="token punctuation">,</span>
+        y<span class="token punctuation">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
+        type<span class="token punctuation">:</span> <span class="token string">'file'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  mac<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    icon<span class="token punctuation">:</span> <span class="token string">'build/icons/icon.png'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  win<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    icon<span class="token punctuation">:</span> <span class="token string">'build/icons/icon.png'</span><span class="token punctuation">,</span>
+    target<span class="token punctuation">:</span> <span class="token string">'nsis'</span><span class="token punctuation">,</span>
+    legalTrademarks<span class="token punctuation">:</span> <span class="token string">'Eyas Personal'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  nsis<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// windows的安装包配置</span>
+    allowToChangeInstallationDirectory<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    oneClick<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    menuCategory<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    allowElevation<span class="token punctuation">:</span> <span class="token boolean">false</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  linux<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    icon<span class="token punctuation">:</span> <span class="token string">'build/icons'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  electronDownload<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    mirror<span class="token punctuation">:</span> <span class="token string">'http://npm.taobao.org/mirrors/electron/'</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p>最后执行<code class="language-text">electron-builder --config ./electronrc.js -mwl</code>进行打包即可, <code class="language-text">-mwl</code>指的是打包三种平台</p>
+<p>更详细的打包配置还是去官方文档查看, 这一部分没有过多深入了解</p>
 ]]></description><link>undefined/posts/489535157.html</link><guid isPermaLink="false">489535157</guid><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Thu, 05 Sep 2019 05:29:20 GMT</pubDate></item><item><title><![CDATA[Hyrule, 基于github的博客+图床管理工具]]></title><description><![CDATA[<p>本篇博客就在<a href="https://github.com/zWingz/Hyrule">Hyrule</a>下完成。</p>
 <p>请先参考, <a href="https://zwing.site/posts/417715171.html">自动部署基于issues的静态博客</a>, 再配合<code class="language-text">Hyrule</code>食用。</p>
 <p><img src="https://raw.githubusercontent.com/zWingz/imgur/master/1563553940621.png"></p>
