@@ -1,4 +1,161 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sat, 04 Jan 2020 06:19:50 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 04 Jan 2020 06:19:50 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[2019，精彩的一年]]></title><description><![CDATA[<h2 id="回顾2019" class="heading"><a href="#%E5%9B%9E%E9%A1%BE2019" aria-hidden="true"><span class="icon icon-link"></span></a>回顾2019</h2>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Wed, 08 Apr 2020 15:22:51 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 08 Apr 2020 15:22:51 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[另类的GraphQL实现方式]]></title><description><![CDATA[<h1 id="另类的graphql实现方式" class="heading"><a href="#%E5%8F%A6%E7%B1%BB%E7%9A%84graphql%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F" aria-hidden="true"><span class="icon icon-link"></span></a>另类的GraphQL实现方式</h1>
+<p>接触过前端的应该都有听过<a href="https://graphql.org/">GraphQL</a></p>
+<p>简单来说就是前端自行定义接口所需要返回的数据, 想要尝试的可以试着调用<a href="https://developer.github.com/v4/">GithubAPI V4</a>.</p>
+<p>而对于我们常用的<code class="language-text">xhr</code>请求能否也做到跟<code class="language-text">GraphQL</code>一样能自定义接口返回的数据? </p>
+<p>答案是可以, 但是提前必须是后端必须提供足够的数据让前端自行选择.</p>
+<h2 id="例子" class="heading"><a href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span class="icon icon-link"></span></a>例子</h2>
+<p>假设目前后端定义了一个<code class="language-text">User</code>模型, 包含了十几项数据</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// Example</span>
+<span class="token keyword">class</span> <span class="token class-name">User</span> <span class="token punctuation">{</span>
+    id<span class="token punctuation">,</span>
+    username<span class="token punctuation">,</span>
+    created<span class="token punctuation">,</span>
+    updated<span class="token punctuation">,</span>
+    <span class="token comment">// .. 省略好几个人</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>任何接口如果有涉及到拿<code class="language-text">User</code>数据的, 都会把该<code class="language-text">User</code>的数据全量返回, 也就是说前端能从接口中拿到<code class="language-text">User</code>相关的十多项数据.</p>
+<p>但实际上并不是每个接口都需要这么多数据, 可能部分接口我们只需要用到<code class="language-text">username</code>和<code class="language-text">id</code>. 但对于后端来说, 他们只管写通过逻辑, 而不去管<code class="language-text">UI</code>上需要哪些数据.</p>
+<p>这样一来, 每个接口都有可能返回大量无用的数据, 如果数据嵌套过深, 极端情况可能有上兆的数据.</p>
+<p>因此前端需要做到像<code class="language-text">GraphQL</code>一样能够自行定义所需的数据. (前提还是需要后端支持)</p>
+<h2 id="squiggly" class="heading"><a href="#squiggly" aria-hidden="true"><span class="icon icon-link"></span></a>Squiggly</h2>
+<p>如果后端是用<code class="language-text">JAVA</code>开发, 那么可以使用<a href="https://github.com/bohnman/squiggly">squiggly</a>来支持前端数据自定义</p>
+<p>根据这个库的介绍, 可以通过自定义<code class="language-text">filter</code>形式来过滤掉<code class="language-text">JAVA</code>类中数据的输出</p>
+<p>用<code class="language-text">javascript</code>以及上面的<code class="language-text">User</code>作为例子的话, 假设我们的<code class="language-text">filter</code>是<code class="language-text">username,id</code>, 那么当我们<code class="language-text">log(User)</code>时候只会输出<code class="language-text">username</code>和<code class="language-text">id</code>两个数据, 其他都被过滤掉</p>
+<p>当然还支持其他过滤方式, 但下面都是以<strong>精确匹配</strong>方式来完成数据定义</p>
+<h2 id="最简单粗暴的方式" class="heading"><a href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%B2%97%E6%9A%B4%E7%9A%84%E6%96%B9%E5%BC%8F" aria-hidden="true"><span class="icon icon-link"></span></a>最简单粗暴的方式</h2>
+<p>直接在请求中带上自定义请求头, 值设为所需要返回的字段</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> fileds <span class="token operator">=</span> <span class="token string">'name,user.username,user.id'</span>
+axios<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  url<span class="token punctuation">:</span> <span class="token string">'/example'</span><span class="token punctuation">,</span>
+  headers<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    fields
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
+<p>这样后端返回的字段只有</p>
+<div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+  <span class="token property">"user"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"username"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">""</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p>这种方法存在弊端</p>
+<ul>
+<li>定义<code class="language-text">fileds</code>会很麻烦</li>
+<li><code class="language-text">fields</code>不利于复用</li>
+<li><code class="language-text">fields</code>中定义的字段无法反应到<code class="language-text">response</code>中</li>
+</ul>
+<h2 id="进一步改进" class="heading"><a href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%94%B9%E8%BF%9B" aria-hidden="true"><span class="icon icon-link"></span></a>进一步改进</h2>
+<p>基于上面的问题, 我所期待的效果应该如下:</p>
+<ul>
+<li>更容易以及明确的定义<code class="language-text">fileds</code></li>
+<li><code class="language-text">fields</code>易于继承和扩展</li>
+<li>定义<code class="language-text">fileds</code>同时能定义其类型, 并且反应到<code class="language-text">response</code>上</li>
+</ul>
+<p>解决上面上个问题可以从两个方法入手</p>
+<ul>
+<li>通过类的方法定义<code class="language-text">fileds</code></li>
+<li>借助<code class="language-text">typescript</code>完成类型定义</li>
+</ul>
+<p>似乎只用<code class="language-text">typescript</code> + <code class="language-text">interface</code>就能很好的解决上述功能</p>
+<p><strong>定义类型</strong></p>
+<div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">ResData</span> <span class="token punctuation">{</span>
+  name<span class="token punctuation">:</span> <span class="token builtin">string</span>
+  user<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    username<span class="token punctuation">:</span> <span class="token builtin">string</span>
+    id<span class="token punctuation">:</span> <span class="token builtin">number</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p>借助<code class="language-text">ts</code>可以很容易定义一个类型, 只要把它赋值给<code class="language-text">axios</code>就能很容易定义<code class="language-text">response</code></p>
+<p>接下来只需要想办法把<code class="language-text">interface</code>转成字符串</p>
+<p>但其实类型和字符串是两个层面的东西, 类型属于<code class="language-text">ts</code>,  而字符串是实实在在的<code class="language-text">js</code>变量, 将两个层面连接一起的通道其实就是<code class="language-text">AST</code>, 我们可以通过解析<code class="language-text">ts</code>语法, 通过<code class="language-text">transform</code>转成<code class="language-text">js</code>代码</p>
+<p>于是乎发现了一个<a href="https://github.com/cevek/ttypescript">ttypescript</a>, 可以自行实现<code class="language-text">transformer</code>来完成编译, 同时发现了一个很合适的<a href="https://github.com/nullcc/ts-interface-keys-transformer#readme">transformer</a></p>
+<p>而这篇<a href="https://nullcc.github.io/2019/07/18/TypeScript%E4%B8%AD%E5%88%A9%E7%94%A8transformer%E8%8E%B7%E5%8F%96interface%20keys/">文章</a>整体思路跟我都是很相似, 这里就不在展开</p>
+<p>但是说下这个方法的一些弊端</p>
+<ul>
+<li>不支持嵌套类型</li>
+<li>不支持数组类型</li>
+<li>对继承不友好</li>
+</ul>
+<h2 id="最终实现" class="heading"><a href="#%E6%9C%80%E7%BB%88%E5%AE%9E%E7%8E%B0" aria-hidden="true"><span class="icon icon-link"></span></a>最终实现</h2>
+<h3 id="定义fields以及类型" class="heading"><a href="#%E5%AE%9A%E4%B9%89fields%E4%BB%A5%E5%8F%8A%E7%B1%BB%E5%9E%8B" aria-hidden="true"><span class="icon icon-link"></span></a>定义fields以及类型</h3>
+<p>最终要达到的目的其实就是: <strong>定义字段同时定义返回类型</strong>, 而上面的方法是从<code class="language-text">ts</code>层面出发, 我们可以试着从<code class="language-text">js</code>层面出发, 利用<code class="language-text">ts</code>的类型推到功能完成</p>
+<p>举个例子</p>
+<div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token punctuation">{</span>
+  name<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+  user<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    username<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+    id<span class="token punctuation">:</span> <span class="token number">1</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> <span class="token constant">A</span> <span class="token operator">=</span> <span class="token keyword">typeof</span> a
+</code></pre></div>
+<p>借助<code class="language-text">ts</code>的类型推到可以很容易得出</p>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token constant">A</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  name<span class="token punctuation">:</span> <span class="token builtin">string</span>
+  user<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    username<span class="token punctuation">:</span> <span class="token builtin">string</span>
+    id<span class="token punctuation">:</span> <span class="token builtin">number</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p>有了这个例子, 我们就可以很容易完成我们的目标</p>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> NumberType <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment">// type: number</span>
+<span class="token keyword">const</span> StringType <span class="token operator">=</span> <span class="token string">''</span> <span class="token comment">// type: string</span>
+<span class="token keyword">const</span> BooleanType <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token comment">// type: boolean</span>
+<span class="token keyword">const</span> AnyType <span class="token operator">=</span> <span class="token string">''</span> <span class="token keyword">as</span> <span class="token builtin">any</span> <span class="token comment">// type: any</span>
+
+<span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token punctuation">{</span>
+  name<span class="token punctuation">:</span> StringType<span class="token punctuation">,</span>
+  user<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    username<span class="token punctuation">:</span> StringType<span class="token punctuation">,</span>
+    id<span class="token punctuation">:</span> NumberType
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token punctuation">{</span>
+  key1<span class="token punctuation">:</span> BooleanType<span class="token punctuation">,</span>
+  key2<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    key3<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      key4<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        key5<span class="token punctuation">:</span> NumberType
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p>通过定义变量+类型推导就能很轻松完成<code class="language-text">fileds</code>的定义</p>
+<h3 id="实现render方法" class="heading"><a href="#%E5%AE%9E%E7%8E%B0render%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="icon icon-link"></span></a>实现render方法</h3>
+<p><code class="language-text">render</code>方法作用其实就是将上面定义好的变量转成字符串形式的<code class="language-text">fields</code></p>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">render</span><span class="token punctuation">(</span><span class="token parameter">arg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 实现方法其实很简单, 就是遍历object输出key</span>
+  <span class="token comment">// 遇到nested或者array就递归</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p>这时候我们可以这样</p>
+<div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> fileds <span class="token operator">=</span> <span class="token function">render</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+axios<span class="token punctuation">.</span>request<span class="token operator">&lt;</span><span class="token keyword">typeof</span> a<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  url<span class="token punctuation">:</span> <span class="token string">'/example'</span><span class="token punctuation">,</span>
+  headers<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    fields
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
+<p>到这里其实就达到了最终的目标<strong>定义fileds同时定义返回类型</strong></p>
+<p>但是目前这样维护起来不太容易, 我们需要<strong>继承</strong>以及更多的<strong>类型支持</strong></p>
+<h3 id="继承" class="heading"><a href="#%E7%BB%A7%E6%89%BF" aria-hidden="true"><span class="icon icon-link"></span></a>继承</h3>
+<p>目前继承通过<code class="language-text">Object.assign</code>就能实现, 但是<code class="language-text">Object.assign</code>并不支持类型, 因此我们需要扩展</p>
+<div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">function</span> <span class="token function">extend</span><span class="token punctuation">(</span><span class="token parameter">t0<span class="token punctuation">,</span> <span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> t0<span class="token punctuation">,</span> <span class="token operator">...</span>args<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<hr>
+<p>未完待续</p>
+]]></description><link>http://zwingz.github.io/posts/596661085.html</link><guid isPermaLink="false">596661085</guid><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Wed, 08 Apr 2020 15:22:10 GMT</pubDate></item><item><title><![CDATA[2019，精彩的一年]]></title><description><![CDATA[<h2 id="回顾2019" class="heading"><a href="#%E5%9B%9E%E9%A1%BE2019" aria-hidden="true"><span class="icon icon-link"></span></a>回顾2019</h2>
 <p>先大概回顾下我在<a href="https://zwing.site/posts/403552116.html">2018年总结</a>中对2019的期望</p>
 <p><img src="https://raw.githubusercontent.com/zWingz/imgur/master/1577282858840.png"></p>
 <h3 id="2019，我的技术成长" class="heading"><a href="#2019%EF%BC%8C%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E6%88%90%E9%95%BF" aria-hidden="true"><span class="icon icon-link"></span></a>2019，我的技术成长</h3>
@@ -605,7 +762,7 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
       <span class="token keyword">let</span> endSelection <span class="token operator">=</span> editor<span class="token punctuation">.</span><span class="token function">getSelection</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
       <span class="token keyword">let</span> range <span class="token operator">=</span> <span class="token function">createRange</span><span class="token punctuation">(</span>endSelection<span class="token punctuation">)</span>
       <span class="token comment">// generate fileName</span>
-      <span class="token keyword">const</span> fileName <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>file<span class="token punctuation">.</span>type<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+      <span class="token keyword">const</span> fileName <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>file<span class="token punctuation">.</span><span class="token keyword">type</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
       <span class="token comment">// copy img url to editor</span>
       editor<span class="token punctuation">.</span><span class="token function">executeEdits</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> range<span class="token punctuation">,</span> text<span class="token punctuation">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">![](Uploading...)</span><span class="token template-punctuation string">`</span></span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
       <span class="token comment">// get new range</span>
