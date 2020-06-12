@@ -1,46 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Fri, 12 Jun 2020 13:45:45 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 12 Jun 2020 13:45:45 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用vuex-ts-enhance提升vuex的使用体验]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Fri, 12 Jun 2020 13:47:39 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 12 Jun 2020 13:47:39 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用vuex-ts-enhance提升vuex的使用体验]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
 <p><code class="language-text">vuex</code>对<code class="language-text">ts</code>支持并不友好, 我们定义了一堆<code class="language-text">state</code>, 但是在使用<code class="language-text">mapXXX</code>方法的时候并不知道有哪些<code class="language-text">namespace</code>以及有哪些<code class="language-text">getters</code>或者<code class="language-text">actions</code>可以获取</p>
 <p>而<a href="https://github.com/zwingz/vuex-ts-enhance">vuex-ts-enhance</a>, 借助<code class="language-text">ts</code>的类型推导功能，在使用<code class="language-text">vuex</code>时能提供<code class="language-text">state</code>, <code class="language-text">actions</code>, <code class="language-text">getters</code>, <code class="language-text">mutations</code>和<code class="language-text">dispatch</code>的类型推导。解决了上述问题</p>
 <h2 id="简单使用" class="heading"><a href="#%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8" aria-hidden="true"><span class="icon icon-link"></span></a>简单使用</h2>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts">import { EnhanceStore } from &#39;vuex-ts-enhance`
-import Vue from &#39;vue&#39;
-const state = {
-    state: {
-        // rootState
-        root: {}
-    },
-    getters: {
-        rootGet() { return 1 }
-    },
-    actions: {
-        // rootActions
-        setRoot(context, payload: string) {}
-    },
-    mutations: {
-        setRoot(state, payload: string){}
-    },
-    modules: {
-        sub: {
-            namespaced: true,
-            state: {
-                substate: &#39;&#39;
-            },
-            actions: {
-                setSubState(context, payload: number) {}
-            },
-            mutations: {
-                setSubState(state, payload: number) {}
-            },
-            getters: {
-                suGet() { return 2 }
-            },
-        }
-    }
-}
-export const { mapGetters, store, mapActions, mapMutations, mapState } = s;
-new Vue({
+<div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> EnhanceStore <span class="token punctuation">}</span> <span class="token keyword">from</span> 'vuex<span class="token operator">-</span>ts<span class="token operator">-</span>enhance`
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
+    state<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token comment">// rootState</span>
+        root<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    getters<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token function">rootGet</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token number">1</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    actions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token comment">// rootActions</span>
+        <span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span> payload<span class="token punctuation">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    mutations<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> payload<span class="token punctuation">:</span> <span class="token builtin">string</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    modules<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        sub<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            namespaced<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            state<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                substate<span class="token punctuation">:</span> <span class="token string">''</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            actions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                <span class="token function">setSubState</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span> payload<span class="token punctuation">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            mutations<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                <span class="token function">setSubState</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> payload<span class="token punctuation">:</span> <span class="token builtin">number</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            getters<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                <span class="token function">suGet</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token number">2</span> <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token punctuation">{</span> mapGetters<span class="token punctuation">,</span> store<span class="token punctuation">,</span> mapActions<span class="token punctuation">,</span> mapMutations<span class="token punctuation">,</span> mapState <span class="token punctuation">}</span> <span class="token operator">=</span> s<span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     store
-})</code></pre></div>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
 <p>这样就能完成初始化, 其实就是把<code class="language-text">state</code>传入构造器中, 所返回的<code class="language-text">mapXXXX</code>方法都带有类型推导, 并且能明确知道某个<code class="language-text">namespaced</code>下有哪些数据或者方法能获取.</p>
 <p>接下来看下<code class="language-text">vscode</code>的提示</p>
 <p><img src="https://raw.githubusercontent.com/zWingz/imgur/master/1591967951648.png"></p>
@@ -82,7 +82,7 @@ new Vue({
 <p>以上类型推导同时支持<code class="language-text">mapGetters</code>, <code class="language-text">mapActions</code>, <code class="language-text">mapState</code>, <code class="language-text">mapMutations</code>, <code class="language-text">dispatch</code></p>
 <h4 id="end" class="heading"><a href="#end" aria-hidden="true"><span class="icon icon-link"></span></a>End</h4>
 <p>以上代码是基于<code class="language-text">lant=ts</code>下有的提示, 但如果是在<code class="language-text">lang=js</code>下, <code class="language-text">vetur</code>有时能提示类型, 又是又不能提示类型..暂且找不到问题所在。但<code class="language-text">mapXXXX</code>方法的提示还依然生效, 因为他不依赖<code class="language-text">vetur</code></p>
-]]></description><link>http://zwingz.github.io/posts/637751719.html</link><guid isPermaLink="false">637751719</guid><category><![CDATA[Vue]]></category><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 12 Jun 2020 13:30:10 GMT</pubDate></item><item><title><![CDATA[利用泛型+类型推导定义伪GraphQL模型]]></title><description><![CDATA[<p>接触过前端的应该都有听过<a href="https://graphql.org/">GraphQL</a></p>
+]]></description><link>http://zwingz.github.io/posts/637751719.html</link><guid isPermaLink="false">637751719</guid><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 12 Jun 2020 13:30:10 GMT</pubDate></item><item><title><![CDATA[利用泛型+类型推导定义伪GraphQL模型]]></title><description><![CDATA[<p>接触过前端的应该都有听过<a href="https://graphql.org/">GraphQL</a></p>
 <p>简单来说就是前端自行定义接口所需要返回的数据, 想要尝试的可以试着调用<a href="https://developer.github.com/v4/">GithubAPI V4</a>.</p>
 <p>而对于我们常用的<code class="language-text">xhr</code>请求能否也做到跟<code class="language-text">GraphQL</code>一样能自定义接口返回的数据? </p>
 <p>答案是可以, 但是提前必须是后端必须提供足够的数据让前端自行选择.</p>
