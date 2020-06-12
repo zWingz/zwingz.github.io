@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Fri, 12 Jun 2020 13:49:20 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 12 Jun 2020 13:49:20 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用vuex-ts-enhance提升vuex的使用体验]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Fri, 12 Jun 2020 14:17:03 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 12 Jun 2020 14:17:03 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用vuex-ts-enhance提升vuex的使用体验]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
 <p><code class="language-text">vuex</code>对<code class="language-text">ts</code>支持并不友好, 我们定义了一堆<code class="language-text">state</code>, 但是在使用<code class="language-text">mapXXX</code>方法的时候并不知道有哪些<code class="language-text">namespace</code>以及有哪些<code class="language-text">getters</code>或者<code class="language-text">actions</code>可以获取</p>
 <p>而<a href="https://github.com/zwingz/vuex-ts-enhance">vuex-ts-enhance</a>, 借助<code class="language-text">ts</code>的类型推导功能，在使用<code class="language-text">vuex</code>时能提供<code class="language-text">state</code>, <code class="language-text">actions</code>, <code class="language-text">getters</code>, <code class="language-text">mutations</code>和<code class="language-text">dispatch</code>的类型推导。解决了上述问题</p>
 <h2 id="简单使用" class="heading"><a href="#%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8" aria-hidden="true"><span class="icon icon-link"></span></a>简单使用</h2>
@@ -85,6 +85,25 @@
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 </code></pre></div>
 <p>以上类型推导同时支持<code class="language-text">mapGetters</code>, <code class="language-text">mapActions</code>, <code class="language-text">mapState</code>, <code class="language-text">mapMutations</code>, <code class="language-text">dispatch</code></p>
+<h2 id="注意" class="heading"><a href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span class="icon icon-link"></span></a>注意</h2>
+<ul>
+<li>如果你使用<code class="language-text">typescript</code>, 请不要把<code class="language-text">state</code>定义成<code class="language-text">StoreOptions</code>, 因为这样会让类型推导失效</li>
+</ul>
+<div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> state<span class="token punctuation">:</span> StoreOptions<span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// don't do that</span>
+</code></pre></div>
+<ul>
+<li>如果你用<code class="language-text">js</code>, 并且使用了<code class="language-text">jsdoc</code>来定义来写, 请务必把<code class="language-text">context</code>定义为<code class="language-text">any</code>, 否则类型检查会失效</li>
+</ul>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
+  actions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * @param {any} context
+     * @param {string} payload
+     */</span>
+    <span class="token function">someActions</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span> payload</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <h4 id="end" class="heading"><a href="#end" aria-hidden="true"><span class="icon icon-link"></span></a>End</h4>
 <p>以上代码是基于<code class="language-text">lant=ts</code>下有的提示, 但如果是在<code class="language-text">lang=js</code>下, <code class="language-text">vetur</code>有时能提示类型, 又是又不能提示类型..暂且找不到问题所在。但<code class="language-text">mapXXXX</code>方法的提示还依然生效, 因为他不依赖<code class="language-text">vetur</code></p>
 ]]></description><link>http://zwingz.github.io/posts/637751719.html</link><guid isPermaLink="false">637751719</guid><dc:creator><![CDATA[zWingz]]></dc:creator><pubDate>Fri, 12 Jun 2020 13:30:10 GMT</pubDate></item><item><title><![CDATA[利用泛型+类型推导定义伪GraphQL模型]]></title><description><![CDATA[<p>接触过前端的应该都有听过<a href="https://graphql.org/">GraphQL</a></p>
