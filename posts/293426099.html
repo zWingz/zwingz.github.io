@@ -1,55 +1,55 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><meta name="description" content="记一次webpack优化 --- 从babelrc和UglifyPlugin下手"><meta name="keywords" content=""><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><title>记一次webpack优化 --- 从babelrc和UglifyPlugin下手 - zWing</title><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6650629ba7ddbfe98e2f63700c2e6923";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script></head><body><div class="indicator"></div><canvas id="ribbon"></canvas><main class="main"><header class="header"><a class="logo" href="/">zWing</a><nav class="menu"><a href="/archives/">Archives</a><a href="/tags/">Tags</a><a href="/about/">About</a><a href="/repo/">Repo</a></nav><div class="social"><a target="_blank" href="/rss.xml"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.18,15.64A2.18,2.18 0 0,1 8.36,17.82C8.36,19 7.38,20 6.18,20C5,20 4,19 4,17.82A2.18,2.18 0 0,1 6.18,15.64M4,4.44A15.56,15.56 0 0,1 19.56,20H16.73A12.73,12.73 0 0,0 4,7.27V4.44M4,10.1A9.9,9.9 0 0,1 13.9,20H11.07A7.07,7.07 0 0,0 4,12.93V10.1Z"></path></svg> </a><a target="_blank" href="https://github.com/zWingz/my-blog-config/issues"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path></svg></a></div></header><div class="content-container center"><div id="post" class="flex"><aside class="toc"><div class="stay"><ul><li><a href="#%E4%BC%98%E5%8C%96%E5%89%8D">优化前</a></li><li><a href="#%E4%BC%98%E5%8C%96%E5%90%8E">优化后</a></li><li><a href="#%E4%BF%AE%E6%94%B9%E4%BA%86%E5%93%AA%E4%BA%9B%E5%9C%B0%E6%96%B9">修改了哪些地方?</a><ul><li><a href="#uglifeplugin">UglifePlugin</a></li><li><a href="#babelrc">babelrc</a></li></ul></li><li><a href="#ps">ps</a></li></ul><span class="toc-icon"></span></div></aside><article class="post-content"><time class="time">February 01, 2018</time><h1 class="title">记一次webpack优化 --- 从babelrc和UglifyPlugin下手</h1><div><a href="/tags/819211154" class="tags-item" style="background: #92efc8;">Front End </a><a href="/tags/819211088" class="tags-item" style="background: #1faf32;">Webpack</a></div><div class="content"><h2 id="优化前" class="heading"><a href="#%E4%BC%98%E5%8C%96%E5%89%8D" aria-hidden="true"><span class="icon icon-link"></span></a>优化前</h2><p>先来看优化前打包速度 大的第三方库大概有vue+axios+vueRouter+vuex+elementUI(datepicker, message两个插件)+jquery 打包总体积为2648k, 一共14个chunk(使用了异步路由) <img src="https://user-images.githubusercontent.com/13031838/35665400-19f380fc-0761-11e8-944b-85a5117364c2.png" alt="image"></p><p>在我本地打包一次需要31s</p><p><img src="https://user-images.githubusercontent.com/13031838/35664714-26a6075a-075e-11e8-8df9-1cde8b4f1878.png" alt="image"></p><p>而在服务器打包时候则要70s以上, 这里就不贴图了.</p><h2 id="优化后" class="heading"><a href="#%E4%BC%98%E5%8C%96%E5%90%8E" aria-hidden="true"><span class="icon icon-link"></span></a>优化后</h2><p>优化后时间 打包总体积上升为2700k, 上升了50k</p><p><img src="https://user-images.githubusercontent.com/13031838/35665453-3ce893ea-0761-11e8-8d79-2c8b3555acb5.png" alt="image"></p><p>本地打包18s</p><p><img src="https://user-images.githubusercontent.com/13031838/35664879-c88ec336-075e-11e8-88c0-a61590c97cad.png" alt="image"></p><p>服务器打包时间40s</p><p><img src="https://user-images.githubusercontent.com/13031838/35664898-d966d888-075e-11e8-8e6b-70b4043afe8b.png" alt="image"></p><p><strong>提升很明显有没有</strong></p><h2 id="修改了哪些地方" class="heading"><a href="#%E4%BF%AE%E6%94%B9%E4%BA%86%E5%93%AA%E4%BA%9B%E5%9C%B0%E6%96%B9" aria-hidden="true"><span class="icon icon-link"></span></a>修改了哪些地方?</h2><h3 id="uglifeplugin" class="heading"><a href="#uglifeplugin" aria-hidden="true"><span class="icon icon-link"></span></a>UglifePlugin</h3><p>主要修改地方还是在UglifyPlugin配置中 由于我是用的并不是webpack自带的,而是独立的<a href="https://github.com/webpack-contrib/uglifyjs-webpack-plugin">uglifyjs-webpack-plugin</a></p><p>其实官方使用的也是这个插件. 只不过官方使用的暂且不是最新版,而webpack4.0-beta已经使用此插件最新版本</p><p>用法很简单</p><div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> UglifyJsPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'uglifyjs-webpack-plugin'</span><span class="token punctuation">)</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">UglifyJsPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">UglifyJsPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 </code></pre></div><p>如果使用默认配置,那么打包速度并不会有提升.</p><p>而且uglifyplugin在打包过程中其实也会进行一些压缩优化,比如内敛静态变量等等.</p><p>那么我们可以从这里面入手,去除一切不必要的压缩优化.可以提升压缩速度.</p><p>同时.我们需要开启parallel和cache选项,对压缩进行缓存和多线程执行</p><p>具体配置规则请参考官方文档<a href="https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options">UglifyOptions</a></p><p>我的最终配置如下</p><div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript">    <span class="token keyword">new</span> <span class="token class-name">UglifyEsPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-            parallel<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-            cache<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-            sourceMap<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-            uglifyOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-                ecma<span class="token operator">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
+            parallel<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            cache<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            sourceMap<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            uglifyOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                ecma<span class="token punctuation">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
                 <span class="token comment">// 详细规则</span>
                 <span class="token comment">// https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options</span>
-                compress<span class="token operator">:</span> <span class="token punctuation">{</span>
+                compress<span class="token punctuation">:</span> <span class="token punctuation">{</span>
                     <span class="token comment">// 在UglifyJs删除没有用到的代码时不输出警告</span>
-                    warnings<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    warnings<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 删除所有的 `console` 语句</span>
-                    drop_console<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    drop_console<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
                     <span class="token comment">// 将()=>{return x} 转成 ()=>x</span>
                     <span class="token comment">// 关闭.eslint有做检查</span>
-                    arrows<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    arrows<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 转换类似!!a ? b : c → a ? b : c</span>
                     <span class="token comment">// 关闭.eslint做检查</span>
-                    booleans<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    booleans<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 转换由计算得来的属性名 {["computed"]: 1} is converted to {computed: 1}.</span>
                     <span class="token comment">// 关闭,eslint做检查</span>
-                    computed_props<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    computed_props<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 自动转换判断</span>
                     <span class="token comment">// e.g. a = !b &amp;&amp; !c &amp;&amp; !d &amp;&amp; !e → a=!(b||c||d||e) etc.</span>
                     <span class="token comment">// 关闭,请自行做规范</span>
-                    comparisons<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    comparisons<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 去掉死代码</span>
                     <span class="token comment">// 关闭.eslint做检查</span>
-                    dead_code<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    dead_code<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 关闭debugger</span>
                     <span class="token comment">// eslint做检查</span>
-                    drop_debugger<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    drop_debugger<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 自动进行静态算术计算</span>
                     <span class="token comment">// 开启</span>
-                    evaluate<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    evaluate<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
                     <span class="token comment">// 函数声明提升</span>
                     <span class="token comment">// 默认就是关闭,不需要开启</span>
-                    hoist_funs<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    hoist_funs<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// For example: var o={p:1, q:2}; f(o.p, o.q); is converted to f(1, 2);</span>
                     <span class="token comment">// 不需要咯</span>
-                    hoist_props<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    hoist_props<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 变量提升</span>
                     <span class="token comment">// 不需要咯</span>
-                    hoist_vars<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    hoist_vars<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">//  optimizations for if/return and if/continue</span>
                     <span class="token comment">// 不需要, eslint做检查</span>
-                    if_return<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    if_return<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">/**
                      * 无法用言语表达,自行理解
                      * inline (default: true) -- inline calls to function with simple/return statement:
@@ -60,70 +60,70 @@ module<span class="token punctuation">.</span>exports <span class="token operato
                         3 -- inline functions with arguments and variables
                         true -- same as 3
                      */</span>
-                    inline<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    inline<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// join consecutive var statements</span>
                     <span class="token comment">// 就是将变量声明合并到一个var中</span>
                     <span class="token comment">// 关闭, eslin做检查</span>
-                    join_vars<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    join_vars<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 自动去除无用的function参数</span>
                     <span class="token comment">// 关闭. eslint做检查</span>
-                    keep_fargs<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    keep_fargs<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">//  Pass true to prevent Infinity from being compressed into 1/0</span>
                     <span class="token comment">// 禁止将infinity转成1/0</span>
-                    keep_infinity<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    keep_infinity<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
                     <span class="token comment">// optimizations for do, while and for loops when we can statically determine the condition.</span>
                     <span class="token comment">// 优化循环</span>
                     <span class="token comment">// 此处关闭,应该由开发者自行优化</span>
-                    loops<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    loops<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// negate "Immediately-Called Function Expressions" where the return value is discarded, to avoid the parens that the code generator would insert.</span>
                     <span class="token comment">// 自行体会</span>
-                    negate_iife<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    negate_iife<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
                     <span class="token comment">//  rewrite property access using the dot notation, for example foo["bar"] → foo.bar</span>
                     <span class="token comment">// 关闭.eslint检查</span>
-                    properties<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    properties<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 将只用到一次的function,通过inline方式插入</span>
                     <span class="token comment">// 关闭.开发者自行把控</span>
-                    reduce_funcs<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    reduce_funcs<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 将静态变量直接lnline紧代码里</span>
                     <span class="token comment">// 可以开启</span>
-                    reduce_vars<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    reduce_vars<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
                     <span class="token comment">// 使用逗号运算符连接连续的简单语句</span>
                     <span class="token comment">// 自行把控</span>
-                    sequences<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    sequences<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">/**
                      *  Pass false to disable potentially dropping functions marked as "pure". 
                      * A function call is marked as "pure" if a comment annotation \/*@__PURE__*\/ or \/*#__PURE__*\/ immediately precedes the call. 
                      * For example: \/*@__PURE__*\/foo();
                      * 就是关闭标注纯函数的注释了
                      */</span>
-                    side_effects<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    side_effects<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 去掉重复和无法到达的switch分支</span>
                     <span class="token comment">// eslint做检查, 以及开发者把控</span>
-                    switches<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    switches<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// Transforms typeof foo == "undefined" into foo === void 0</span>
-                    typeofs<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    typeofs<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                 <span class="token punctuation">}</span>
             <span class="token punctuation">}</span></code></pre></div><p>其实很多优化点都是可以通过eslint来检查,而不需要在压缩过程检查</p><p>再配合自身的开发习惯以及规范,可以去掉很多压缩检查, 压缩效率就能提升</p><p>但是带来的负面影响就是压缩体积会有上升/</p><p>因为对于第三方库来说,并不会安装项目配置的eslint来跑.自然就达不到要求.</p><p>再少了uglifyplugin的压缩优化,体积就会上升.</p><p>以我的例子来看,总体积上升了50k. 尚可以接受.</p><p>而打包时间足足提升了30s.</p><p>但可能也有人说上线打包不必在乎打包时间.</p><p>其实这些都看具体业务需求,以及自身的开发规范来配置.</p><p>重要的还是在打包速度和打包体积两者中找出一个最合适的平衡点</p><h3 id="babelrc" class="heading"><a href="#babelrc" aria-hidden="true"><span class="icon icon-link"></span></a>babelrc</h3><p>其实babel并不会影响到打包速度.我也只是顺便提下</p><p>我的配置如下</p><div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token punctuation">{</span>
-    <span class="token string">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"plugins"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
         <span class="token punctuation">[</span>
             <span class="token string">"component"</span><span class="token punctuation">,</span>
             <span class="token punctuation">[</span><span class="token punctuation">{</span>
-                <span class="token string">"libraryName"</span><span class="token operator">:</span> <span class="token string">"element-ui"</span><span class="token punctuation">,</span>
-                <span class="token string">"styleLibraryName"</span><span class="token operator">:</span> <span class="token string">"theme-default"</span>
+                <span class="token string">"libraryName"</span><span class="token punctuation">:</span> <span class="token string">"element-ui"</span><span class="token punctuation">,</span>
+                <span class="token string">"styleLibraryName"</span><span class="token punctuation">:</span> <span class="token string">"theme-default"</span>
             <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token string">"comments"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-    <span class="token string">"env"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-        <span class="token string">"development"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-            <span class="token string">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"transform-object-rest-spread"</span><span class="token punctuation">,</span> <span class="token string">"syntax-dynamic-import"</span><span class="token punctuation">]</span>
+    <span class="token string">"comments"</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token string">"env"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"development"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"plugins"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"transform-object-rest-spread"</span><span class="token punctuation">,</span> <span class="token string">"syntax-dynamic-import"</span><span class="token punctuation">]</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token string">"production"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-            <span class="token string">"presets"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">"es2015"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">"modules"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"stage-2"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-            <span class="token string">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"transform-runtime"</span><span class="token punctuation">]</span>
+        <span class="token string">"production"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"presets"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">"es2015"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">"modules"</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"stage-2"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token string">"plugins"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"transform-runtime"</span><span class="token punctuation">]</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token string">"test"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-            <span class="token string">"presets"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"env"</span><span class="token punctuation">,</span> <span class="token string">"stage-2"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-            <span class="token string">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"transform-runtime"</span><span class="token punctuation">,</span> <span class="token string">"istanbul"</span><span class="token punctuation">]</span>
+        <span class="token string">"test"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"presets"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"env"</span><span class="token punctuation">,</span> <span class="token string">"stage-2"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token string">"plugins"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"transform-runtime"</span><span class="token punctuation">,</span> <span class="token string">"istanbul"</span><span class="token punctuation">]</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div><p>我把babel配置区分成了三个阶段,开发,生产和测试.</p><p>在开发过程不使用preset,直接跑原生代码.</p><p>在生产环境则使用es2015的preset</p><p>也许这样能提高开发环境的编译速度? 暂时不清楚,因为没感觉.一向很快.</p><p>这也看个人喜好了.</p><h2 id="ps" class="heading"><a href="#ps" aria-hidden="true"><span class="icon icon-link"></span></a>ps</h2><p>eslint的作用真的很大很大.</p><p>但是在开发阶段使用eslint真的很烦很烦.</p><p>所以,我目前的做法就是在开发阶段关闭eslint检查.因为我的vscode有带插件提示</p><p>即便检查到有错误,也可以正常编译.</p><p>但是在commit的时候添加了一层pre-commit来对修改的文件执行eslint.</p><p>这样就确保上传到git的代码是经过eslint检查的</p><p>这样既能确保开发不被干扰,也能确保代码能按照规范.</p></div><div class="comments"><div id="gitalk-container"></div></div></article></div></div></main><footer class="footer"><div class="center">Powered by <a target="_blank" href="https://github.com/acyortjs/acyort">AcyOrt</a> / Theme <a target="_blank" href="https://github.com/acyortjs/theme-donob">donob</a></div></footer><script src="/script/post.js"></script><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalkConfig = JSON.parse('{"owner":"zWingz","repo":"my-blog-config","admin":["zWingz"],"clientID":"0438ed96c0cb944693a7","clientSecret":"23e7aa3152f5d03d8f20029540741d6f886c9f5b","number":6}')
