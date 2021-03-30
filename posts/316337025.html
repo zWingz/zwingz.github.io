@@ -157,11 +157,11 @@ console<span class="token punctuation">.</span><span class="token function">log<
    * @memberof Promise
    */</span>
   <span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">onFulfilled<span class="token punctuation">,</span> onRejected</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    onFulfilled <span class="token operator">=</span> <span class="token keyword">typeof</span> onFulfilled <span class="token operator">===</span> <span class="token string">'function'</span> <span class="token operator">?</span> <span class="token function-variable function">onFulfilled</span> <span class="token operator">:</span> <span class="token parameter">val</span> <span class="token operator">=></span> val
+    onFulfilled <span class="token operator">=</span> <span class="token keyword">typeof</span> onFulfilled <span class="token operator">===</span> <span class="token string">'function'</span> <span class="token operator">?</span> <span class="token function-variable function">onFulfilled</span> <span class="token punctuation">:</span> <span class="token parameter">val</span> <span class="token operator">=></span> val
     onRejected <span class="token operator">=</span>
       <span class="token keyword">typeof</span> onRejected <span class="token operator">===</span> <span class="token string">'function'</span>
         <span class="token operator">?</span> <span class="token function-variable function">onRejected</span>
-        <span class="token operator">:</span> <span class="token parameter">err</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+        <span class="token punctuation">:</span> <span class="token parameter">err</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> err
           <span class="token punctuation">}</span>
     <span class="token keyword">const</span> self <span class="token operator">=</span> <span class="token keyword">this</span>
