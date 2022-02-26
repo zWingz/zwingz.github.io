@@ -6,17 +6,17 @@
 <span class="token punctuation">}</span>
 </code></pre></div><p>然而, 对于<code class="language-text">taro</code>而言, 数据的修改通过<code class="language-text">this.setState</code>来完成, 不能像原生小程序那样只修改部分数据。 比如:</p><div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// taro</span>
 <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  a<span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>a<span class="token punctuation">,</span>
-    b<span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token literal-property property">b</span><span class="token operator">:</span> <span class="token number">1</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  c<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> b<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>c<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+  <span class="token literal-property property">c</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> <span class="token literal-property property">b</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>c<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
 <span class="token comment">// 小程序</span>
 <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  <span class="token string">'a.b'</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token string">'c[0].b'</span><span class="token operator">:</span> <span class="token number">1</span>
+  <span class="token string-property property">'a.b'</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token string-property property">'c[0].b'</span><span class="token operator">:</span> <span class="token number">1</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre></div><p>因此, <code class="language-text">taro</code>每次的<code class="language-text">setState</code>都会把整个数据带上. 不符合<code class="language-text">setData</code>限制。</p><p>倘若<code class="language-text">taro</code>能像<code class="language-text">setData</code>一样可以支持单独修改某一部分数据, 是否可以?</p><p>答案也是否定的</p><p>在<code class="language-text">taro</code>中, 在<code class="language-text">render</code>方法用到的数据, 最终都会被挂在<code class="language-text">this.__state</code>上, 而<code class="language-text">this.__state</code>最终也会反应到<code class="language-text">data</code>上, 所以也是不可取。</p><div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">C</span> <span class="token keyword">extends</span> <span class="token class-name">Taro<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
   <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -28,12 +28,12 @@
 <span class="token comment">// ...</span>
 <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span>
 Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>__state<span class="token punctuation">,</span> <span class="token punctuation">{</span>
-  aa<span class="token operator">:</span> aa
+  <span class="token literal-property property">aa</span><span class="token operator">:</span> aa
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token comment">// ...</span>
 </code></pre></div><p>最终还是只能用原生的方法来实现。</p><h3 id="解决" class="heading"><a href="#%E8%A7%A3%E5%86%B3" aria-hidden="true"><span class="icon icon-link"></span></a>解决</h3><p>对于数据处理, 则像上面一样, 分次写入数据。</p><div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token function">Page</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  data<span class="token operator">:</span> <span class="token punctuation">{</span>
-    arr<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">arr</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token function">setImg</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
