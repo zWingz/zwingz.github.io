@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sat, 26 Feb 2022 01:35:18 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 26 Feb 2022 01:35:18 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用vuex-ts-enhance提升vuex的使用体验]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[zWing]]></title><description><![CDATA[Just a blog.]]></description><link>http://zwingz.github.io</link><image><url>http://zwingz.github.io/favicon.ico</url><title>zWing</title><link>http://zwingz.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Fri, 24 Jun 2022 22:15:48 GMT</lastBuildDate><atom:link href="http://zwingz.github.io/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 24 Jun 2022 22:15:48 GMT</pubDate><webMaster><![CDATA[zWingz]]></webMaster><item><title><![CDATA[使用vuex-ts-enhance提升vuex的使用体验]]></title><description><![CDATA[<h2 id="背景" class="heading"><a href="#%E8%83%8C%E6%99%AF" aria-hidden="true"><span class="icon icon-link"></span></a>背景</h2>
 <p><code class="language-text">vuex</code>对<code class="language-text">ts</code>支持并不友好, 我们定义了一堆<code class="language-text">state</code>, 但是在使用<code class="language-text">mapXXX</code>方法的时候并不知道有哪些<code class="language-text">namespace</code>以及有哪些<code class="language-text">getters</code>或者<code class="language-text">actions</code>可以获取</p>
 <p>而<a href="https://github.com/zwingz/vuex-ts-enhance">vuex-ts-enhance</a>, 借助<code class="language-text">ts</code>的类型推导功能，在使用<code class="language-text">vuex</code>时能提供<code class="language-text">state</code>, <code class="language-text">actions</code>, <code class="language-text">getters</code>, <code class="language-text">mutations</code>和<code class="language-text">dispatch</code>的类型推导。解决了上述问题</p>
 <h2 id="简单使用" class="heading"><a href="#%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8" aria-hidden="true"><span class="icon icon-link"></span></a>简单使用</h2>
@@ -70,7 +70,7 @@
   <span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
   <span class="token keyword">import</span> <span class="token punctuation">{</span> mapGetters<span class="token punctuation">,</span> mapActions<span class="token punctuation">,</span> mapState<span class="token punctuation">,</span> mapMutations <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./store'</span>
   <span class="token keyword">export</span> <span class="token keyword">default</span> Vue<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-    <span class="token literal-property property">computed</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    computed<span class="token operator">:</span> <span class="token punctuation">{</span>
       <span class="token operator">...</span><span class="token function">mapGetters</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'rootGet'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -78,7 +78,7 @@
       <span class="token keyword">this</span><span class="token punctuation">.</span>setSubState <span class="token comment">// type (payload: number) => Promise&lt;void></span>
       <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'sub'</span><span class="token punctuation">,</span> <span class="token string">'setSubState'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    methods<span class="token operator">:</span> <span class="token punctuation">{</span>
       <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token string">'sub'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'setSubState'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span>
@@ -95,7 +95,7 @@
 <li>如果你用<code class="language-text">js</code>, 并且使用了<code class="language-text">jsdoc</code>来定义来写, 请务必把<code class="language-text">context</code>定义为<code class="language-text">any</code>, 否则类型检查会失效</li>
 </ul>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token literal-property property">actions</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  actions<span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token comment">/**
      * @param {any} context
      * @param {string} payload
@@ -133,8 +133,8 @@
 <p>直接在请求中带上自定义请求头, 值设为所需要返回的字段</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> fileds <span class="token operator">=</span> <span class="token string">'name,user.username,user.id'</span>
 axios<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">'/example'</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">headers</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  url<span class="token operator">:</span> <span class="token string">'/example'</span><span class="token punctuation">,</span>
+  headers<span class="token operator">:</span> <span class="token punctuation">{</span>
     fields
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
@@ -435,7 +435,7 @@ axios<span class="token punctuation">.</span><span class="token generic-function
 <li>构建一个<code class="language-text">IconSymbol</code>类, 用于管理<code class="language-text">svg</code><div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">import</span> Icon1 <span class="token keyword">from</span> <span class="token string">'@path/to/svg/es/asn/IconName'</span> <span class="token comment">// 加载icon对应的文件</span>
 IconSymbol<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span>Icon1<span class="token punctuation">)</span> <span class="token comment">// 注册icon</span>
 </code></pre></div></li>
-<li>调用<code class="language-text">IconSymbol.getIcon(name)</code>将<code class="language-text">icon</code>挂载到<code class="language-text">svg-symbol</code><div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token function">getIcon</span><span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">name</span><span class="token operator">:</span> string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<li>调用<code class="language-text">IconSymbol.getIcon(name)</code>将<code class="language-text">icon</code>挂载到<code class="language-text">svg-symbol</code><div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token function">getIcon</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token operator">:</span> string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">const</span> icon <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_map<span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token comment">// 拿到icon的数据结构</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>icon<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">[MkSvgIcon] </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> is unregister</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
@@ -443,7 +443,7 @@ IconSymbol<span class="token punctuation">.</span><span class="token function">r
     <span class="token punctuation">}</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>icon<span class="token punctuation">.</span>isRendered<span class="token punctuation">)</span> <span class="token keyword">return</span>
      <span class="token comment">// 将icon插入到dom中</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">renderSymbol</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">,</span> <span class="token literal-property property">icon</span><span class="token operator">:</span> icon<span class="token punctuation">.</span>define<span class="token punctuation">,</span> <span class="token literal-property property">group</span><span class="token operator">:</span> icon<span class="token punctuation">.</span>group <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">renderSymbol</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">,</span> icon<span class="token operator">:</span> icon<span class="token punctuation">.</span>define<span class="token punctuation">,</span> group<span class="token operator">:</span> icon<span class="token punctuation">.</span>group <span class="token punctuation">}</span><span class="token punctuation">)</span>
     icon<span class="token punctuation">.</span>isRendered <span class="token operator">=</span> <span class="token boolean">true</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>_isRender<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">// 将svg symbol插入到dom中</span>
@@ -561,7 +561,7 @@ IconSymbol<span class="token punctuation">.</span><span class="token function">r
   <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token string">'electron-devtools-installer'</span><span class="token punctuation">)</span>
   <span class="token function">installExtension</span><span class="token punctuation">(</span><span class="token constant">REACT_DEVELOPER_TOOLS</span><span class="token punctuation">)</span>
     <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>name <span class="token operator">=></span> <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Added Extension:  </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span>err <span class="token operator">=></span> <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'An error occurred: '</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>err <span class="token operator">=></span> <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'An error occurred: '</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span><span class="token punctuation">)</span>
   <span class="token comment">// win.webContents.openDevTools()</span>
 <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
   <span class="token comment">// 生产环境直接加载index.html</span>
@@ -645,9 +645,9 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     headers<span class="token operator">:</span> <span class="token punctuation">{</span>
       Accept<span class="token operator">:</span> <span class="token string">'application/json'</span><span class="token punctuation">,</span>
-      <span class="token string-property property">'Content-Type'</span><span class="token operator">:</span> <span class="token string">'application/x-www-form-urlencoded'</span><span class="token punctuation">,</span>
+      <span class="token string">'Content-Type'</span><span class="token operator">:</span> <span class="token string">'application/x-www-form-urlencoded'</span><span class="token punctuation">,</span>
       Referer<span class="token operator">:</span> <span class="token string">'https://github.com/'</span><span class="token punctuation">,</span>
-      <span class="token string-property property">'User-Agent'</span><span class="token operator">:</span>
+      <span class="token string">'User-Agent'</span><span class="token operator">:</span>
         <span class="token string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36'</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span>
@@ -693,7 +693,7 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
 <ul>
 <li><a href="https://developer.github.com/v3/git/blobs/#git-blobs">git-blobs</a>: 可以获取任何文件, 返回base64</li>
 <li><a href="https://developer.github.com/v3/repos/contents/#get-contents">contents</a>: 可以获取1mb以内的文件, 返回base64</li>
-<li>通过<code class="language-text">https://access_token@github.com/user/repo/path/to/file</code> 由于此形式有安全隐患, 因此无法直接用在<code class="language-text">&lt;img /></code>上, 但是可以通过<code class="language-text">curl</code>形式使用</li>
+<li>通过<code class="language-text">https://access_token@github.com/user/repo/path/to/file</code> 由于此形式有安全隐患, 因此无法直接用在<code class="language-text">&lt;img /&gt;</code>上, 但是可以通过<code class="language-text">curl</code>形式使用</li>
 <li>带上<code class="language-text">Authorization</code>访问raw.githubusercontent.com<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token function">fetch</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">https://raw.githubusercontent.com/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>owner<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>repo<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/master/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
   headers<span class="token operator">:</span> <span class="token punctuation">{</span>
     Authorization<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">token </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>_token<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
@@ -746,12 +746,12 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
   <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">https://api.github.com/repos/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>owner<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>repo<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/git/blobs/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>sha<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
     headers<span class="token operator">:</span> <span class="token punctuation">{</span>
       Authorization<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">token </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>_token<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
-      <span class="token string-property property">'content-type'</span><span class="token operator">:</span> <span class="token string">'application/json'</span>
+      <span class="token string">'content-type'</span><span class="token operator">:</span> <span class="token string">'application/json'</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">async</span> res <span class="token operator">=></span> <span class="token punctuation">{</span>
     <span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token builtin">any</span>
     <span class="token comment">// 转成Buffer</span>
-    <span class="token keyword">const</span> buf <span class="token operator">=</span> Buffer<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>content<span class="token punctuation">,</span> <span class="token string">'base64'</span><span class="token punctuation">)</span>
+    <span class="token keyword">const</span> buf <span class="token operator">=</span> Buffer<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>content<span class="token punctuation">,</span> <span class="token string">'base64'</span><span class="token punctuation">)</span>
     <span class="token comment">// 构造Readable</span>
     <span class="token keyword">const</span> read <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Readable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     read<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span>
@@ -762,14 +762,14 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
       data<span class="token operator">:</span> read<span class="token punctuation">,</span>
       <span class="token comment">// 将对应头部也带上</span>
       headers<span class="token operator">:</span> <span class="token punctuation">{</span>
-        <span class="token string-property property">'Content-Length'</span><span class="token operator">:</span> data<span class="token punctuation">.</span>size<span class="token punctuation">,</span>
-        <span class="token string-property property">'Content-Type'</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">image/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>ext<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
-        <span class="token string-property property">'Cache-Control:'</span><span class="token operator">:</span> <span class="token string">'public'</span><span class="token punctuation">,</span>
-        <span class="token string-property property">'Accept-Ranges'</span><span class="token operator">:</span> <span class="token string">'bytes'</span><span class="token punctuation">,</span>
-        Status<span class="token operator">:</span> res<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'Status'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        Date<span class="token operator">:</span> res<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'date'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        Etag<span class="token operator">:</span> res<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'etag'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        <span class="token string-property property">'Last-Modified'</span><span class="token operator">:</span> res<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'Last-Modified'</span><span class="token punctuation">)</span>
+        <span class="token string">'Content-Length'</span><span class="token operator">:</span> data<span class="token punctuation">.</span>size<span class="token punctuation">,</span>
+        <span class="token string">'Content-Type'</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">image/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>ext<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+        <span class="token string">'Cache-Control:'</span><span class="token operator">:</span> <span class="token string">'public'</span><span class="token punctuation">,</span>
+        <span class="token string">'Accept-Ranges'</span><span class="token operator">:</span> <span class="token string">'bytes'</span><span class="token punctuation">,</span>
+        Status<span class="token operator">:</span> res<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'Status'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        Date<span class="token operator">:</span> res<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'date'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        Etag<span class="token operator">:</span> res<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'etag'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">'Last-Modified'</span><span class="token operator">:</span> res<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'Last-Modified'</span><span class="token punctuation">)</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span>
@@ -820,10 +820,10 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
   _cache<span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token punctuation">[</span>k<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">T</span>
   <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token function">set</span><span class="token punctuation">(</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> data<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">set</span><span class="token punctuation">(</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> data<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>_cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> data
   <span class="token punctuation">}</span>
-  <span class="token function">get</span><span class="token punctuation">(</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">get</span><span class="token punctuation">(</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">const</span> ret <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
     <span class="token keyword">return</span> ret
   <span class="token punctuation">}</span>
@@ -853,10 +853,10 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
 
 <span class="token keyword">class</span> <span class="token class-name">ImageCache</span> <span class="token keyword">extends</span> <span class="token class-name">Cache<span class="token operator">&lt;</span>DataJsonType<span class="token operator">></span></span> <span class="token punctuation">{</span>
   <span class="token function">addImg</span><span class="token punctuation">(</span>path<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> img<span class="token operator">:</span> ImgType<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">.</span>images<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">.</span>images<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>img<span class="token punctuation">)</span>
   <span class="token punctuation">}</span>
   <span class="token function">delImg</span><span class="token punctuation">(</span>path<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> img<span class="token operator">:</span> ImgType<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">const</span> cac <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+    <span class="token keyword">const</span> cac <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span>
     cac<span class="token punctuation">.</span>images <span class="token operator">=</span> cac<span class="token punctuation">.</span>images<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>each <span class="token operator">=></span> each<span class="token punctuation">.</span>sha <span class="token operator">!==</span> img<span class="token punctuation">.</span>sha<span class="token punctuation">)</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
@@ -967,7 +967,7 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
       <span class="token keyword">let</span> endSelection <span class="token operator">=</span> editor<span class="token punctuation">.</span><span class="token function">getSelection</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
       <span class="token keyword">let</span> range <span class="token operator">=</span> <span class="token function">createRange</span><span class="token punctuation">(</span>endSelection<span class="token punctuation">)</span>
       <span class="token comment">// generate fileName</span>
-      <span class="token keyword">const</span> fileName <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>file<span class="token punctuation">.</span>type<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+      <span class="token keyword">const</span> fileName <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>file<span class="token punctuation">.</span><span class="token keyword">type</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
       <span class="token comment">// copy img url to editor</span>
       editor<span class="token punctuation">.</span><span class="token function">executeEdits</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> range<span class="token punctuation">,</span> text<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">![](Uploading...)</span><span class="token template-punctuation string">`</span></span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
       <span class="token comment">// get new range</span>
@@ -1048,52 +1048,52 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
 <h2 id="项目打包" class="heading"><a href="#%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85" aria-hidden="true"><span class="icon icon-link"></span></a>项目打包</h2>
 <p>使用了<a href="https://github.com/electron-userland/electron-builder">electron-builder</a>尽心打包, 只需添加<code class="language-text">electronrc.js</code>配置文件即可</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token literal-property property">productName</span><span class="token operator">:</span> <span class="token string">'App name'</span><span class="token punctuation">,</span> <span class="token comment">// App 名称</span>
-  <span class="token literal-property property">appId</span><span class="token operator">:</span> <span class="token string">'com.App.name'</span><span class="token punctuation">,</span> <span class="token comment">// 程序的唯一标识符</span>
-  <span class="token literal-property property">directories</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">output</span><span class="token operator">:</span> <span class="token string">'package'</span>
+  productName<span class="token operator">:</span> <span class="token string">'App name'</span><span class="token punctuation">,</span> <span class="token comment">// App 名称</span>
+  appId<span class="token operator">:</span> <span class="token string">'com.App.name'</span><span class="token punctuation">,</span> <span class="token comment">// 程序的唯一标识符</span>
+  directories<span class="token operator">:</span> <span class="token punctuation">{</span>
+    output<span class="token operator">:</span> <span class="token string">'package'</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">files</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'dist/**/*'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 构建好的dist目录</span>
+  files<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'dist/**/*'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 构建好的dist目录</span>
   <span class="token comment">// copyright: 'Copyright © 2019 zWing',</span>
-  <span class="token literal-property property">asar</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// 是否加密</span>
-  <span class="token literal-property property">artifactName</span><span class="token operator">:</span> <span class="token string">'${productName}-${version}.${ext}'</span><span class="token punctuation">,</span>
+  asar<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// 是否加密</span>
+  artifactName<span class="token operator">:</span> <span class="token string">'${productName}-${version}.${ext}'</span><span class="token punctuation">,</span>
   <span class="token comment">// compression: 'maximum', // 压缩程度</span>
-  <span class="token literal-property property">dmg</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  dmg<span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token comment">// MacOS dmg形式安装完后的界面</span>
-    <span class="token literal-property property">contents</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    contents<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        <span class="token literal-property property">x</span><span class="token operator">:</span> <span class="token number">410</span><span class="token punctuation">,</span>
-        <span class="token literal-property property">y</span><span class="token operator">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
-        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'link'</span><span class="token punctuation">,</span>
-        <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/Applications'</span>
+        x<span class="token operator">:</span> <span class="token number">410</span><span class="token punctuation">,</span>
+        y<span class="token operator">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
+        type<span class="token operator">:</span> <span class="token string">'link'</span><span class="token punctuation">,</span>
+        path<span class="token operator">:</span> <span class="token string">'/Applications'</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
-        <span class="token literal-property property">x</span><span class="token operator">:</span> <span class="token number">130</span><span class="token punctuation">,</span>
-        <span class="token literal-property property">y</span><span class="token operator">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
-        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'file'</span>
+        x<span class="token operator">:</span> <span class="token number">130</span><span class="token punctuation">,</span>
+        y<span class="token operator">:</span> <span class="token number">150</span><span class="token punctuation">,</span>
+        type<span class="token operator">:</span> <span class="token string">'file'</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">mac</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">icon</span><span class="token operator">:</span> <span class="token string">'build/icons/icon.png'</span>
+  mac<span class="token operator">:</span> <span class="token punctuation">{</span>
+    icon<span class="token operator">:</span> <span class="token string">'build/icons/icon.png'</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">win</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">icon</span><span class="token operator">:</span> <span class="token string">'build/icons/icon.png'</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">target</span><span class="token operator">:</span> <span class="token string">'nsis'</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">legalTrademarks</span><span class="token operator">:</span> <span class="token string">'Eyas Personal'</span>
+  win<span class="token operator">:</span> <span class="token punctuation">{</span>
+    icon<span class="token operator">:</span> <span class="token string">'build/icons/icon.png'</span><span class="token punctuation">,</span>
+    target<span class="token operator">:</span> <span class="token string">'nsis'</span><span class="token punctuation">,</span>
+    legalTrademarks<span class="token operator">:</span> <span class="token string">'Eyas Personal'</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">nsis</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  nsis<span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token comment">// windows的安装包配置</span>
-    <span class="token literal-property property">allowToChangeInstallationDirectory</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">oneClick</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">menuCategory</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">allowElevation</span><span class="token operator">:</span> <span class="token boolean">false</span>
+    allowToChangeInstallationDirectory<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    oneClick<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    menuCategory<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    allowElevation<span class="token operator">:</span> <span class="token boolean">false</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">linux</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">icon</span><span class="token operator">:</span> <span class="token string">'build/icons'</span>
+  linux<span class="token operator">:</span> <span class="token punctuation">{</span>
+    icon<span class="token operator">:</span> <span class="token string">'build/icons'</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">electronDownload</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">mirror</span><span class="token operator">:</span> <span class="token string">'http://npm.taobao.org/mirrors/electron/'</span>
+  electronDownload<span class="token operator">:</span> <span class="token punctuation">{</span>
+    mirror<span class="token operator">:</span> <span class="token string">'http://npm.taobao.org/mirrors/electron/'</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre></div>
@@ -1180,7 +1180,7 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
   <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> byteString<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     intArray<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> byteString<span class="token punctuation">.</span><span class="token function">charCodeAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
   <span class="token punctuation">}</span>
-  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Blob</span><span class="token punctuation">(</span><span class="token punctuation">[</span>intArray<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token literal-property property">type</span><span class="token operator">:</span> mimeString <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// 转成 blob</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Blob</span><span class="token punctuation">(</span><span class="token punctuation">[</span>intArray<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> type<span class="token operator">:</span> mimeString <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// 转成 blob</span>
 <span class="token punctuation">}</span>
 </code></pre></div>
 <h3 id="编码和解码" class="heading"><a href="#%E7%BC%96%E7%A0%81%E5%92%8C%E8%A7%A3%E7%A0%81" aria-hidden="true"><span class="icon icon-link"></span></a>编码和解码</h3>
@@ -1334,17 +1334,17 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
 比如:</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// taro</span>
 <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  <span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  a<span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>a<span class="token punctuation">,</span>
-    <span class="token literal-property property">b</span><span class="token operator">:</span> <span class="token number">1</span>
+    b<span class="token operator">:</span> <span class="token number">1</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">c</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> <span class="token literal-property property">b</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>c<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+  c<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> b<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>c<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
 <span class="token comment">// 小程序</span>
 <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  <span class="token string-property property">'a.b'</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token string-property property">'c[0].b'</span><span class="token operator">:</span> <span class="token number">1</span>
+  <span class="token string">'a.b'</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token string">'c[0].b'</span><span class="token operator">:</span> <span class="token number">1</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre></div>
 <p>因此, <code class="language-text">taro</code>每次的<code class="language-text">setState</code>都会把整个数据带上. 不符合<code class="language-text">setData</code>限制。</p>
@@ -1361,7 +1361,7 @@ authWindow<span class="token punctuation">.</span>webContents<span class="token 
 <span class="token comment">// ...</span>
 <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span>
 Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>__state<span class="token punctuation">,</span> <span class="token punctuation">{</span>
-  <span class="token literal-property property">aa</span><span class="token operator">:</span> aa
+  aa<span class="token operator">:</span> aa
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token comment">// ...</span>
 </code></pre></div>
@@ -1369,8 +1369,8 @@ Object<span class="token punctuation">.</span><span class="token function">assig
 <h3 id="解决" class="heading"><a href="#%E8%A7%A3%E5%86%B3" aria-hidden="true"><span class="icon icon-link"></span></a>解决</h3>
 <p>对于数据处理, 则像上面一样, 分次写入数据。</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token function">Page</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">arr</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  data<span class="token operator">:</span> <span class="token punctuation">{</span>
+    arr<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token function">setImg</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
@@ -1398,7 +1398,7 @@ Object<span class="token punctuation">.</span><span class="token function">assig
 <p>其实<code class="language-text">js</code>中一切都是对象, 但是这里讨论的对象只是一般对象, 非数组/字符串/方法/等等
 形如<code class="language-text">{}</code>, <code class="language-text">Object.create()</code>, <code class="language-text">new AnyClass()</code> 等等</p>
 <h3 id="typeof" class="heading"><a href="#typeof" aria-hidden="true"><span class="icon icon-link"></span></a>typeof</h3>
-<p>通过<code class="language-text">typeof arg === 'object'</code>可以得出的是<code class="language-text">arg</code>为<code class="language-text">字面变量</code>/<code class="language-text">null</code>/<code class="language-text">array</code>
+<p>通过<code class="language-text">typeof arg === &#39;object&#39;</code>可以得出的是<code class="language-text">arg</code>为<code class="language-text">字面变量</code>/<code class="language-text">null</code>/<code class="language-text">array</code>
 因此, 如果要通过<code class="language-text">typeof</code>判断是否为<code class="language-text">object</code>, 则要排除<code class="language-text">null</code>和<code class="language-text">array</code></p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">isObj</span><span class="token punctuation">(</span><span class="token parameter">arg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> arg <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> arg <span class="token operator">===</span> <span class="token string">'object'</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span>
@@ -1566,7 +1566,7 @@ PreviewApi<span class="token punctuation">.</span><span class="token function">p
 <li>当<code class="language-text">thead</code>设了<code class="language-text">transform</code>之后, <code class="language-text">border</code>会失效, 因此使用了<code class="language-text">box-shadow</code>来模拟<code class="language-text">border</code>. 当然, </li>
 </ul></li>
 <li>监听<code class="language-text">mousewheel</code>来设置<code class="language-text">transform</code>的时候, 因为滚动和视图更新有延迟, 在<code class="language-text">firfox</code>和<code class="language-text">safari</code>会有抖动, 在<code class="language-text">chrome</code>下表现良好.<ul>
-<li>在<code class="language-text">chrome</code>和<code class="language-text">firfox</code>分别加入<code class="language-text">window.addEventListener('scroll', console.log)</code>, 鼠标滚动一次, 会发现<code class="language-text">ff</code>下会触发多次回调, 而<code class="language-text">chrome</code>只会触发一次</li>
+<li>在<code class="language-text">chrome</code>和<code class="language-text">firfox</code>分别加入<code class="language-text">window.addEventListener(&#39;scroll&#39;, console.log)</code>, 鼠标滚动一次, 会发现<code class="language-text">ff</code>下会触发多次回调, 而<code class="language-text">chrome</code>只会触发一次</li>
 </ul></li>
 <li><code class="language-text">safari</code>下, <code class="language-text">thead</code>在被固定后的<code class="language-text">box-shadow</code>会失效.</li>
 </ul>
@@ -1626,15 +1626,15 @@ pathArr.forEach((each, index) =&gt; {
 <a href="https://codesandbox.io/s/qzm589k42j?fontsize=14"><img src="https://user-gold-cdn.xitu.io/2019/4/1/169d83173a8c345a?w=201&#x26;h=42&#x26;f=svg&#x26;s=21059" alt="Edit chain object"></a></p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// a.b.c.d</span>
 <span class="token keyword">const</span> chain <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">b</span><span class="token operator">:</span> chain<span class="token punctuation">[</span><span class="token string">'a.b'</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token string-property property">'a.b'</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">c</span><span class="token operator">:</span> chain<span class="token punctuation">[</span><span class="token string">'a.b.c'</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token string-property property">'a.b.c'</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">d</span><span class="token operator">:</span> chain<span class="token punctuation">[</span><span class="token string">'a.b.c.d'</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token string-property property">'a.b.c.d'</span><span class="token operator">:</span> <span class="token keyword">undefined</span>
+  a<span class="token operator">:</span> <span class="token punctuation">{</span> b<span class="token operator">:</span> chain<span class="token punctuation">[</span><span class="token string">'a.b'</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">'a.b'</span><span class="token operator">:</span> <span class="token punctuation">{</span> c<span class="token operator">:</span> chain<span class="token punctuation">[</span><span class="token string">'a.b.c'</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">'a.b.c'</span><span class="token operator">:</span> <span class="token punctuation">{</span> d<span class="token operator">:</span> chain<span class="token punctuation">[</span><span class="token string">'a.b.c.d'</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">'a.b.c.d'</span><span class="token operator">:</span> <span class="token keyword">undefined</span>
 <span class="token punctuation">}</span>
 </code></pre></div>
 <ul>
 <li>对于<code class="language-text">get</code>操作, 则可以直接从<code class="language-text">chain[path]</code>中获取数据</li>
-<li>对于<code class="language-text">set</code>操作, 则可以直接修改<code class="language-text">chain['a.b.c'].d = 'str'</code>, 最后修改<code class="language-text">chain['a.b.c.d'] = 'str</code></li>
+<li>对于<code class="language-text">set</code>操作, 则可以直接修改<code class="language-text">chain[&#39;a.b.c&#39;].d = &#39;str&#39;</code>, 最后修改<code class="language-text">chain[&#39;a.b.c.d&#39;] = &#39;str</code></li>
 <li>因为修改的是同一个引用, 所以<code class="language-text">set</code>操作会同步<code class="language-text">chain.a</code>和<code class="language-text">chain.a.b</code></li>
 </ul>
 <h3 id="最后" class="heading"><a href="#%E6%9C%80%E5%90%8E" aria-hidden="true"><span class="icon icon-link"></span></a>最后</h3>
@@ -1823,21 +1823,21 @@ pathArr.forEach((each, index) =&gt; {
       package.json</code></pre></div>
 <h4 id="lernajson-配置" class="heading"><a href="#lernajson-%E9%85%8D%E7%BD%AE" aria-hidden="true"><span class="icon icon-link"></span></a>Lerna.json 配置</h4>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
-  <span class="token string-property property">"version"</span><span class="token operator">:</span> <span class="token string">"1.1.3"</span><span class="token punctuation">,</span> <span class="token comment">// 项目版本</span>
-  <span class="token string-property property">"npmClient"</span><span class="token operator">:</span> <span class="token string">"npm"</span><span class="token punctuation">,</span> <span class="token comment">// 默认使用的npm，可改为yarn</span>
-  <span class="token string-property property">"command"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token comment">// lerna 内置命令的配置</span>
-    <span class="token string-property property">"publish"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token string-property property">"ignoreChanges"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"*.md"</span><span class="token punctuation">,</span> <span class="token string">"**/test/**"</span><span class="token punctuation">,</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 发布时忽略部分文件的改动，配置此项可以减少不必要的publish。</span>
-      <span class="token string-property property">"message"</span><span class="token operator">:</span> <span class="token string">"chore(release): publish"</span> <span class="token comment">// git commit message</span>
+  <span class="token string">"version"</span><span class="token operator">:</span> <span class="token string">"1.1.3"</span><span class="token punctuation">,</span> <span class="token comment">// 项目版本</span>
+  <span class="token string">"npmClient"</span><span class="token operator">:</span> <span class="token string">"npm"</span><span class="token punctuation">,</span> <span class="token comment">// 默认使用的npm，可改为yarn</span>
+  <span class="token string">"command"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token comment">// lerna 内置命令的配置</span>
+    <span class="token string">"publish"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"ignoreChanges"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"*.md"</span><span class="token punctuation">,</span> <span class="token string">"**/test/**"</span><span class="token punctuation">,</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 发布时忽略部分文件的改动，配置此项可以减少不必要的publish。</span>
+      <span class="token string">"message"</span><span class="token operator">:</span> <span class="token string">"chore(release): publish"</span> <span class="token comment">// git commit message</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token string-property property">"packages"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"packages/*"</span><span class="token punctuation">]</span>
+  <span class="token string">"packages"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"packages/*"</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h4 id="create-创建子项目" class="heading"><a href="#create-%E5%88%9B%E5%BB%BA%E5%AD%90%E9%A1%B9%E7%9B%AE" aria-hidden="true"><span class="icon icon-link"></span></a>Create 创建子项目</h4>
-<p><code class="language-text">lerna create &lt;name></code>
+<p><code class="language-text">lerna create &lt;name&gt;</code>
 创建一个子项目，并会根据交互提示生成对应的<code class="language-text">package.json</code></p>
 <h4 id="add-添加依赖" class="heading"><a href="#add-%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96" aria-hidden="true"><span class="icon icon-link"></span></a>Add 添加依赖</h4>
-<p><code class="language-text">lerna add &lt;package>[@version] [--dev] [--exact]</code></p>
+<p><code class="language-text">lerna add &lt;package&gt;[@version] [--dev] [--exact]</code></p>
 <ul>
 <li><code class="language-text">lerna add eslint</code>： 所有包都会装上<code class="language-text">eslint</code>。</li>
 <li><code class="language-text">lerna add eslint --scope=package1</code>：只有<code class="language-text">package1</code>会装上。</li>
@@ -1851,14 +1851,14 @@ pathArr.forEach((each, index) =&gt; {
 <p>如果添加的是子项目，则会通过<code class="language-text">link</code>软连接到对应的项目中。
 <code class="language-text">lerna add package1 --scope=package2</code></p>
 <h4 id="run-执行npm-script命令" class="heading"><a href="#run-%E6%89%A7%E8%A1%8Cnpm-script%E5%91%BD%E4%BB%A4" aria-hidden="true"><span class="icon icon-link"></span></a>Run 执行npm script命令</h4>
-<p><code class="language-text">lerna run &lt;script> -- [..args]</code></p>
+<p><code class="language-text">lerna run &lt;script&gt; -- [..args]</code></p>
 <ul>
 <li><code class="language-text">lerna run test</code>：则会执行所有子项目中的<code class="language-text">test</code>。</li>
 <li><code class="language-text">lerna run --scope package1 test</code>：只执行<code class="language-text">package1</code>中的<code class="language-text">test</code>。</li>
 <li><code class="language-text">lerna run --ignore package-* test</code>：只执行除了匹配<code class="language-text">package-*</code>外的项目中的<code class="language-text">test</code></li>
 </ul>
 <h4 id="exec-执行任意命令" class="heading"><a href="#exec-%E6%89%A7%E8%A1%8C%E4%BB%BB%E6%84%8F%E5%91%BD%E4%BB%A4" aria-hidden="true"><span class="icon icon-link"></span></a>Exec 执行任意命令</h4>
-<p><code class="language-text">lerna exec -- &lt;command> [..args]</code></p>
+<p><code class="language-text">lerna exec -- &lt;command&gt; [..args]</code></p>
 <p>与<code class="language-text">lerna run</code>类似，只不过它可以执行任意命令。
 eg: <code class="language-text">lerna exec -- rm -rf ./node_modules</code></p>
 <h4 id="其他命令" class="heading"><a href="#%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4" aria-hidden="true"><span class="icon icon-link"></span></a>其他命令</h4>
@@ -2140,7 +2140,7 @@ eg: <code class="language-text">lerna exec -- rm -rf ./node_modules</code></p>
 <h3 id="modulenamemapper" class="heading"><a href="#modulenamemapper" aria-hidden="true"><span class="icon icon-link"></span></a>moduleNameMapper</h3>
 <p>用来<code class="language-text">mock</code>一些额外<code class="language-text">module</code>, 比如<code class="language-text">sass</code>, <code class="language-text">jpg</code>等等.</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// /test/utils.ts</span>
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token string">'test-file-stub'</span>
+<span class="token keyword">module</span><span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token string">'test-file-stub'</span>
 </code></pre></div>
 <h3 id="setupfilesafterenv" class="heading"><a href="#setupfilesafterenv" aria-hidden="true"><span class="icon icon-link"></span></a>setupFilesAfterEnv</h3>
 <blockquote>
@@ -2318,17 +2318,17 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </code></pre></div>
 <p>然后编可以通过命令<code class="language-text">docker-compose run --rm deploy yarn xxx</code>来执行<code class="language-text">npm</code>命令</p>
 <h2 id="利用makefile更好的执行命令" class="heading"><a href="#%E5%88%A9%E7%94%A8makefile%E6%9B%B4%E5%A5%BD%E7%9A%84%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4" aria-hidden="true"><span class="icon icon-link"></span></a>利用makefile更好的执行命令</h2>
-<div class="gatsby-highlight" data-language="makefile"><pre class="language-makefile"><code class="language-makefile"><span class="token target symbol">build</span><span class="token punctuation">:</span>
+<div class="gatsby-highlight" data-language="makefile"><pre class="language-makefile"><code class="language-makefile"><span class="token symbol">build</span><span class="token punctuation">:</span>
   docker-compose run --rm deploy yarn build
 
-<span class="token target symbol">install</span><span class="token punctuation">:</span>
+<span class="token symbol">install</span><span class="token punctuation">:</span>
   docker-compose run --rm deploy yarn install --production
 
-<span class="token target symbol">dev</span><span class="token punctuation">:</span>
-<span class="token target symbol">  docker-compose run --rm -p 8080</span><span class="token punctuation">:</span>8080 deploy yarn dev
+<span class="token symbol">dev</span><span class="token punctuation">:</span>
+<span class="token symbol">  docker-compose run --rm -p 8080</span><span class="token punctuation">:</span>8080 deploy yarn dev
 
 <span class="token comment"># 因为当前build目录和build命令冲突, 用以下关键词区分两者</span>
-<span class="token builtin-target builtin">.PHONY</span><span class="token punctuation">:</span> build</code></pre></div>
+<span class="token builtin">.PHONY</span><span class="token punctuation">:</span> build</code></pre></div>
 <h2 id="shell脚本-更好的执行makefile" class="heading"><a href="#shell%E8%84%9A%E6%9C%AC-%E6%9B%B4%E5%A5%BD%E7%9A%84%E6%89%A7%E8%A1%8Cmakefile" aria-hidden="true"><span class="icon icon-link"></span></a>Shell脚本, 更好的执行makefile</h2>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
 
@@ -2767,7 +2767,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>同时, 他不会对promise产生影响.总是返回原来的值 所以在<code class="language-text">finally</code>中的操作,应该是与状态无关, 不依赖于promise的执行结果</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// ...</span>
-    <span class="token function">finally</span><span class="token punctuation">(</span><span class="token function-variable function">fnc</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">finally</span><span class="token punctuation">(</span><span class="token function-variable function">fnc</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">val</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
             <span class="token function">fnc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
             <span class="token keyword">return</span> val
@@ -3091,7 +3091,7 @@ IdentityFile ~/.ssh/id_rsa_gitlab</code></pre></div>
 <h2 id="vscode-编辑器" class="heading"><a href="#vscode-%E7%BC%96%E8%BE%91%E5%99%A8" aria-hidden="true"><span class="icon icon-link"></span></a><a href="https://code.visualstudio.com/">vscode</a> 编辑器</h2>
 <ul>
 <li>安装插件 <code class="language-text">Setting Sync</code></li>
-<li>设置 gist <code class="language-text">"sync.gist": "8162a18bd9632ab95c50704e92e1a57c"</code></li>
+<li>设置 gist <code class="language-text">&quot;sync.gist&quot;: &quot;8162a18bd9632ab95c50704e92e1a57c&quot;</code></li>
 <li>同步 Setting</li>
 <li>主要插件<code class="language-text">eslint</code> <code class="language-text">vetur</code> <code class="language-text">document this</code> <code class="language-text">javascript code snippets</code> <code class="language-text">project manager</code></li>
 </ul>
@@ -3277,11 +3277,11 @@ elementUI 的表格就是这样实现的.
 <span class="token keyword">import</span> Comp <span class="token keyword">from</span> <span class="token string">'Comp.vue'</span>
 <span class="token keyword">function</span> <span class="token function">registerModule</span><span class="token punctuation">(</span><span class="token parameter">store</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   store<span class="token punctuation">.</span><span class="token function">registerModule</span><span class="token punctuation">(</span><span class="token string">'compNameSpaceState'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">namespaced</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">state</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">getters</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">mutations</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">actions</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    namespaced<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    state<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    getters<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    mutations<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    actions<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </code></pre></div>
@@ -3302,7 +3302,7 @@ elementUI 的表格就是这样实现的.
 Comp<span class="token punctuation">.</span><span class="token function-variable function">install</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">Vue</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">// 代理带vue原形上.可以通过this.$spin调用</span>
   Object<span class="token punctuation">.</span><span class="token function">defineProperties</span><span class="token punctuation">(</span><span class="token class-name">Vue</span><span class="token punctuation">.</span>prototype<span class="token punctuation">,</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">$compApi</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    $compApi<span class="token operator">:</span> <span class="token punctuation">{</span>
       <span class="token comment">// 挂载到Vue.prototype中的$compApi</span>
       <span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>bind<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -3489,7 +3489,7 @@ ssh-add -k ~/.ssh/id_rsa_gitlab</code></pre></div>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> UglifyJsPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'uglifyjs-webpack-plugin'</span><span class="token punctuation">)</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">UglifyJsPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">UglifyJsPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 </code></pre></div>
 <p>如果使用默认配置,那么打包速度并不会有提升.</p>
@@ -3499,52 +3499,52 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>具体配置规则请参考官方文档<a href="https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options">UglifyOptions</a></p>
 <p>我的最终配置如下</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript">    <span class="token keyword">new</span> <span class="token class-name">UglifyEsPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-            <span class="token literal-property property">parallel</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-            <span class="token literal-property property">cache</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-            <span class="token literal-property property">sourceMap</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-            <span class="token literal-property property">uglifyOptions</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-                <span class="token literal-property property">ecma</span><span class="token operator">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
+            parallel<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            cache<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            sourceMap<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            uglifyOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+                ecma<span class="token operator">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
                 <span class="token comment">// 详细规则</span>
                 <span class="token comment">// https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options</span>
-                <span class="token literal-property property">compress</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                compress<span class="token operator">:</span> <span class="token punctuation">{</span>
                     <span class="token comment">// 在UglifyJs删除没有用到的代码时不输出警告</span>
-                    <span class="token literal-property property">warnings</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    warnings<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 删除所有的 `console` 语句</span>
-                    <span class="token literal-property property">drop_console</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    drop_console<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
                     <span class="token comment">// 将()=>{return x} 转成 ()=>x</span>
                     <span class="token comment">// 关闭.eslint有做检查</span>
-                    <span class="token literal-property property">arrows</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    arrows<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 转换类似!!a ? b : c → a ? b : c</span>
                     <span class="token comment">// 关闭.eslint做检查</span>
-                    <span class="token literal-property property">booleans</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    booleans<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 转换由计算得来的属性名 {["computed"]: 1} is converted to {computed: 1}.</span>
                     <span class="token comment">// 关闭,eslint做检查</span>
-                    <span class="token literal-property property">computed_props</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    computed_props<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 自动转换判断</span>
                     <span class="token comment">// e.g. a = !b &amp;&amp; !c &amp;&amp; !d &amp;&amp; !e → a=!(b||c||d||e) etc.</span>
                     <span class="token comment">// 关闭,请自行做规范</span>
-                    <span class="token literal-property property">comparisons</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    comparisons<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 去掉死代码</span>
                     <span class="token comment">// 关闭.eslint做检查</span>
-                    <span class="token literal-property property">dead_code</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    dead_code<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 关闭debugger</span>
                     <span class="token comment">// eslint做检查</span>
-                    <span class="token literal-property property">drop_debugger</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    drop_debugger<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 自动进行静态算术计算</span>
                     <span class="token comment">// 开启</span>
-                    <span class="token literal-property property">evaluate</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    evaluate<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
                     <span class="token comment">// 函数声明提升</span>
                     <span class="token comment">// 默认就是关闭,不需要开启</span>
-                    <span class="token literal-property property">hoist_funs</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    hoist_funs<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// For example: var o={p:1, q:2}; f(o.p, o.q); is converted to f(1, 2);</span>
                     <span class="token comment">// 不需要咯</span>
-                    <span class="token literal-property property">hoist_props</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    hoist_props<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 变量提升</span>
                     <span class="token comment">// 不需要咯</span>
-                    <span class="token literal-property property">hoist_vars</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    hoist_vars<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">//  optimizations for if/return and if/continue</span>
                     <span class="token comment">// 不需要, eslint做检查</span>
-                    <span class="token literal-property property">if_return</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    if_return<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">/**
                      * 无法用言语表达,自行理解
                      * inline (default: true) -- inline calls to function with simple/return statement:
@@ -3555,48 +3555,48 @@ module<span class="token punctuation">.</span>exports <span class="token operato
                         3 -- inline functions with arguments and variables
                         true -- same as 3
                      */</span>
-                    <span class="token literal-property property">inline</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    inline<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// join consecutive var statements</span>
                     <span class="token comment">// 就是将变量声明合并到一个var中</span>
                     <span class="token comment">// 关闭, eslin做检查</span>
-                    <span class="token literal-property property">join_vars</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    join_vars<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 自动去除无用的function参数</span>
                     <span class="token comment">// 关闭. eslint做检查</span>
-                    <span class="token literal-property property">keep_fargs</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    keep_fargs<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">//  Pass true to prevent Infinity from being compressed into 1/0</span>
                     <span class="token comment">// 禁止将infinity转成1/0</span>
-                    <span class="token literal-property property">keep_infinity</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    keep_infinity<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
                     <span class="token comment">// optimizations for do, while and for loops when we can statically determine the condition.</span>
                     <span class="token comment">// 优化循环</span>
                     <span class="token comment">// 此处关闭,应该由开发者自行优化</span>
-                    <span class="token literal-property property">loops</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    loops<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// negate "Immediately-Called Function Expressions" where the return value is discarded, to avoid the parens that the code generator would insert.</span>
                     <span class="token comment">// 自行体会</span>
-                    <span class="token literal-property property">negate_iife</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    negate_iife<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
                     <span class="token comment">//  rewrite property access using the dot notation, for example foo["bar"] → foo.bar</span>
                     <span class="token comment">// 关闭.eslint检查</span>
-                    <span class="token literal-property property">properties</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    properties<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 将只用到一次的function,通过inline方式插入</span>
                     <span class="token comment">// 关闭.开发者自行把控</span>
-                    <span class="token literal-property property">reduce_funcs</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    reduce_funcs<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 将静态变量直接lnline紧代码里</span>
                     <span class="token comment">// 可以开启</span>
-                    <span class="token literal-property property">reduce_vars</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    reduce_vars<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
                     <span class="token comment">// 使用逗号运算符连接连续的简单语句</span>
                     <span class="token comment">// 自行把控</span>
-                    <span class="token literal-property property">sequences</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    sequences<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">/**
                      *  Pass false to disable potentially dropping functions marked as "pure". 
                      * A function call is marked as "pure" if a comment annotation \/*@__PURE__*\/ or \/*#__PURE__*\/ immediately precedes the call. 
                      * For example: \/*@__PURE__*\/foo();
                      * 就是关闭标注纯函数的注释了
                      */</span>
-                    <span class="token literal-property property">side_effects</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    side_effects<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// 去掉重复和无法到达的switch分支</span>
                     <span class="token comment">// eslint做检查, 以及开发者把控</span>
-                    <span class="token literal-property property">switches</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    switches<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                     <span class="token comment">// Transforms typeof foo == "undefined" into foo === void 0</span>
-                    <span class="token literal-property property">typeofs</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                    typeofs<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
                 <span class="token punctuation">}</span>
             <span class="token punctuation">}</span></code></pre></div>
 <p>其实很多优化点都是可以通过eslint来检查,而不需要在压缩过程检查</p>
@@ -3613,26 +3613,26 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>其实babel并不会影响到打包速度.我也只是顺便提下</p>
 <p>我的配置如下</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token punctuation">{</span>
-    <span class="token string-property property">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
         <span class="token punctuation">[</span>
             <span class="token string">"component"</span><span class="token punctuation">,</span>
             <span class="token punctuation">[</span><span class="token punctuation">{</span>
-                <span class="token string-property property">"libraryName"</span><span class="token operator">:</span> <span class="token string">"element-ui"</span><span class="token punctuation">,</span>
-                <span class="token string-property property">"styleLibraryName"</span><span class="token operator">:</span> <span class="token string">"theme-default"</span>
+                <span class="token string">"libraryName"</span><span class="token operator">:</span> <span class="token string">"element-ui"</span><span class="token punctuation">,</span>
+                <span class="token string">"styleLibraryName"</span><span class="token operator">:</span> <span class="token string">"theme-default"</span>
             <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"comments"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-    <span class="token string-property property">"env"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-        <span class="token string-property property">"development"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-            <span class="token string-property property">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"transform-object-rest-spread"</span><span class="token punctuation">,</span> <span class="token string">"syntax-dynamic-import"</span><span class="token punctuation">]</span>
+    <span class="token string">"comments"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token string">"env"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"development"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"transform-object-rest-spread"</span><span class="token punctuation">,</span> <span class="token string">"syntax-dynamic-import"</span><span class="token punctuation">]</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token string-property property">"production"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-            <span class="token string-property property">"presets"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">"es2015"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string-property property">"modules"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"stage-2"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-            <span class="token string-property property">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"transform-runtime"</span><span class="token punctuation">]</span>
+        <span class="token string">"production"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"presets"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">"es2015"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">"modules"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"stage-2"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token string">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"transform-runtime"</span><span class="token punctuation">]</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token string-property property">"test"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-            <span class="token string-property property">"presets"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"env"</span><span class="token punctuation">,</span> <span class="token string">"stage-2"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-            <span class="token string-property property">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"transform-runtime"</span><span class="token punctuation">,</span> <span class="token string">"istanbul"</span><span class="token punctuation">]</span>
+        <span class="token string">"test"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"presets"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"env"</span><span class="token punctuation">,</span> <span class="token string">"stage-2"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token string">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"transform-runtime"</span><span class="token punctuation">,</span> <span class="token string">"istanbul"</span><span class="token punctuation">]</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>

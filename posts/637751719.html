@@ -49,7 +49,7 @@
   <span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
   <span class="token keyword">import</span> <span class="token punctuation">{</span> mapGetters<span class="token punctuation">,</span> mapActions<span class="token punctuation">,</span> mapState<span class="token punctuation">,</span> mapMutations <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./store'</span>
   <span class="token keyword">export</span> <span class="token keyword">default</span> Vue<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-    <span class="token literal-property property">computed</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    computed<span class="token operator">:</span> <span class="token punctuation">{</span>
       <span class="token operator">...</span><span class="token function">mapGetters</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'rootGet'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -57,14 +57,14 @@
       <span class="token keyword">this</span><span class="token punctuation">.</span>setSubState <span class="token comment">// type (payload: number) => Promise&lt;void></span>
       <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'sub'</span><span class="token punctuation">,</span> <span class="token string">'setSubState'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    methods<span class="token operator">:</span> <span class="token punctuation">{</span>
       <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token string">'sub'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'setSubState'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 </code></pre></div><p>以上类型推导同时支持<code class="language-text">mapGetters</code>, <code class="language-text">mapActions</code>, <code class="language-text">mapState</code>, <code class="language-text">mapMutations</code>, <code class="language-text">dispatch</code></p><h2 id="注意" class="heading"><a href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span class="icon icon-link"></span></a>注意</h2><ul><li>如果你使用<code class="language-text">typescript</code>, 请不要把<code class="language-text">state</code>定义成<code class="language-text">StoreOptions</code>, 因为这样会让类型推导失效</li></ul><div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> state<span class="token operator">:</span> StoreOptions<span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// don't do that</span>
 </code></pre></div><ul><li>如果你用<code class="language-text">js</code>, 并且使用了<code class="language-text">jsdoc</code>来定义来写, 请务必把<code class="language-text">context</code>定义为<code class="language-text">any</code>, 否则类型检查会失效</li></ul><div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token literal-property property">actions</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  actions<span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token comment">/**
      * @param {any} context
      * @param {string} payload
